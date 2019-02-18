@@ -1,0 +1,1 @@
+web: java -jar target/webservice.war --server.port=$PORT --spring.profiles.active=prod
