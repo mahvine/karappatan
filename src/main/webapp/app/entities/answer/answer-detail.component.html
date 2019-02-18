@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="answer">
+            <h2><span>Answer</span> {{answer.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Answer</span></dt>
+                <dd>
+                    <span>{{answer.answer}}</span>
+                </dd>
+                <dt><span>Instructions</span></dt>
+                <dd>
+                    <span>{{answer.instructions}}</span>
+                </dd>
+                <dt><span>Annex</span></dt>
+                <dd>
+                    <div *ngIf="answer.annex">
+                        <a [routerLink]="['/annex', answer.annex?.id, 'view']">{{answer.annex?.content}}</a>
+                    </div>
+                </dd>
+                <dt><span>Recommendation</span></dt>
+                <dd>
+                    <div *ngIf="answer.recommendation">
+                        <a [routerLink]="['/recommendation', answer.recommendation?.id, 'view']">{{answer.recommendation?.content}}</a>
+                    </div>
+                </dd>
+                <dt><span>Next Question</span></dt>
+                <dd>
+                    <div *ngIf="answer.nextQuestion">
+                        <a [routerLink]="['/question', answer.nextQuestion?.id, 'view']">{{answer.nextQuestion?.question}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/answer', answer.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

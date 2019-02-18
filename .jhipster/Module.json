@@ -1,0 +1,54 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "questions",
+            "otherEntityName": "question",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "question",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "module",
+            "otherEntityRelationshipNameUndefined": false
+        },
+        {
+            "relationshipName": "annexes",
+            "otherEntityName": "annex",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "content",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "module",
+            "otherEntityRelationshipNameUndefined": false
+        },
+        {
+            "relationshipName": "recommendations",
+            "otherEntityName": "recommendation",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "content",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "module",
+            "otherEntityRelationshipNameUndefined": false
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "details",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20190218073009",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "krptn_module",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

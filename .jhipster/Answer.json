@@ -1,0 +1,51 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "annex",
+            "otherEntityName": "annex",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "content",
+            "otherEntityRelationshipName": "answer",
+            "otherEntityRelationshipNameUndefined": true
+        },
+        {
+            "relationshipName": "recommendation",
+            "otherEntityName": "recommendation",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "content",
+            "otherEntityRelationshipName": "answer",
+            "otherEntityRelationshipNameUndefined": true
+        },
+        {
+            "relationshipName": "nextQuestion",
+            "otherEntityName": "question",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "question",
+            "otherEntityRelationshipName": "answer",
+            "otherEntityRelationshipNameUndefined": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "answer",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "instructions",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20190218065140",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "krptn_answer",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

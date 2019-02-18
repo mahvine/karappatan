@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Question.
+    -->
+    <changeSet id="20190218072351-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="question_id"
+                                 baseTableName="krptn_question_answers"
+                                 constraintName="fk_krptn_question_answers_krptn_question_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="krptn_question"/>
+        <addForeignKeyConstraint baseColumnNames="answers_id"
+                                 baseTableName="krptn_question_answers"
+                                 constraintName="fk_krptn_question_answers_answers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="krptn_answer"/>
+        
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-module-heading">Create or edit a Module</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!module.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="module.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="module.title" required/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_details">Details</label>
+                    <input type="text" class="form-control" name="details" id="field_details"
+                        [(ngModel)]="module.details" />
+                </div>
+
+                <div class="form-group">
+                    <label for="field_questions">Questions</label>
+                    <select class="form-control" id="field_questions" multiple name="questions" [(ngModel)]="module.questions">
+                        <option [ngValue]="getSelected(module.questions, questionOption)" *ngFor="let questionOption of questions; trackBy: trackQuestionById">{{questionOption.question}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="field_annexes">Annexes</label>
+                    <select class="form-control" id="field_annexes" multiple name="annexes" [(ngModel)]="module.annexes">
+                        <option [ngValue]="getSelected(module.annexes, annexOption)" *ngFor="let annexOption of annexes; trackBy: trackAnnexById">{{annexOption.content}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="field_recommendations">Recommendations</label>
+                    <select class="form-control" id="field_recommendations" multiple name="recommendations" [(ngModel)]="module.recommendations">
+                        <option [ngValue]="getSelected(module.recommendations, recommendationOption)" *ngFor="let recommendationOption of recommendations; trackBy: trackRecommendationById">{{recommendationOption.content}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
