@@ -1,0 +1,49 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "caseSummary",
+            "otherEntityRelationshipNameUndefined": false
+        },
+        {
+            "relationshipName": "answers",
+            "otherEntityName": "answer",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "answer",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "caseSummary",
+            "otherEntityRelationshipNameUndefined": false
+        },
+        {
+            "relationshipName": "module",
+            "otherEntityName": "module",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "title",
+            "otherEntityRelationshipName": "caseSummary",
+            "otherEntityRelationshipNameUndefined": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "dateCreated",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20190222150334",
+    "dto": "mapstruct",
+    "searchEngine": false,
+    "service": "serviceClass",
+    "entityTableName": "case_summary",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

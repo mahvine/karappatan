@@ -35,6 +35,34 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'module',
                 loadChildren: './module/module.module#KarappatanModuleModule'
+            },
+            {
+                path: 'case-summary',
+                loadChildren: './case-summary/case-summary.module#KarappatanCaseSummaryModule'
+            },
+            {
+                path: 'case-summary',
+                loadChildren: './case-summary/case-summary.module#KarappatanCaseSummaryModule'
+            },
+            {
+                path: 'case-summary',
+                loadChildren: './case-summary/case-summary.module#KarappatanCaseSummaryModule'
+            },
+            {
+                path: 'case-summary',
+                loadChildren: './case-summary/case-summary.module#KarappatanCaseSummaryModule'
+            },
+            {
+                path: 'case-summary',
+                loadChildren: './case-summary/case-summary.module#KarappatanCaseSummaryModule'
+            },
+            {
+                path: 'case-summary',
+                loadChildren: './case-summary/case-summary.module#KarappatanCaseSummaryModule'
+            },
+            {
+                path: 'case-summary',
+                loadChildren: './case-summary/case-summary.module#KarappatanCaseSummaryModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-case-summary-heading">Create or edit a Case Summary</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!caseSummary.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="caseSummary.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateCreated">Date Created</label>
+                    <div class="input-group">
+                        <input id="field_dateCreated" type="text" class="form-control" name="dateCreated" ngbDatepicker  #dateCreatedDp="ngbDatepicker" [(ngModel)]="caseSummary.dateCreated"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateCreatedDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" [(ngModel)]="caseSummary.userId"  required>
+                        <option *ngIf="!editForm.value.user" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.user?.dirty && editForm.controls.user?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.user?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="field_answers">Answers</label>
+                    <select class="form-control" id="field_answers" multiple name="answers" [(ngModel)]="caseSummary.answers">
+                        <option [ngValue]="getSelected(caseSummary.answers, answerOption)" *ngFor="let answerOption of answers; trackBy: trackAnswerById">{{answerOption.answer}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_module">Module</label>
+                    <select class="form-control" id="field_module" name="module" [(ngModel)]="caseSummary.moduleId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="moduleOption.id" *ngFor="let moduleOption of modules; trackBy: trackModuleById">{{moduleOption.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

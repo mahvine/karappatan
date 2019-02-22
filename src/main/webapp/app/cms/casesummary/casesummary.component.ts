@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styles: []
 })
 export class CasesummaryComponent implements OnInit {
+    private casesummaries = [];
     constructor() {}
 
     ngOnInit() {}
