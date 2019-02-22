@@ -20,7 +20,7 @@ public class CaseSummaryDTO implements Serializable {
 
     private String userLogin;
 
-    private Set<Long> answers = new HashSet<>();
+//    private Set<Long> answers = new HashSet<>();
 
     private Long moduleId;
 
@@ -58,13 +58,13 @@ public class CaseSummaryDTO implements Serializable {
         this.userLogin = userLogin;
     }
 
-    public Set<Long> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(Set<Long> answers) {
-        this.answers = answers;
-    }
+//    public Set<Long> getAnswers() {
+//        return answers;
+//    }
+//
+//    public void setAnswers(Set<Long> answers) {
+//        this.answers = answers;
+//    }
 
     public Long getModuleId() {
         return moduleId;

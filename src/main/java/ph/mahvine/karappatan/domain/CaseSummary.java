@@ -1,6 +1,7 @@
 package ph.mahvine.karappatan.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class CaseSummary implements Serializable {
     @JsonIgnoreProperties("caseSummaries")
     private User user;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "case_summary_answers",
                joinColumns = @JoinColumn(name = "case_summary_id", referencedColumnName = "id"),
@@ -90,13 +92,11 @@ public class CaseSummary implements Serializable {
 
     public CaseSummary addAnswers(Answer answer) {
         this.answers.add(answer);
-        answer.getCaseSummaries().add(this);
         return this;
     }
 
     public CaseSummary removeAnswers(Answer answer) {
         this.answers.remove(answer);
-        answer.getCaseSummaries().remove(this);
         return this;
     }
 
