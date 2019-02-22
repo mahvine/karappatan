@@ -13,6 +13,10 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
                     path: 'admin',
                     loadChildren: './admin/admin.module#KarappatanAdminModule'
                 },
+                {
+                    path: 'manage',
+                    loadChildren: './cms/cms.module#KarappatanCmsModule'
+                },
                 ...LAYOUT_ROUTES
             ],
             { useHash: true, enableTracing: DEBUG_INFO_ENABLED }

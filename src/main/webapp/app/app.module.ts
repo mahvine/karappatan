@@ -17,6 +17,7 @@ import { KarappatanAppRoutingModule } from './app-routing.module';
 import { KarappatanHomeModule } from './home/home.module';
 import { KarappatanAccountModule } from './account/account.module';
 import { KarappatanEntityModule } from './entities/entity.module';
+import { KarappatanCmsModule } from './cms/cms.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
@@ -34,6 +35,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         KarappatanCoreModule,
         KarappatanHomeModule,
         KarappatanAccountModule,
+        KarappatanCmsModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         KarappatanEntityModule,
         KarappatanAppRoutingModule
