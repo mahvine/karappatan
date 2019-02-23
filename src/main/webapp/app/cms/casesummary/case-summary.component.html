@@ -1,12 +1,6 @@
 <div>
     <h2 id="page-heading">
         <span>Case Summaries</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-case-summary" [routerLink]="['/case-summary/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
-            Create new Case Summary
-            </span>
-        </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
@@ -24,7 +18,7 @@
             <tbody>
             <tr *ngFor="let caseSummary of caseSummaries ;trackBy: trackId">
                 <td><a [routerLink]="['/case-summary', caseSummary.id, 'view' ]">{{caseSummary.id}}</a></td>
-                <td>{{caseSummary.dateCreated | date:'medium'}}</td>
+                <td>{{caseSummary.dateCreated | date:'mediumDate'}}</td>
                 <td>
                     {{caseSummary.userLogin}}
                 </td>

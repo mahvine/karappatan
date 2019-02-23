@@ -1,6 +1,9 @@
 package ph.mahvine.karappatan.service.dto;
-import java.time.LocalDate;
+import java.time.Instant;
 import javax.validation.constraints.*;
+
+import ph.mahvine.karappatan.domain.Answer;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,14 +16,14 @@ public class CaseSummaryDTO implements Serializable {
 
     private Long id;
 
-    private LocalDate dateCreated;
+    private Instant dateCreated;
 
 
     private Long userId;
 
     private String userLogin;
 
-//    private Set<Long> answers = new HashSet<>();
+    private Set<Answer> answers = new HashSet<>();
 
     private Long moduleId;
 
@@ -34,11 +37,11 @@ public class CaseSummaryDTO implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDateCreated() {
+    public Instant getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
+    public void setDateCreated(Instant dateCreated) {
         this.dateCreated = dateCreated;
     }
 
@@ -58,13 +61,13 @@ public class CaseSummaryDTO implements Serializable {
         this.userLogin = userLogin;
     }
 
-//    public Set<Long> getAnswers() {
-//        return answers;
-//    }
-//
-//    public void setAnswers(Set<Long> answers) {
-//        this.answers = answers;
-//    }
+    public Set<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(Set<Answer> answers) {
+        this.answers = answers;
+    }
 
     public Long getModuleId() {
         return moduleId;

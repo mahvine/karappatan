@@ -1,3 +1,4 @@
-export * from './casesummary/casesummary.component';
-export * from './casesummary/casesummary.route';
+export * from './casesummary/case-summary.component';
+export * from './casesummary/case-summary.route';
+export * from './casesummary/case-summary.service';
 export * from './cms.route';

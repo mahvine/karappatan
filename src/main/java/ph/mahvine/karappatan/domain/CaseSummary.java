@@ -1,14 +1,13 @@
 package ph.mahvine.karappatan.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -28,14 +27,13 @@ public class CaseSummary implements Serializable {
     private Long id;
 
     @Column(name = "date_created")
-    private LocalDate dateCreated;
+    private Instant dateCreated;
 
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties("caseSummaries")
     private User user;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "case_summary_answers",
                joinColumns = @JoinColumn(name = "case_summary_id", referencedColumnName = "id"),
@@ -55,16 +53,16 @@ public class CaseSummary implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDateCreated() {
+    public Instant getDateCreated() {
         return dateCreated;
     }
 
-    public CaseSummary dateCreated(LocalDate dateCreated) {
+    public CaseSummary dateCreated(Instant dateCreated) {
         this.dateCreated = dateCreated;
         return this;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
+    public void setDateCreated(Instant dateCreated) {
         this.dateCreated = dateCreated;
     }
 

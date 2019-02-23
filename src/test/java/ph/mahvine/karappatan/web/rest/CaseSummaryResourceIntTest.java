@@ -29,8 +29,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,8 +51,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = KarappatanApp.class)
 public class CaseSummaryResourceIntTest {
 
-    private static final LocalDate DEFAULT_DATE_CREATED = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_CREATED = LocalDate.now(ZoneId.systemDefault());
+    private static final Instant DEFAULT_DATE_CREATED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATE_CREATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private CaseSummaryRepository caseSummaryRepository;

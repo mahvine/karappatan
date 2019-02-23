@@ -29,13 +29,13 @@
             "relationshipType": "many-to-one",
             "otherEntityField": "title",
             "otherEntityRelationshipName": "caseSummary",
-            "otherEntityRelationshipNameUndefined": true
+            "otherEntityRelationshipNameUndefined": false
         }
     ],
     "fields": [
         {
             "fieldName": "dateCreated",
-            "fieldType": "LocalDate"
+            "fieldType": "Instant"
         }
     ],
     "changelogDate": "20190222150334",

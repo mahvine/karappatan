@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 
-import { casesummaryRoute } from './';
+import { caseSummaryRoute } from './';
 
-const CMS_ROUTES = [casesummaryRoute];
+const CMS_ROUTES = [caseSummaryRoute];
 
 export const cmsState: Routes = [
     {

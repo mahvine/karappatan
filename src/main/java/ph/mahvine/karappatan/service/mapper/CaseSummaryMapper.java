@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Mapper(componentModel = "spring", uses = {UserMapper.class})
 public abstract class CaseSummaryMapper implements EntityMapper<CaseSummaryDTO, CaseSummary> {
-	
+
 	@Autowired
 	ModuleRepository moduleRepository;
-
+	
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.login", target = "userLogin")
     @Mapping(source = "module.id", target = "moduleId")
@@ -36,9 +36,9 @@ public abstract class CaseSummaryMapper implements EntityMapper<CaseSummaryDTO, 
     }
     
     public Module moduleFromId(Long id) {
-        if (id == null) {
-            return null;
-        }
-        return moduleRepository.getOne(id);
+    	if (id == null) {
+    		return null;
+    	}
+    	return moduleRepository.getOne(id);
     }
 }

@@ -4,6 +4,7 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 import { ICaseSummary } from 'app/shared/model/case-summary.model';
 import { CaseSummaryService } from './case-summary.service';
@@ -26,7 +27,7 @@ export class CaseSummaryUpdateComponent implements OnInit {
     answers: IAnswer[];
 
     modules: IModule[];
-    dateCreatedDp: any;
+    dateCreated: string;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -41,6 +42,7 @@ export class CaseSummaryUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ caseSummary }) => {
             this.caseSummary = caseSummary;
+            this.dateCreated = this.caseSummary.dateCreated != null ? this.caseSummary.dateCreated.format(DATE_TIME_FORMAT) : null;
         });
         this.userService
             .query()
@@ -71,6 +73,7 @@ export class CaseSummaryUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.caseSummary.dateCreated = this.dateCreated != null ? moment(this.dateCreated, DATE_TIME_FORMAT) : null;
         if (this.caseSummary.id !== undefined) {
             this.subscribeToSaveResponse(this.caseSummaryService.update(this.caseSummary));
         } else {
