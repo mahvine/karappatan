@@ -8,6 +8,7 @@ import ph.mahvine.karappatan.service.MailService;
 import ph.mahvine.karappatan.service.UserService;
 import ph.mahvine.karappatan.service.dto.UserDTO;
 import ph.mahvine.karappatan.web.rest.errors.BadRequestAlertException;
+import ph.mahvine.karappatan.web.rest.errors.ContactAlreadyUsedException;
 import ph.mahvine.karappatan.web.rest.errors.EmailAlreadyUsedException;
 import ph.mahvine.karappatan.web.rest.errors.LoginAlreadyUsedException;
 import ph.mahvine.karappatan.web.rest.util.HeaderUtil;
@@ -96,6 +97,8 @@ public class UserResource {
             throw new LoginAlreadyUsedException();
         } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
             throw new EmailAlreadyUsedException();
+        } else if (userRepository.findOneByContactNumberIgnoreCase(userDTO.getContactNumber()).isPresent()) {
+            throw new ContactAlreadyUsedException();
         } else {
             User newUser = userService.createUser(userDTO);
             mailService.sendCreationEmail(newUser);
@@ -124,6 +127,11 @@ public class UserResource {
         existingUser = userRepository.findOneByLogin(userDTO.getLogin().toLowerCase());
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
             throw new LoginAlreadyUsedException();
+        }
+
+        existingUser = userRepository.findOneByContactNumberIgnoreCase(userDTO.getContactNumber());
+        if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
+            throw new ContactAlreadyUsedException();
         }
         Optional<UserDTO> updatedUser = userService.updateUser(userDTO);
 

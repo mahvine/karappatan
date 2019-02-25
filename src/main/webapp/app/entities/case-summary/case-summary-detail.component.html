@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="caseSummary">
+            <h2><span>Case Summary</span> {{caseSummary.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Date Created</span></dt>
+                <dd>
+                    <span>{{caseSummary.dateCreated}}</span>
+                </dd>
+                <dt><span>User</span></dt>
+                <dd>
+                    {{caseSummary.userLogin}}
+                </dd>
+                <dt><span>Answers</span></dt>
+                <dd>
+                    <span *ngFor="let answerId of caseSummary.answerIds; let last = last">
+                        <a [routerLink]="['/answer', answerId, 'view' ]">{{answerId}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span>Module</span></dt>
+                <dd>
+                    <div *ngIf="caseSummary.moduleId">
+                        <a [routerLink]="['/module', caseSummary.moduleId, 'view']">{{caseSummary.moduleTitle}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/case-summary', caseSummary.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
