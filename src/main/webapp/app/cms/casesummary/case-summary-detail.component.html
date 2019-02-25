@@ -13,12 +13,6 @@
                 <dd>
                     {{caseSummary.userLogin}}
                 </dd>
-                <dt><span>Answers</span></dt>
-                <dd>
-                    <span *ngFor="let answers of caseSummary.answers; let last = last">
-                        <a [routerLink]="['/answer', answers?.id, 'view' ]">{{answers.answer}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
                 <dt><span>Module: </span> <span *ngIf="module">{{module.title}}</span></dt>
                 <dd>
                     <div *ngIf="module">
@@ -27,7 +21,7 @@
                         <ol>
                             <li *ngFor="let question of module.questions"> {{question.question}}
                                 <ul *ngFor="let answer of question.answers">
-                                    <li *ngIf="caseSummary.answers.indexOf(answer.id) > -1">{{answer.answer}} <br> {{answer.instructions}}</li>
+                                    <li *ngIf="caseSummary.answerIds.indexOf(answer.id) > -1">{{answer.answer}} <br> {{answer.instructions}}</li>
                                 </ul>
                             </li>
                         </ol>

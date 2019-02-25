@@ -15,8 +15,8 @@
                 </dd>
                 <dt><span>Answers</span></dt>
                 <dd>
-                    <span *ngFor="let answers of caseSummary.answers; let last = last">
-                        <a [routerLink]="['/answer', answers?.id, 'view' ]">{{answers.answer}}</a>{{last ? '' : ', '}}
+                    <span *ngFor="let answerId of caseSummary.answerIds; let last = last">
+                        <a [routerLink]="['/answer', answerId, 'view' ]">{{answerId}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
                 <dt><span>Module</span></dt>

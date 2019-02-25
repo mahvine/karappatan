@@ -22,6 +22,10 @@ public class CaseSummaryDTO implements Serializable {
     private Long userId;
 
     private String userLogin;
+    
+    private UserDTO user;
+    
+    private Set<Long> answerIds = new HashSet<>();
 
     private Set<Answer> answers = new HashSet<>();
 
@@ -117,4 +121,20 @@ public class CaseSummaryDTO implements Serializable {
             ", module='" + getModuleTitle() + "'" +
             "}";
     }
+
+	public UserDTO getUser() {
+		return user;
+	}
+
+	public void setUser(UserDTO user) {
+		this.user = user;
+	}
+
+	public Set<Long> getAnswerIds() {
+		return answerIds;
+	}
+
+	public void setAnswerIds(Set<Long> answerIds) {
+		this.answerIds = answerIds;
+	}
 }

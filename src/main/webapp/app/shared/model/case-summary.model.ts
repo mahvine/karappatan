@@ -9,6 +9,7 @@ export interface ICaseSummary {
     answers?: IAnswer[];
     moduleTitle?: string;
     moduleId?: number;
+    answerIds?: number[];
 }
 
 export class CaseSummary implements ICaseSummary {
@@ -19,6 +20,7 @@ export class CaseSummary implements ICaseSummary {
         public userId?: number,
         public answers?: IAnswer[],
         public moduleTitle?: string,
-        public moduleId?: number
+        public moduleId?: number,
+        public answerIds?: number[]
     ) {}
 }

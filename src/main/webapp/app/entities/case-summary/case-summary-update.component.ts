@@ -9,7 +9,7 @@ import { JhiAlertService } from 'ng-jhipster';
 import { ICaseSummary } from 'app/shared/model/case-summary.model';
 import { CaseSummaryService } from './case-summary.service';
 import { IUser, UserService } from 'app/core';
-import { IAnswer } from 'app/shared/model/answer.model';
+import { IAnswer, Answer } from 'app/shared/model/answer.model';
 import { AnswerService } from 'app/entities/answer';
 import { IModule } from 'app/shared/model/module.model';
 import { ModuleService } from 'app/entities/module';
@@ -43,6 +43,10 @@ export class CaseSummaryUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ caseSummary }) => {
             this.caseSummary = caseSummary;
             this.dateCreated = this.caseSummary.dateCreated != null ? this.caseSummary.dateCreated.format(DATE_TIME_FORMAT) : null;
+
+            if (this.caseSummary.answerIds.length > 0) {
+                this.caseSummary.answers = this.caseSummary.answerIds.map(answerId => new Answer(answerId));
+            }
         });
         this.userService
             .query()

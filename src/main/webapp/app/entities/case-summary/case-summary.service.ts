@@ -20,6 +20,7 @@ export class CaseSummaryService {
 
     create(caseSummary: ICaseSummary): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(caseSummary);
+        copy.answerIds = copy.answers.map(a => a.id);
         return this.http
             .post<ICaseSummary>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
@@ -27,6 +28,7 @@ export class CaseSummaryService {
 
     update(caseSummary: ICaseSummary): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(caseSummary);
+        copy.answerIds = copy.answers.map(a => a.id);
         return this.http
             .put<ICaseSummary>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
