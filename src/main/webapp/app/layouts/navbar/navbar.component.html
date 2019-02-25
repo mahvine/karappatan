@@ -16,7 +16,7 @@
                     </span>
                 </a>
             </li>
-            <li *jhiHasAnyAuthority="['ROLE_ADMIN']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_IBP_USER']" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="manage/casesummaries" (click)="collapseNavbar()">
                     <span>
                         <fa-icon icon="balance-scale" fixedWidth="true"></fa-icon>

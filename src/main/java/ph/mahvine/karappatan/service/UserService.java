@@ -93,6 +93,13 @@ public class UserService {
                 throw new EmailAlreadyUsedException();
             }
         });
+
+        userRepository.findOneByContactNumberIgnoreCase(userDTO.getContactNumber()).ifPresent(existingUser -> {
+            boolean removed = removeNonActivatedUser(existingUser);
+            if (!removed) {
+                throw new EmailAlreadyUsedException();
+            }
+        });
         User newUser = new User();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(userDTO.getLogin().toLowerCase());
@@ -105,6 +112,8 @@ public class UserService {
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
         newUser.setActivated(false);
+        newUser.setContactNumber(userDTO.getContactNumber());
+        newUser.setAddress(userDTO.getAddress());
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
@@ -149,6 +158,8 @@ public class UserService {
                 .collect(Collectors.toSet());
             user.setAuthorities(authorities);
         }
+        user.setContactNumber(userDTO.getContactNumber());
+        user.setAddress(userDTO.getAddress());
         userRepository.save(user);
         log.debug("Created Information for User: {}", user);
         return user;
@@ -163,7 +174,7 @@ public class UserService {
      * @param langKey language key
      * @param imageUrl image URL of user
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
+	public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl, String contactNumber, String address) {
         SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
             .ifPresent(user -> {
@@ -172,6 +183,8 @@ public class UserService {
                 user.setEmail(email.toLowerCase());
                 user.setLangKey(langKey);
                 user.setImageUrl(imageUrl);
+                user.setContactNumber(contactNumber);
+                user.setAddress(address);
                 log.debug("Changed Information for User: {}", user);
             });
     }
@@ -196,6 +209,8 @@ public class UserService {
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());
                 Set<Authority> managedAuthorities = user.getAuthorities();
+                user.setContactNumber(userDTO.getContactNumber());
+                user.setAddress(userDTO.getAddress());
                 managedAuthorities.clear();
                 userDTO.getAuthorities().stream()
                     .map(authorityRepository::findById)

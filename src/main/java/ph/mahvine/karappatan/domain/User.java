@@ -92,6 +92,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+    
+    @Size(max = 30)
+    @Column(name = "contact_number", length = 30, unique = true)
+    private String contactNumber;
+
+    @Size(max = 254)
+    @Column(length = 254, unique = true)
+    private String address;
 
     public Long getId() {
         return id;
@@ -197,8 +205,25 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
     }
+    
 
-    @Override
+    public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

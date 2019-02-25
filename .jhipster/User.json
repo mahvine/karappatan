@@ -1,0 +1,19 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "contact",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20190225135454",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "jhi_user",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

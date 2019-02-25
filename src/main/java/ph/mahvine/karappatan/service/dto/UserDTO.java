@@ -52,6 +52,13 @@ public class UserDTO {
     private Instant lastModifiedDate;
 
     private Set<String> authorities;
+    
+
+    @Size(min = 7, max = 30)
+    private String contactNumber;
+
+    @Size(max = 254)
+    private String address;
 
     public UserDTO() {
         // Empty constructor needed for Jackson.
@@ -73,6 +80,8 @@ public class UserDTO {
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
+        this.contactNumber = user.getContactNumber();
+        this.address = user.getAddress();
     }
 
     public Long getId() {
@@ -179,21 +188,40 @@ public class UserDTO {
         this.authorities = authorities;
     }
 
-    @Override
-    public String toString() {
-        return "UserDTO{" +
-            "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
-            ", activated=" + activated +
-            ", langKey='" + langKey + '\'' +
-            ", createdBy=" + createdBy +
-            ", createdDate=" + createdDate +
-            ", lastModifiedBy='" + lastModifiedBy + '\'' +
-            ", lastModifiedDate=" + lastModifiedDate +
-            ", authorities=" + authorities +
-            "}";
-    }
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "UserDTO [" + (id != null ? "id=" + id + ", " : "") + (login != null ? "login=" + login + ", " : "")
+				+ (firstName != null ? "firstName=" + firstName + ", " : "")
+				+ (lastName != null ? "lastName=" + lastName + ", " : "")
+				+ (email != null ? "email=" + email + ", " : "")
+				+ (imageUrl != null ? "imageUrl=" + imageUrl + ", " : "") + "activated=" + activated + ", "
+				+ (langKey != null ? "langKey=" + langKey + ", " : "")
+				+ (createdBy != null ? "createdBy=" + createdBy + ", " : "")
+				+ (createdDate != null ? "createdDate=" + createdDate + ", " : "")
+				+ (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "")
+				+ (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "")
+				+ (authorities != null ? "authorities=" + authorities + ", " : "")
+				+ (contactNumber != null ? "contactNumber=" + contactNumber + ", " : "")
+				+ (address != null ? "address=" + address : "") + "]";
+	}
+    
+    
+
+    
 }

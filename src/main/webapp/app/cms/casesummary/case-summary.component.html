@@ -30,18 +30,18 @@
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['/case-summary', caseSummary.id, 'view' ]"
+                                [routerLink]="['/manage/casesummaries', caseSummary.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline">View</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN']" type="submit"
                                 [routerLink]="['/case-summary', caseSummary.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN']" type="submit"
                                 [routerLink]="['/', 'case-summary', { outlets: { popup: caseSummary.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
