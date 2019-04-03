@@ -1,6 +1,7 @@
 package ph.mahvine.karappatan.web.rest;
 
 
+import ph.mahvine.karappatan.config.Constants;
 import ph.mahvine.karappatan.domain.User;
 import ph.mahvine.karappatan.repository.UserRepository;
 import ph.mahvine.karappatan.security.SecurityUtils;
@@ -102,6 +103,19 @@ public class AccountResource {
     }
 
     /**
+     * GET  /account : get the current user.
+     *
+     * @return the current user
+     * @throws RuntimeException 500 (Internal Server Error) if the user couldn't be returned
+     */
+    @GetMapping("/account/{login:" + Constants.LOGIN_REGEX + "}")
+    public Map<String,String> getAccountByLogin(@PathVariable String login) {
+        return userService.getUserWithAuthoritiesByLogin(login)
+            .map( user -> simpleResponse("User found"))
+            .orElseThrow(() -> new EmailNotFoundException());
+    }
+
+    /**
      * POST  /account : update the current user information.
      *
      * @param userDTO the current user information
@@ -175,5 +189,11 @@ public class AccountResource {
         return !StringUtils.isEmpty(password) &&
             password.length() >= ManagedUserVM.PASSWORD_MIN_LENGTH &&
             password.length() <= ManagedUserVM.PASSWORD_MAX_LENGTH;
+    }
+    
+    private static Map<String, String> simpleResponse(String message){
+    	Map<String,String> response = new HashMap<String, String>();
+    	response.put("message", message);
+    	return response;
     }
 }
