@@ -25,8 +25,23 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="identifier" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_krptn_annex_identifier" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        
+        <createTable tableName="krptn_annex_next_questions">
+            <column name="next_questions_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="annex_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="annex_id, next_questions_id" tableName="krptn_annex_next_questions"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

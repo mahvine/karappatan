@@ -9,11 +9,13 @@
                 <dd>
                     <span>{{question.question}}</span>
                 </dd>
-                <dt><span>Answers</span></dt>
+                <dt><span>Identifier</span></dt>
                 <dd>
-                    <span *ngFor="let answers of question.answers; let last = last">
-                        <a [routerLink]="['/answer', answers?.id, 'view' ]">{{answers.answer}}</a>{{last ? '' : ', '}}
-                    </span>
+                    <span>{{question.identifier}}</span>
+                </dd>
+                <dt><span>Info</span></dt>
+                <dd>
+                    <span>{{question.info}}</span>
                 </dd>
             </dl>
 

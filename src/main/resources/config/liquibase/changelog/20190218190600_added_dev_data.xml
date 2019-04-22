@@ -47,18 +47,11 @@
                   file="config/liquibase/dev/answers.csv"
                   separator=";"
                   tableName="krptn_answer">
-                  annex_id;recommendation_id;next_question_id
+                  annex_id;recommendation_id;next_question_id;question_id
 	        <column name="annex_id"  type="numeric"/>
 	        <column name="recommendation_id" type="numeric"/>
 	        <column name="next_question_id"  type="numeric"/>
-        </loadData>
-        
-        
-        <!-- Question Answers -->
-        <loadData encoding="UTF-8"
-                  file="config/liquibase/dev/question_answers.csv"
-                  separator=";"
-                  tableName="krptn_question_answers">
+	        <column name="question_id" type="numeric"/>
         </loadData>
         
         

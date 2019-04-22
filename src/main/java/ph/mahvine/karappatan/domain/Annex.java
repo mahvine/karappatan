@@ -3,10 +3,11 @@ package ph.mahvine.karappatan.domain;
 
 
 import javax.persistence.*;
-
-import org.hibernate.annotations.Type;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -23,10 +24,18 @@ public class Annex implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Lob
     @Column(name = "content")
-    @Type(type = "org.hibernate.type.TextType")
     private String content;
+
+    
+    @Column(name = "identifier", unique = true)
+    private String identifier;
+
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name = "krptn_annex_next_questions",
+               joinColumns = @JoinColumn(name = "annex_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "next_questions_id", referencedColumnName = "id"))
+    private Set<Question> nextQuestions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -48,6 +57,42 @@ public class Annex implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public Annex identifier(String identifier) {
+        this.identifier = identifier;
+        return this;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
+    public Set<Question> getNextQuestions() {
+        return nextQuestions;
+    }
+
+    public Annex nextQuestions(Set<Question> questions) {
+        this.nextQuestions = questions;
+        return this;
+    }
+
+    public Annex addNextQuestions(Question question) {
+        this.nextQuestions.add(question);
+        return this;
+    }
+
+    public Annex removeNextQuestions(Question question) {
+        this.nextQuestions.remove(question);
+        return this;
+    }
+
+    public void setNextQuestions(Set<Question> questions) {
+        this.nextQuestions = questions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -76,6 +121,7 @@ public class Annex implements Serializable {
         return "Annex{" +
             "id=" + getId() +
             ", content='" + getContent() + "'" +
+            ", identifier='" + getIdentifier() + "'" +
             "}";
     }
 }

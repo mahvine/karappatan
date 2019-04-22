@@ -1,8 +1,11 @@
 package ph.mahvine.karappatan.repository;
 
-import ph.mahvine.karappatan.domain.Answer;
-import org.springframework.data.jpa.repository.*;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import ph.mahvine.karappatan.domain.Answer;
 
 
 /**
@@ -12,4 +15,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
+	List<Answer> findByQuestionId(Long questionId);
 }

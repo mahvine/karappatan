@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IAnswer } from 'app/shared/model/answer.model';
 import { AnswerService } from './answer.service';
 import { IAnnex } from 'app/shared/model/annex.model';
@@ -28,6 +28,7 @@ export class AnswerUpdateComponent implements OnInit {
     questions: IQuestion[];
 
     constructor(
+        protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected answerService: AnswerService,
         protected annexService: AnnexService,
@@ -62,6 +63,18 @@ export class AnswerUpdateComponent implements OnInit {
                 map((response: HttpResponse<IQuestion[]>) => response.body)
             )
             .subscribe((res: IQuestion[]) => (this.questions = res), (res: HttpErrorResponse) => this.onError(res.message));
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
     }
 
     previousState() {

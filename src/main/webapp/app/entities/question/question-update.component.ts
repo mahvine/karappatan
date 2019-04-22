@@ -3,11 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { JhiAlertService } from 'ng-jhipster';
+import { JhiDataUtils } from 'ng-jhipster';
 import { IQuestion } from 'app/shared/model/question.model';
 import { QuestionService } from './question.service';
-import { IAnswer } from 'app/shared/model/answer.model';
-import { AnswerService } from 'app/entities/answer';
 
 @Component({
     selector: 'jhi-question-update',
@@ -17,27 +15,25 @@ export class QuestionUpdateComponent implements OnInit {
     question: IQuestion;
     isSaving: boolean;
 
-    answers: IAnswer[];
-
-    constructor(
-        protected jhiAlertService: JhiAlertService,
-        protected questionService: QuestionService,
-        protected answerService: AnswerService,
-        protected activatedRoute: ActivatedRoute
-    ) {}
+    constructor(protected dataUtils: JhiDataUtils, protected questionService: QuestionService, protected activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ question }) => {
             this.question = question;
         });
-        this.answerService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IAnswer[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IAnswer[]>) => response.body)
-            )
-            .subscribe((res: IAnswer[]) => (this.answers = res), (res: HttpErrorResponse) => this.onError(res.message));
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
     }
 
     previousState() {
@@ -64,24 +60,5 @@ export class QuestionUpdateComponent implements OnInit {
 
     protected onSaveError() {
         this.isSaving = false;
-    }
-
-    protected onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackAnswerById(index: number, item: IAnswer) {
-        return item.id;
-    }
-
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
     }
 }

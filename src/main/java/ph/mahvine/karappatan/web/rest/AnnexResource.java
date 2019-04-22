@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -45,7 +46,7 @@ public class AnnexResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/annexes")
-    public ResponseEntity<Annex> createAnnex(@RequestBody Annex annex) throws URISyntaxException {
+    public ResponseEntity<Annex> createAnnex(@Valid @RequestBody Annex annex) throws URISyntaxException {
         log.debug("REST request to save Annex : {}", annex);
         if (annex.getId() != null) {
             throw new BadRequestAlertException("A new annex cannot already have an ID", ENTITY_NAME, "idexists");
@@ -66,7 +67,7 @@ public class AnnexResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/annexes")
-    public ResponseEntity<Annex> updateAnnex(@RequestBody Annex annex) throws URISyntaxException {
+    public ResponseEntity<Annex> updateAnnex(@Valid @RequestBody Annex annex) throws URISyntaxException {
         log.debug("REST request to update Annex : {}", annex);
         if (annex.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -81,13 +82,19 @@ public class AnnexResource {
      * GET  /annexes : get all the annexes.
      *
      * @param pageable the pagination information
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of annexes in body
      */
     @GetMapping("/annexes")
-    public ResponseEntity<List<Annex>> getAllAnnexes(Pageable pageable) {
+    public ResponseEntity<List<Annex>> getAllAnnexes(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Annexes");
-        Page<Annex> page = annexRepository.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/annexes");
+        Page<Annex> page;
+        if (eagerload) {
+            page = annexRepository.findAllWithEagerRelationships(pageable);
+        } else {
+            page = annexRepository.findAll(pageable);
+        }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/annexes?eagerload=%b", eagerload));
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -100,7 +107,7 @@ public class AnnexResource {
     @GetMapping("/annexes/{id}")
     public ResponseEntity<Annex> getAnnex(@PathVariable Long id) {
         log.debug("REST request to get Annex : {}", id);
-        Optional<Annex> annex = annexRepository.findById(id);
+        Optional<Annex> annex = annexRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(annex);
     }
 

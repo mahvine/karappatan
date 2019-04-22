@@ -20,6 +20,7 @@
             <th jhiSortBy="annex.content"><span>Annex</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="recommendation.content"><span>Recommendation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nextQuestion.question"><span>Next Question</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="question.question"><span>Question</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -41,6 +42,11 @@
                 <td>
                     <div *ngIf="answer.nextQuestion">
                         <a [routerLink]="['../question', answer.nextQuestion?.id, 'view' ]" >{{answer.nextQuestion?.question}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="answer.question">
+                        <a [routerLink]="['../question', answer.question?.id, 'view' ]" >{{answer.question?.question}}</a>
                     </div>
                 </td>
                 <td class="text-right">

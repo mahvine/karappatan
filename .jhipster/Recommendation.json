@@ -1,12 +1,37 @@
 {
     "fluentMethods": true,
     "clientRootFolder": "",
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "nextRecommendation",
+            "otherEntityName": "recommendation",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "content",
+            "otherEntityRelationshipName": "recommendation",
+            "otherEntityRelationshipNameUndefined": true
+        },
+        {
+            "relationshipName": "nextQuestions",
+            "otherEntityName": "question",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "question",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "recommendation",
+            "otherEntityRelationshipNameUndefined": false
+        }
+    ],
     "fields": [
         {
             "fieldName": "content",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "identifier",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique"
+            ]
         }
     ],
     "changelogDate": "20190218063557",

@@ -1,6 +1,7 @@
 package ph.mahvine.karappatan.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -24,16 +25,21 @@ public class Question implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
+    
+    @Lob
     @Column(name = "question", nullable = false)
     private String question;
 
-    @ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name = "krptn_question_answers",
-               joinColumns = @JoinColumn(name = "question_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "answers_id", referencedColumnName = "id"))
-    private Set<Answer> answers = new HashSet<>();
+    @NotNull
+    @Column(name = "identifier", nullable = false, unique = true)
+    private String identifier;
 
+    @Lob
+    @Column(name = "info")
+    private String info;
+
+    @OneToMany(mappedBy = "question")
+    private Set<Answer> answers = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -56,6 +62,32 @@ public class Question implements Serializable {
         this.question = question;
     }
 
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public Question identifier(String identifier) {
+        this.identifier = identifier;
+        return this;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public Question info(String info) {
+        this.info = info;
+        return this;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
     public Set<Answer> getAnswers() {
         return answers;
     }
@@ -67,11 +99,13 @@ public class Question implements Serializable {
 
     public Question addAnswers(Answer answer) {
         this.answers.add(answer);
+        answer.setQuestion(this);
         return this;
     }
 
     public Question removeAnswers(Answer answer) {
         this.answers.remove(answer);
+        answer.setQuestion(null);
         return this;
     }
 
@@ -105,6 +139,8 @@ public class Question implements Serializable {
         return "Question{" +
             "id=" + getId() +
             ", question='" + getQuestion() + "'" +
+            ", identifier='" + getIdentifier() + "'" +
+            ", info='" + getInfo() + "'" +
             "}";
     }
 }

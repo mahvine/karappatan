@@ -79,6 +79,66 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'case-summary',
                 loadChildren: './case-summary/case-summary.module#KarappatanCaseSummaryModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'recommendation',
+                loadChildren: './recommendation/recommendation.module#KarappatanRecommendationModule'
+            },
+            {
+                path: 'annex',
+                loadChildren: './annex/annex.module#KarappatanAnnexModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'answer',
+                loadChildren: './answer/answer.module#KarappatanAnswerModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'answer',
+                loadChildren: './answer/answer.module#KarappatanAnswerModule'
+            },
+            {
+                path: 'answer',
+                loadChildren: './answer/answer.module#KarappatanAnswerModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'recommendation',
+                loadChildren: './recommendation/recommendation.module#KarappatanRecommendationModule'
+            },
+            {
+                path: 'recommendation',
+                loadChildren: './recommendation/recommendation.module#KarappatanRecommendationModule'
+            },
+            {
+                path: 'annex',
+                loadChildren: './annex/annex.module#KarappatanAnnexModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

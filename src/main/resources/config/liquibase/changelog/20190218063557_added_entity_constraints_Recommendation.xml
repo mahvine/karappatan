@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Recommendation.
+    -->
+    <changeSet id="20190218063557-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="next_recommendation_id"
+                                 baseTableName="krptn_recommendation"
+                                 constraintName="fk_krptn_recommendation_next_recommendation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="krptn_recommendation"/>
+
+        <addForeignKeyConstraint baseColumnNames="recommendation_id"
+                                 baseTableName="krptn_recommendation_next_questions"
+                                 constraintName="fk_krptn_recommendation_next_questions_krptn_recommendation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="krptn_recommendation"/>
+        <addForeignKeyConstraint baseColumnNames="next_questions_id"
+                                 baseTableName="krptn_recommendation_next_questions"
+                                 constraintName="fk_krptn_recommendation_next_questions_next_questions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="krptn_question"/>
+        
+    </changeSet>
+</databaseChangeLog>

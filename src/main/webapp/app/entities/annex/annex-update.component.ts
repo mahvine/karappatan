@@ -3,9 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { JhiDataUtils } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IAnnex } from 'app/shared/model/annex.model';
 import { AnnexService } from './annex.service';
+import { IQuestion } from 'app/shared/model/question.model';
+import { QuestionService } from 'app/entities/question';
 
 @Component({
     selector: 'jhi-annex-update',
@@ -15,13 +17,28 @@ export class AnnexUpdateComponent implements OnInit {
     annex: IAnnex;
     isSaving: boolean;
 
-    constructor(protected dataUtils: JhiDataUtils, protected annexService: AnnexService, protected activatedRoute: ActivatedRoute) {}
+    questions: IQuestion[];
+
+    constructor(
+        protected dataUtils: JhiDataUtils,
+        protected jhiAlertService: JhiAlertService,
+        protected annexService: AnnexService,
+        protected questionService: QuestionService,
+        protected activatedRoute: ActivatedRoute
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ annex }) => {
             this.annex = annex;
         });
+        this.questionService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IQuestion[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IQuestion[]>) => response.body)
+            )
+            .subscribe((res: IQuestion[]) => (this.questions = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -60,5 +77,24 @@ export class AnnexUpdateComponent implements OnInit {
 
     protected onSaveError() {
         this.isSaving = false;
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackQuestionById(index: number, item: IQuestion) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 }

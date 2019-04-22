@@ -5,19 +5,32 @@
         {
             "relationshipName": "answers",
             "otherEntityName": "answer",
-            "relationshipType": "many-to-many",
-            "otherEntityField": "answer",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "question"
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "question",
+            "otherEntityRelationshipNameUndefined": false
         }
     ],
     "fields": [
         {
             "fieldName": "question",
-            "fieldType": "String",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "identifier",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "info",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
         }
     ],
     "changelogDate": "20190218072351",

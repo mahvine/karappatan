@@ -4,20 +4,22 @@ import { IQuestion } from 'app/shared/model/question.model';
 
 export interface IAnswer {
     id?: number;
-    answer?: string;
-    instructions?: string;
+    answer?: any;
+    instructions?: any;
     annex?: IAnnex;
     recommendation?: IRecommendation;
     nextQuestion?: IQuestion;
+    question?: IQuestion;
 }
 
 export class Answer implements IAnswer {
     constructor(
         public id?: number,
-        public answer?: string,
-        public instructions?: string,
+        public answer?: any,
+        public instructions?: any,
         public annex?: IAnnex,
         public recommendation?: IRecommendation,
-        public nextQuestion?: IQuestion
+        public nextQuestion?: IQuestion,
+        public question?: IQuestion
     ) {}
 }

@@ -9,12 +9,9 @@ import ph.mahvine.karappatan.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -22,17 +19,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 
 
 import static ph.mahvine.karappatan.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -48,11 +44,14 @@ public class QuestionResourceIntTest {
     private static final String DEFAULT_QUESTION = "AAAAAAAAAA";
     private static final String UPDATED_QUESTION = "BBBBBBBBBB";
 
+    private static final String DEFAULT_IDENTIFIER = "AAAAAAAAAA";
+    private static final String UPDATED_IDENTIFIER = "BBBBBBBBBB";
+
+    private static final String DEFAULT_INFO = "AAAAAAAAAA";
+    private static final String UPDATED_INFO = "BBBBBBBBBB";
+
     @Autowired
     private QuestionRepository questionRepository;
-
-    @Mock
-    private QuestionRepository questionRepositoryMock;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -93,7 +92,9 @@ public class QuestionResourceIntTest {
      */
     public static Question createEntity(EntityManager em) {
         Question question = new Question()
-            .question(DEFAULT_QUESTION);
+            .question(DEFAULT_QUESTION)
+            .identifier(DEFAULT_IDENTIFIER)
+            .info(DEFAULT_INFO);
         return question;
     }
 
@@ -118,6 +119,8 @@ public class QuestionResourceIntTest {
         assertThat(questionList).hasSize(databaseSizeBeforeCreate + 1);
         Question testQuestion = questionList.get(questionList.size() - 1);
         assertThat(testQuestion.getQuestion()).isEqualTo(DEFAULT_QUESTION);
+        assertThat(testQuestion.getIdentifier()).isEqualTo(DEFAULT_IDENTIFIER);
+        assertThat(testQuestion.getInfo()).isEqualTo(DEFAULT_INFO);
     }
 
     @Test
@@ -141,10 +144,10 @@ public class QuestionResourceIntTest {
 
     @Test
     @Transactional
-    public void checkQuestionIsRequired() throws Exception {
+    public void checkIdentifierIsRequired() throws Exception {
         int databaseSizeBeforeTest = questionRepository.findAll().size();
         // set the field null
-        question.setQuestion(null);
+        question.setIdentifier(null);
 
         // Create the Question, which fails.
 
@@ -168,42 +171,11 @@ public class QuestionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(question.getId().intValue())))
-            .andExpect(jsonPath("$.[*].question").value(hasItem(DEFAULT_QUESTION.toString())));
+            .andExpect(jsonPath("$.[*].question").value(hasItem(DEFAULT_QUESTION.toString())))
+            .andExpect(jsonPath("$.[*].identifier").value(hasItem(DEFAULT_IDENTIFIER.toString())))
+            .andExpect(jsonPath("$.[*].info").value(hasItem(DEFAULT_INFO.toString())));
     }
     
-    @SuppressWarnings({"unchecked"})
-    public void getAllQuestionsWithEagerRelationshipsIsEnabled() throws Exception {
-        QuestionResource questionResource = new QuestionResource(questionRepositoryMock);
-        when(questionRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        MockMvc restQuestionMockMvc = MockMvcBuilders.standaloneSetup(questionResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-
-        restQuestionMockMvc.perform(get("/api/questions?eagerload=true"))
-        .andExpect(status().isOk());
-
-        verify(questionRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({"unchecked"})
-    public void getAllQuestionsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        QuestionResource questionResource = new QuestionResource(questionRepositoryMock);
-            when(questionRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-            MockMvc restQuestionMockMvc = MockMvcBuilders.standaloneSetup(questionResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-
-        restQuestionMockMvc.perform(get("/api/questions?eagerload=true"))
-        .andExpect(status().isOk());
-
-            verify(questionRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
     @Test
     @Transactional
     public void getQuestion() throws Exception {
@@ -215,7 +187,9 @@ public class QuestionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(question.getId().intValue()))
-            .andExpect(jsonPath("$.question").value(DEFAULT_QUESTION.toString()));
+            .andExpect(jsonPath("$.question").value(DEFAULT_QUESTION.toString()))
+            .andExpect(jsonPath("$.identifier").value(DEFAULT_IDENTIFIER.toString()))
+            .andExpect(jsonPath("$.info").value(DEFAULT_INFO.toString()));
     }
 
     @Test
@@ -239,7 +213,9 @@ public class QuestionResourceIntTest {
         // Disconnect from session so that the updates on updatedQuestion are not directly saved in db
         em.detach(updatedQuestion);
         updatedQuestion
-            .question(UPDATED_QUESTION);
+            .question(UPDATED_QUESTION)
+            .identifier(UPDATED_IDENTIFIER)
+            .info(UPDATED_INFO);
 
         restQuestionMockMvc.perform(put("/api/questions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -251,6 +227,8 @@ public class QuestionResourceIntTest {
         assertThat(questionList).hasSize(databaseSizeBeforeUpdate);
         Question testQuestion = questionList.get(questionList.size() - 1);
         assertThat(testQuestion.getQuestion()).isEqualTo(UPDATED_QUESTION);
+        assertThat(testQuestion.getIdentifier()).isEqualTo(UPDATED_IDENTIFIER);
+        assertThat(testQuestion.getInfo()).isEqualTo(UPDATED_INFO);
     }
 
     @Test

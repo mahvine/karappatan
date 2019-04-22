@@ -16,6 +16,8 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="content"><span>Content</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="identifier"><span>Identifier</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nextRecommendation.content"><span>Next Recommendation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -23,6 +25,12 @@
             <tr *ngFor="let recommendation of recommendations ;trackBy: trackId">
                 <td><a [routerLink]="['/recommendation', recommendation.id, 'view' ]">{{recommendation.id}}</a></td>
                 <td>{{recommendation.content}}</td>
+                <td>{{recommendation.identifier}}</td>
+                <td>
+                    <div *ngIf="recommendation.nextRecommendation">
+                        <a [routerLink]="['../recommendation', recommendation.nextRecommendation?.id, 'view' ]" >{{recommendation.nextRecommendation?.content}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

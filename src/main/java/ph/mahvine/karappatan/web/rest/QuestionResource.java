@@ -82,19 +82,13 @@ public class QuestionResource {
      * GET  /questions : get all the questions.
      *
      * @param pageable the pagination information
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of questions in body
      */
     @GetMapping("/questions")
-    public ResponseEntity<List<Question>> getAllQuestions(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public ResponseEntity<List<Question>> getAllQuestions(Pageable pageable) {
         log.debug("REST request to get a page of Questions");
-        Page<Question> page;
-        if (eagerload) {
-            page = questionRepository.findAllWithEagerRelationships(pageable);
-        } else {
-            page = questionRepository.findAll(pageable);
-        }
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/questions?eagerload=%b", eagerload));
+        Page<Question> page = questionRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/questions");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -107,7 +101,7 @@ public class QuestionResource {
     @GetMapping("/questions/{id}")
     public ResponseEntity<Question> getQuestion(@PathVariable Long id) {
         log.debug("REST request to get Question : {}", id);
-        Optional<Question> question = questionRepository.findOneWithEagerRelationships(id);
+        Optional<Question> question = questionRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(question);
     }
 

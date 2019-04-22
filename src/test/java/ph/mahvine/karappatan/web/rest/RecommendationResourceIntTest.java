@@ -9,9 +9,12 @@ import ph.mahvine.karappatan.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -23,12 +26,14 @@ import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 
 
 import static ph.mahvine.karappatan.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -44,8 +49,14 @@ public class RecommendationResourceIntTest {
     private static final String DEFAULT_CONTENT = "AAAAAAAAAA";
     private static final String UPDATED_CONTENT = "BBBBBBBBBB";
 
+    private static final String DEFAULT_IDENTIFIER = "AAAAAAAAAA";
+    private static final String UPDATED_IDENTIFIER = "BBBBBBBBBB";
+
     @Autowired
     private RecommendationRepository recommendationRepository;
+
+    @Mock
+    private RecommendationRepository recommendationRepositoryMock;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -86,7 +97,8 @@ public class RecommendationResourceIntTest {
      */
     public static Recommendation createEntity(EntityManager em) {
         Recommendation recommendation = new Recommendation()
-            .content(DEFAULT_CONTENT);
+            .content(DEFAULT_CONTENT)
+            .identifier(DEFAULT_IDENTIFIER);
         return recommendation;
     }
 
@@ -111,6 +123,7 @@ public class RecommendationResourceIntTest {
         assertThat(recommendationList).hasSize(databaseSizeBeforeCreate + 1);
         Recommendation testRecommendation = recommendationList.get(recommendationList.size() - 1);
         assertThat(testRecommendation.getContent()).isEqualTo(DEFAULT_CONTENT);
+        assertThat(testRecommendation.getIdentifier()).isEqualTo(DEFAULT_IDENTIFIER);
     }
 
     @Test
@@ -134,6 +147,24 @@ public class RecommendationResourceIntTest {
 
     @Test
     @Transactional
+    public void checkIdentifierIsRequired() throws Exception {
+        int databaseSizeBeforeTest = recommendationRepository.findAll().size();
+        // set the field null
+        recommendation.setIdentifier(null);
+
+        // Create the Recommendation, which fails.
+
+        restRecommendationMockMvc.perform(post("/api/recommendations")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(recommendation)))
+            .andExpect(status().isBadRequest());
+
+        List<Recommendation> recommendationList = recommendationRepository.findAll();
+        assertThat(recommendationList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllRecommendations() throws Exception {
         // Initialize the database
         recommendationRepository.saveAndFlush(recommendation);
@@ -143,9 +174,43 @@ public class RecommendationResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(recommendation.getId().intValue())))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())));
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
+            .andExpect(jsonPath("$.[*].identifier").value(hasItem(DEFAULT_IDENTIFIER.toString())));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllRecommendationsWithEagerRelationshipsIsEnabled() throws Exception {
+        RecommendationResource recommendationResource = new RecommendationResource(recommendationRepositoryMock);
+        when(recommendationRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        MockMvc restRecommendationMockMvc = MockMvcBuilders.standaloneSetup(recommendationResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restRecommendationMockMvc.perform(get("/api/recommendations?eagerload=true"))
+        .andExpect(status().isOk());
+
+        verify(recommendationRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllRecommendationsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        RecommendationResource recommendationResource = new RecommendationResource(recommendationRepositoryMock);
+            when(recommendationRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+            MockMvc restRecommendationMockMvc = MockMvcBuilders.standaloneSetup(recommendationResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restRecommendationMockMvc.perform(get("/api/recommendations?eagerload=true"))
+        .andExpect(status().isOk());
+
+            verify(recommendationRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     @Transactional
     public void getRecommendation() throws Exception {
@@ -157,7 +222,8 @@ public class RecommendationResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(recommendation.getId().intValue()))
-            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()));
+            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
+            .andExpect(jsonPath("$.identifier").value(DEFAULT_IDENTIFIER.toString()));
     }
 
     @Test
@@ -181,7 +247,8 @@ public class RecommendationResourceIntTest {
         // Disconnect from session so that the updates on updatedRecommendation are not directly saved in db
         em.detach(updatedRecommendation);
         updatedRecommendation
-            .content(UPDATED_CONTENT);
+            .content(UPDATED_CONTENT)
+            .identifier(UPDATED_IDENTIFIER);
 
         restRecommendationMockMvc.perform(put("/api/recommendations")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -193,6 +260,7 @@ public class RecommendationResourceIntTest {
         assertThat(recommendationList).hasSize(databaseSizeBeforeUpdate);
         Recommendation testRecommendation = recommendationList.get(recommendationList.size() - 1);
         assertThat(testRecommendation.getContent()).isEqualTo(UPDATED_CONTENT);
+        assertThat(testRecommendation.getIdentifier()).isEqualTo(UPDATED_IDENTIFIER);
     }
 
     @Test

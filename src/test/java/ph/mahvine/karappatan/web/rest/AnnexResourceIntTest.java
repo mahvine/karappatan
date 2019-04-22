@@ -9,9 +9,12 @@ import ph.mahvine.karappatan.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -23,12 +26,14 @@ import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 
 
 import static ph.mahvine.karappatan.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -44,8 +49,14 @@ public class AnnexResourceIntTest {
     private static final String DEFAULT_CONTENT = "AAAAAAAAAA";
     private static final String UPDATED_CONTENT = "BBBBBBBBBB";
 
+    private static final String DEFAULT_IDENTIFIER = "AAAAAAAAAA";
+    private static final String UPDATED_IDENTIFIER = "BBBBBBBBBB";
+
     @Autowired
     private AnnexRepository annexRepository;
+
+    @Mock
+    private AnnexRepository annexRepositoryMock;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -86,7 +97,8 @@ public class AnnexResourceIntTest {
      */
     public static Annex createEntity(EntityManager em) {
         Annex annex = new Annex()
-            .content(DEFAULT_CONTENT);
+            .content(DEFAULT_CONTENT)
+            .identifier(DEFAULT_IDENTIFIER);
         return annex;
     }
 
@@ -111,6 +123,7 @@ public class AnnexResourceIntTest {
         assertThat(annexList).hasSize(databaseSizeBeforeCreate + 1);
         Annex testAnnex = annexList.get(annexList.size() - 1);
         assertThat(testAnnex.getContent()).isEqualTo(DEFAULT_CONTENT);
+        assertThat(testAnnex.getIdentifier()).isEqualTo(DEFAULT_IDENTIFIER);
     }
 
     @Test
@@ -143,9 +156,43 @@ public class AnnexResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(annex.getId().intValue())))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())));
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
+            .andExpect(jsonPath("$.[*].identifier").value(hasItem(DEFAULT_IDENTIFIER.toString())));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllAnnexesWithEagerRelationshipsIsEnabled() throws Exception {
+        AnnexResource annexResource = new AnnexResource(annexRepositoryMock);
+        when(annexRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        MockMvc restAnnexMockMvc = MockMvcBuilders.standaloneSetup(annexResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restAnnexMockMvc.perform(get("/api/annexes?eagerload=true"))
+        .andExpect(status().isOk());
+
+        verify(annexRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllAnnexesWithEagerRelationshipsIsNotEnabled() throws Exception {
+        AnnexResource annexResource = new AnnexResource(annexRepositoryMock);
+            when(annexRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+            MockMvc restAnnexMockMvc = MockMvcBuilders.standaloneSetup(annexResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restAnnexMockMvc.perform(get("/api/annexes?eagerload=true"))
+        .andExpect(status().isOk());
+
+            verify(annexRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     @Transactional
     public void getAnnex() throws Exception {
@@ -157,7 +204,8 @@ public class AnnexResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(annex.getId().intValue()))
-            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()));
+            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
+            .andExpect(jsonPath("$.identifier").value(DEFAULT_IDENTIFIER.toString()));
     }
 
     @Test
@@ -181,7 +229,8 @@ public class AnnexResourceIntTest {
         // Disconnect from session so that the updates on updatedAnnex are not directly saved in db
         em.detach(updatedAnnex);
         updatedAnnex
-            .content(UPDATED_CONTENT);
+            .content(UPDATED_CONTENT)
+            .identifier(UPDATED_IDENTIFIER);
 
         restAnnexMockMvc.perform(put("/api/annexes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -193,6 +242,7 @@ public class AnnexResourceIntTest {
         assertThat(annexList).hasSize(databaseSizeBeforeUpdate);
         Annex testAnnex = annexList.get(annexList.size() - 1);
         assertThat(testAnnex.getContent()).isEqualTo(UPDATED_CONTENT);
+        assertThat(testAnnex.getIdentifier()).isEqualTo(UPDATED_IDENTIFIER);
     }
 
     @Test

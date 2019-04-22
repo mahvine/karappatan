@@ -9,6 +9,22 @@
                 <dd>
                     <span>{{recommendation.content}}</span>
                 </dd>
+                <dt><span>Identifier</span></dt>
+                <dd>
+                    <span>{{recommendation.identifier}}</span>
+                </dd>
+                <dt><span>Next Recommendation</span></dt>
+                <dd>
+                    <div *ngIf="recommendation.nextRecommendation">
+                        <a [routerLink]="['/recommendation', recommendation.nextRecommendation?.id, 'view']">{{recommendation.nextRecommendation?.content}}</a>
+                    </div>
+                </dd>
+                <dt><span>Next Questions</span></dt>
+                <dd>
+                    <span *ngFor="let nextQuestions of recommendation.nextQuestions; let last = last">
+                        <a [routerLink]="['/question', nextQuestions?.id, 'view' ]">{{nextQuestions.question}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
             </dl>
 
             <button type="submit"

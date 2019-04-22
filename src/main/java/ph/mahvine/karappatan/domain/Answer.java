@@ -23,24 +23,30 @@ public class Answer implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
+    
+    @Lob
     @Column(name = "answer", nullable = false)
     private String answer;
 
+    @Lob
     @Column(name = "instructions")
     private String instructions;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     @JsonIgnoreProperties("answers")
     private Annex annex;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     @JsonIgnoreProperties("answers")
     private Recommendation recommendation;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     @JsonIgnoreProperties("answers")
     private Question nextQuestion;
+
+    @ManyToOne
+    @JsonIgnoreProperties("answers")
+    private Question question;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -114,6 +120,19 @@ public class Answer implements Serializable {
 
     public void setNextQuestion(Question question) {
         this.nextQuestion = question;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public Answer question(Question question) {
+        this.question = question;
+        return this;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

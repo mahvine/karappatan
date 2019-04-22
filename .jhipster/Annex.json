@@ -1,12 +1,29 @@
 {
     "fluentMethods": true,
     "clientRootFolder": "",
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "nextQuestions",
+            "otherEntityName": "question",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "content",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "annex",
+            "otherEntityRelationshipNameUndefined": false
+        }
+    ],
     "fields": [
         {
             "fieldName": "content",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "identifier",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique"
+            ]
         }
     ],
     "changelogDate": "20190218064552",

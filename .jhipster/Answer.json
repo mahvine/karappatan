@@ -8,7 +8,7 @@
             "relationshipType": "many-to-one",
             "otherEntityField": "content",
             "otherEntityRelationshipName": "answer",
-            "otherEntityRelationshipNameUndefined": true
+            "otherEntityRelationshipNameUndefined": false
         },
         {
             "relationshipName": "recommendation",
@@ -16,10 +16,18 @@
             "relationshipType": "many-to-one",
             "otherEntityField": "content",
             "otherEntityRelationshipName": "answer",
-            "otherEntityRelationshipNameUndefined": true
+            "otherEntityRelationshipNameUndefined": false
         },
         {
             "relationshipName": "nextQuestion",
+            "otherEntityName": "question",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "question",
+            "otherEntityRelationshipName": "answer",
+            "otherEntityRelationshipNameUndefined": false
+        },
+        {
+            "relationshipName": "question",
             "otherEntityName": "question",
             "relationshipType": "many-to-one",
             "otherEntityField": "question",
@@ -30,14 +38,16 @@
     "fields": [
         {
             "fieldName": "answer",
-            "fieldType": "String",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
             "fieldName": "instructions",
-            "fieldType": "String"
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
         }
     ],
     "changelogDate": "20190218065140",

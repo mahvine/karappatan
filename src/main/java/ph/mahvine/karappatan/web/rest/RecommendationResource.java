@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -45,7 +46,7 @@ public class RecommendationResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/recommendations")
-    public ResponseEntity<Recommendation> createRecommendation(@RequestBody Recommendation recommendation) throws URISyntaxException {
+    public ResponseEntity<Recommendation> createRecommendation(@Valid @RequestBody Recommendation recommendation) throws URISyntaxException {
         log.debug("REST request to save Recommendation : {}", recommendation);
         if (recommendation.getId() != null) {
             throw new BadRequestAlertException("A new recommendation cannot already have an ID", ENTITY_NAME, "idexists");
@@ -66,7 +67,7 @@ public class RecommendationResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/recommendations")
-    public ResponseEntity<Recommendation> updateRecommendation(@RequestBody Recommendation recommendation) throws URISyntaxException {
+    public ResponseEntity<Recommendation> updateRecommendation(@Valid @RequestBody Recommendation recommendation) throws URISyntaxException {
         log.debug("REST request to update Recommendation : {}", recommendation);
         if (recommendation.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -81,13 +82,19 @@ public class RecommendationResource {
      * GET  /recommendations : get all the recommendations.
      *
      * @param pageable the pagination information
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of recommendations in body
      */
     @GetMapping("/recommendations")
-    public ResponseEntity<List<Recommendation>> getAllRecommendations(Pageable pageable) {
+    public ResponseEntity<List<Recommendation>> getAllRecommendations(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Recommendations");
-        Page<Recommendation> page = recommendationRepository.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/recommendations");
+        Page<Recommendation> page;
+        if (eagerload) {
+            page = recommendationRepository.findAllWithEagerRelationships(pageable);
+        } else {
+            page = recommendationRepository.findAll(pageable);
+        }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/recommendations?eagerload=%b", eagerload));
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -100,7 +107,7 @@ public class RecommendationResource {
     @GetMapping("/recommendations/{id}")
     public ResponseEntity<Recommendation> getRecommendation(@PathVariable Long id) {
         log.debug("REST request to get Recommendation : {}", id);
-        Optional<Recommendation> recommendation = recommendationRepository.findById(id);
+        Optional<Recommendation> recommendation = recommendationRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(recommendation);
     }
 
