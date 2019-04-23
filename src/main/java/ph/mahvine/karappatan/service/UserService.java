@@ -141,6 +141,9 @@ public class UserService {
         newUser.setFirstName(fbLoginDTO.getFirstName());
         newUser.setLastName(fbLoginDTO.getLastName());
         newUser.setEmail(fbLoginDTO.getEmail().toLowerCase());
+        String encryptedPassword = passwordEncoder.encode("dummy_baka");//TODO workaround
+        newUser.setPassword(encryptedPassword);
+        newUser.setLangKey("en");
         newUser.setActivated(true);
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
