@@ -14,6 +14,8 @@ public class ManagedUserVM extends UserDTO {
 
     @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
+    
+    private boolean generateSession;
 
     public ManagedUserVM() {
         // Empty constructor needed for Jackson.
@@ -30,6 +32,16 @@ public class ManagedUserVM extends UserDTO {
     @Override
     public String toString() {
         return "ManagedUserVM{" +
+        	"generateSession:"+generateSession+
             "} " + super.toString();
     }
+
+	public boolean isGenerateSession() {
+		return generateSession;
+	}
+
+	public void setGenerateSession(boolean generateSession) {
+		this.generateSession = generateSession;
+	}
+    
 }

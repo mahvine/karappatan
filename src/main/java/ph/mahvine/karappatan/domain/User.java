@@ -100,6 +100,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(max = 254)
     @Column(length = 254, unique = true)
     private String address;
+    
+    @Size(max = 254)
+    @Column(name="fb_id", length = 254, unique = true)
+    private String fbId;
 
     public Long getId() {
         return id;
@@ -222,6 +226,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
+	public String getFbId() {
+		return fbId;
+	}
+
+	public void setFbId(String fbId) {
+		this.fbId = fbId;
+	}
 
 	@Override
     public boolean equals(Object o) {
@@ -254,4 +266,5 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", activationKey='" + activationKey + '\'' +
             "}";
     }
+
 }

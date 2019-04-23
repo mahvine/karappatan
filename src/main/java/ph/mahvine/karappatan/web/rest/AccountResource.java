@@ -9,14 +9,18 @@ import ph.mahvine.karappatan.service.MailService;
 import ph.mahvine.karappatan.service.UserService;
 import ph.mahvine.karappatan.service.dto.PasswordChangeDTO;
 import ph.mahvine.karappatan.service.dto.UserDTO;
+import ph.mahvine.karappatan.web.rest.UserJWTController.JWTToken;
 import ph.mahvine.karappatan.web.rest.errors.*;
 import ph.mahvine.karappatan.web.rest.vm.KeyAndPasswordVM;
+import ph.mahvine.karappatan.web.rest.vm.LoginVM;
 import ph.mahvine.karappatan.web.rest.vm.ManagedUserVM;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +41,9 @@ public class AccountResource {
     private final UserService userService;
 
     private final MailService mailService;
+    
+    @Autowired
+    private UserJWTController userJWTController;
 
     public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
 
@@ -55,12 +62,22 @@ public class AccountResource {
      */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+    public ResponseEntity<JWTToken> registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
+        if(managedUserVM.getLogin() == null) {
+        	managedUserVM.setLogin(managedUserVM.getEmail());
+        }
+        if(managedUserVM.getLangKey() == null) {
+        	managedUserVM.setLangKey("en");
+        }
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
         mailService.sendActivationEmail(user);
+        if(managedUserVM.isGenerateSession()) {
+        	return userJWTController.authorize(new LoginVM(managedUserVM.getLogin(), managedUserVM.getPassword()));
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     /**
@@ -185,6 +202,15 @@ public class AccountResource {
         }
     }
 
+    
+    @DeleteMapping( path = "/account/{email}")
+    public void deleteUser(String email) {
+    	userRepository.findOneByEmailIgnoreCase(email).ifPresent(existingUser -> {
+    		userRepository.delete(existingUser);
+    	});
+    	
+    }
+    
     private static boolean checkPasswordLength(String password) {
         return !StringUtils.isEmpty(password) &&
             password.length() >= ManagedUserVM.PASSWORD_MIN_LENGTH &&
@@ -196,4 +222,8 @@ public class AccountResource {
     	response.put("message", message);
     	return response;
     }
+
+	public UserJWTController getUserJWTController() {
+		return userJWTController;
+	}
 }

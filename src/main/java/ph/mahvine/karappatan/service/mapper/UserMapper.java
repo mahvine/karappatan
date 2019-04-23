@@ -42,7 +42,10 @@ public class UserMapper {
         } else {
             User user = new User();
             user.setId(userDTO.getId());
-            user.setLogin(userDTO.getLogin());
+            if(userDTO.getLogin()==null) {
+                userDTO.setLogin(userDTO.getEmail());
+            }
+            user.setLogin(userDTO.getLogin().toLowerCase());
             user.setFirstName(userDTO.getFirstName());
             user.setLastName(userDTO.getLastName());
             user.setEmail(userDTO.getEmail());

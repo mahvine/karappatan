@@ -7,6 +7,7 @@ import ph.mahvine.karappatan.repository.AuthorityRepository;
 import ph.mahvine.karappatan.repository.UserRepository;
 import ph.mahvine.karappatan.security.AuthoritiesConstants;
 import ph.mahvine.karappatan.security.SecurityUtils;
+import ph.mahvine.karappatan.service.dto.FacebookLoginDTO;
 import ph.mahvine.karappatan.service.dto.UserDTO;
 import ph.mahvine.karappatan.service.util.RandomUtil;
 import ph.mahvine.karappatan.web.rest.errors.*;
@@ -93,13 +94,14 @@ public class UserService {
                 throw new EmailAlreadyUsedException();
             }
         });
-
-        userRepository.findOneByContactNumberIgnoreCase(userDTO.getContactNumber()).ifPresent(existingUser -> {
-            boolean removed = removeNonActivatedUser(existingUser);
-            if (!removed) {
-                throw new EmailAlreadyUsedException();
-            }
-        });
+        if(userDTO.getContactNumber()!=null) {
+	        userRepository.findOneByContactNumberIgnoreCase(userDTO.getContactNumber()).ifPresent(existingUser -> {
+	            boolean removed = removeNonActivatedUser(existingUser);
+	            if (!removed) {
+	                throw new EmailAlreadyUsedException();
+	            }
+	        });
+        }
         User newUser = new User();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(userDTO.getLogin().toLowerCase());
@@ -110,8 +112,8 @@ public class UserService {
         newUser.setEmail(userDTO.getEmail().toLowerCase());
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
-        // new user is not active
-        newUser.setActivated(false);
+        // new user is not active 
+        newUser.setActivated(true); //TODO temporary 
         newUser.setContactNumber(userDTO.getContactNumber());
         newUser.setAddress(userDTO.getAddress());
         // new user gets registration key
@@ -123,6 +125,71 @@ public class UserService {
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
+    
+    public User registerFbUser(FacebookLoginDTO fbLoginDTO) {
+        
+        User newUser = new User();
+        
+
+        userRepository.findOneByEmailIgnoreCase(fbLoginDTO.getEmail()).ifPresent(existingUser -> {
+            boolean removed = removeNonActivatedUser(existingUser);
+            if (!removed) {
+                throw new EmailAlreadyUsedException();
+            }
+        });
+        newUser.setLogin(fbLoginDTO.getEmail().toLowerCase());
+        newUser.setFirstName(fbLoginDTO.getFirstName());
+        newUser.setLastName(fbLoginDTO.getLastName());
+        newUser.setEmail(fbLoginDTO.getEmail().toLowerCase());
+        newUser.setActivated(true);
+        Set<Authority> authorities = new HashSet<>();
+        authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+        newUser.setAuthorities(authorities);
+        userRepository.save(newUser);
+        log.debug("Created Information for FB User: {}", newUser);
+        return newUser;
+    }
+    
+
+    
+    public void linkFbUser(String email, String fbId) {
+    	//Check if fbId is existing
+        userRepository.findOneByFbId(fbId).ifPresent(existingUser -> {
+            boolean removed = removeNonActivatedUser(existingUser);
+            if (!removed) {
+                throw new EmailAlreadyUsedException();
+            }
+        });
+        User existingUser = null;
+        
+    	//Check if email is in use by other user
+        Optional<User> optUser = userRepository.findOneByEmailIgnoreCase(email);
+        if (optUser.isPresent()) {
+        	existingUser = optUser.get();
+        	if(existingUser.getFbId() != null) {
+        		throw new EmailAlreadyUsedException();
+        	}
+        } else {
+        	throw new EmailNotFoundException();
+        };
+        existingUser.setFbId(fbId);
+        userRepository.save(existingUser);
+        log.info("Linked for FB User: {}", existingUser);
+    }
+    
+    public void unlinkFbUser(String email) {
+        Optional<User> optUser = userRepository.findOneByEmailIgnoreCase(email);
+        if (optUser.isPresent()) {
+        	User existingUser = optUser.get();
+            existingUser.setFbId(null);
+            userRepository.save(existingUser);
+            log.info("Unlinked for FB User: {}", existingUser);
+        } else {
+        	throw new EmailNotFoundException();
+        };
+    }
+    
+    
 
     private boolean removeNonActivatedUser(User existingUser){
         if (existingUser.getActivated()) {
