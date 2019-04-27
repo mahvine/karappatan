@@ -19,5 +19,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="krptn_question"/>
         
+        <addForeignKeyConstraint baseColumnNames="module_id"
+                                 baseTableName="krptn_annex"
+                                 constraintName="fk_krptn_annex_module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="krptn_module"/>
+
     </changeSet>
 </databaseChangeLog>

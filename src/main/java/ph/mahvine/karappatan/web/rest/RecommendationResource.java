@@ -1,9 +1,9 @@
 package ph.mahvine.karappatan.web.rest;
-import ph.mahvine.karappatan.domain.Recommendation;
-import ph.mahvine.karappatan.repository.RecommendationRepository;
+import ph.mahvine.karappatan.service.RecommendationService;
 import ph.mahvine.karappatan.web.rest.errors.BadRequestAlertException;
 import ph.mahvine.karappatan.web.rest.util.HeaderUtil;
 import ph.mahvine.karappatan.web.rest.util.PaginationUtil;
+import ph.mahvine.karappatan.service.dto.RecommendationDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,26 +32,26 @@ public class RecommendationResource {
 
     private static final String ENTITY_NAME = "recommendation";
 
-    private final RecommendationRepository recommendationRepository;
+    private final RecommendationService recommendationService;
 
-    public RecommendationResource(RecommendationRepository recommendationRepository) {
-        this.recommendationRepository = recommendationRepository;
+    public RecommendationResource(RecommendationService recommendationService) {
+        this.recommendationService = recommendationService;
     }
 
     /**
      * POST  /recommendations : Create a new recommendation.
      *
-     * @param recommendation the recommendation to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new recommendation, or with status 400 (Bad Request) if the recommendation has already an ID
+     * @param recommendationDTO the recommendationDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new recommendationDTO, or with status 400 (Bad Request) if the recommendation has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/recommendations")
-    public ResponseEntity<Recommendation> createRecommendation(@Valid @RequestBody Recommendation recommendation) throws URISyntaxException {
-        log.debug("REST request to save Recommendation : {}", recommendation);
-        if (recommendation.getId() != null) {
+    public ResponseEntity<RecommendationDTO> createRecommendation(@Valid @RequestBody RecommendationDTO recommendationDTO) throws URISyntaxException {
+        log.debug("REST request to save Recommendation : {}", recommendationDTO);
+        if (recommendationDTO.getId() != null) {
             throw new BadRequestAlertException("A new recommendation cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Recommendation result = recommendationRepository.save(recommendation);
+        RecommendationDTO result = recommendationService.save(recommendationDTO);
         return ResponseEntity.created(new URI("/api/recommendations/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -60,21 +60,21 @@ public class RecommendationResource {
     /**
      * PUT  /recommendations : Updates an existing recommendation.
      *
-     * @param recommendation the recommendation to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated recommendation,
-     * or with status 400 (Bad Request) if the recommendation is not valid,
-     * or with status 500 (Internal Server Error) if the recommendation couldn't be updated
+     * @param recommendationDTO the recommendationDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated recommendationDTO,
+     * or with status 400 (Bad Request) if the recommendationDTO is not valid,
+     * or with status 500 (Internal Server Error) if the recommendationDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/recommendations")
-    public ResponseEntity<Recommendation> updateRecommendation(@Valid @RequestBody Recommendation recommendation) throws URISyntaxException {
-        log.debug("REST request to update Recommendation : {}", recommendation);
-        if (recommendation.getId() == null) {
+    public ResponseEntity<RecommendationDTO> updateRecommendation(@Valid @RequestBody RecommendationDTO recommendationDTO) throws URISyntaxException {
+        log.debug("REST request to update Recommendation : {}", recommendationDTO);
+        if (recommendationDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Recommendation result = recommendationRepository.save(recommendation);
+        RecommendationDTO result = recommendationService.save(recommendationDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, recommendation.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, recommendationDTO.getId().toString()))
             .body(result);
     }
 
@@ -86,13 +86,13 @@ public class RecommendationResource {
      * @return the ResponseEntity with status 200 (OK) and the list of recommendations in body
      */
     @GetMapping("/recommendations")
-    public ResponseEntity<List<Recommendation>> getAllRecommendations(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public ResponseEntity<List<RecommendationDTO>> getAllRecommendations(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Recommendations");
-        Page<Recommendation> page;
+        Page<RecommendationDTO> page;
         if (eagerload) {
-            page = recommendationRepository.findAllWithEagerRelationships(pageable);
+            page = recommendationService.findAllWithEagerRelationships(pageable);
         } else {
-            page = recommendationRepository.findAll(pageable);
+            page = recommendationService.findAll(pageable);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/recommendations?eagerload=%b", eagerload));
         return ResponseEntity.ok().headers(headers).body(page.getContent());
@@ -101,26 +101,26 @@ public class RecommendationResource {
     /**
      * GET  /recommendations/:id : get the "id" recommendation.
      *
-     * @param id the id of the recommendation to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the recommendation, or with status 404 (Not Found)
+     * @param id the id of the recommendationDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the recommendationDTO, or with status 404 (Not Found)
      */
     @GetMapping("/recommendations/{id}")
-    public ResponseEntity<Recommendation> getRecommendation(@PathVariable Long id) {
+    public ResponseEntity<RecommendationDTO> getRecommendation(@PathVariable Long id) {
         log.debug("REST request to get Recommendation : {}", id);
-        Optional<Recommendation> recommendation = recommendationRepository.findOneWithEagerRelationships(id);
-        return ResponseUtil.wrapOrNotFound(recommendation);
+        Optional<RecommendationDTO> recommendationDTO = recommendationService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(recommendationDTO);
     }
 
     /**
      * DELETE  /recommendations/:id : delete the "id" recommendation.
      *
-     * @param id the id of the recommendation to delete
+     * @param id the id of the recommendationDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/recommendations/{id}")
     public ResponseEntity<Void> deleteRecommendation(@PathVariable Long id) {
         log.debug("REST request to delete Recommendation : {}", id);
-        recommendationRepository.deleteById(id);
+        recommendationService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

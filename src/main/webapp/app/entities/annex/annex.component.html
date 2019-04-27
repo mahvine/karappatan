@@ -17,6 +17,7 @@
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="content"><span>Content</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="identifier"><span>Identifier</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="moduleTitle"><span>Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -25,6 +26,11 @@
                 <td><a [routerLink]="['/annex', annex.id, 'view' ]">{{annex.id}}</a></td>
                 <td>{{annex.content}}</td>
                 <td>{{annex.identifier}}</td>
+                <td>
+                    <div *ngIf="annex.moduleId">
+                        <a [routerLink]="['../module', annex.moduleId , 'view' ]" >{{annex.moduleTitle}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

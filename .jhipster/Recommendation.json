@@ -8,7 +8,7 @@
             "relationshipType": "many-to-one",
             "otherEntityField": "content",
             "otherEntityRelationshipName": "recommendation",
-            "otherEntityRelationshipNameUndefined": true
+            "otherEntityRelationshipNameUndefined": false
         },
         {
             "relationshipName": "nextQuestions",
@@ -18,6 +18,14 @@
             "ownerSide": true,
             "otherEntityRelationshipName": "recommendation",
             "otherEntityRelationshipNameUndefined": false
+        },
+        {
+            "relationshipName": "module",
+            "otherEntityName": "module",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "title",
+            "otherEntityRelationshipName": "recommendation",
+            "otherEntityRelationshipNameUndefined": true
         }
     ],
     "fields": [
@@ -35,9 +43,9 @@
         }
     ],
     "changelogDate": "20190218063557",
-    "dto": "no",
+    "dto": "mapstruct",
     "searchEngine": false,
-    "service": "no",
+    "service": "serviceClass",
     "entityTableName": "krptn_recommendation",
     "databaseType": "sql",
     "jpaMetamodelFiltering": false,

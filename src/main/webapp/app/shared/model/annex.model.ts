@@ -5,8 +5,17 @@ export interface IAnnex {
     content?: any;
     identifier?: string;
     nextQuestions?: IQuestion[];
+    moduleTitle?: string;
+    moduleId?: number;
 }
 
 export class Annex implements IAnnex {
-    constructor(public id?: number, public content?: any, public identifier?: string, public nextQuestions?: IQuestion[]) {}
+    constructor(
+        public id?: number,
+        public content?: any,
+        public identifier?: string,
+        public nextQuestions?: IQuestion[],
+        public moduleTitle?: string,
+        public moduleId?: number
+    ) {}
 }

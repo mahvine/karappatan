@@ -17,10 +17,10 @@
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="answer"><span>Answer</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="instructions"><span>Instructions</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="annex.content"><span>Annex</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="recommendation.content"><span>Recommendation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="nextQuestion.question"><span>Next Question</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="question.question"><span>Question</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="annexContent"><span>Annex</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="recommendationContent"><span>Recommendation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nextQuestionQuestion"><span>Next Question</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="questionQuestion"><span>Question</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -30,23 +30,23 @@
                 <td>{{answer.answer}}</td>
                 <td>{{answer.instructions}}</td>
                 <td>
-                    <div *ngIf="answer.annex">
-                        <a [routerLink]="['../annex', answer.annex?.id, 'view' ]" >{{answer.annex?.content}}</a>
+                    <div *ngIf="answer.annexId">
+                        <a [routerLink]="['../annex', answer.annexId , 'view' ]" >{{answer.annexContent}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="answer.recommendation">
-                        <a [routerLink]="['../recommendation', answer.recommendation?.id, 'view' ]" >{{answer.recommendation?.content}}</a>
+                    <div *ngIf="answer.recommendationId">
+                        <a [routerLink]="['../recommendation', answer.recommendationId , 'view' ]" >{{answer.recommendationContent}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="answer.nextQuestion">
-                        <a [routerLink]="['../question', answer.nextQuestion?.id, 'view' ]" >{{answer.nextQuestion?.question}}</a>
+                    <div *ngIf="answer.nextQuestionId">
+                        <a [routerLink]="['../question', answer.nextQuestionId , 'view' ]" >{{answer.nextQuestionQuestion}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="answer.question">
-                        <a [routerLink]="['../question', answer.question?.id, 'view' ]" >{{answer.question?.question}}</a>
+                    <div *ngIf="answer.questionId">
+                        <a [routerLink]="['../question', answer.questionId , 'view' ]" >{{answer.questionQuestion}}</a>
                     </div>
                 </td>
                 <td class="text-right">

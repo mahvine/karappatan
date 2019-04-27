@@ -17,7 +17,8 @@
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="content"><span>Content</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="identifier"><span>Identifier</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="nextRecommendation.content"><span>Next Recommendation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nextRecommendationContent"><span>Next Recommendation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="moduleTitle"><span>Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -27,8 +28,13 @@
                 <td>{{recommendation.content}}</td>
                 <td>{{recommendation.identifier}}</td>
                 <td>
-                    <div *ngIf="recommendation.nextRecommendation">
-                        <a [routerLink]="['../recommendation', recommendation.nextRecommendation?.id, 'view' ]" >{{recommendation.nextRecommendation?.content}}</a>
+                    <div *ngIf="recommendation.nextRecommendationId">
+                        <a [routerLink]="['../recommendation', recommendation.nextRecommendationId , 'view' ]" >{{recommendation.nextRecommendationContent}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="recommendation.moduleId">
+                        <a [routerLink]="['../module', recommendation.moduleId , 'view' ]" >{{recommendation.moduleTitle}}</a>
                     </div>
                 </td>
                 <td class="text-right">

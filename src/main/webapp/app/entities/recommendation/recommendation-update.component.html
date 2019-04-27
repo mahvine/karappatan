@@ -17,26 +17,29 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_identifier">Identifier</label>
                     <input type="text" class="form-control" name="identifier" id="field_identifier"
-                        [(ngModel)]="recommendation.identifier" required/>
+                        [(ngModel)]="recommendation.identifier" />
                     <div [hidden]="!(editForm.controls.identifier?.dirty && editForm.controls.identifier?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.identifier?.errors?.required">
-                        This field is required.
-                        </small>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_nextRecommendation">Next Recommendation</label>
-                    <select class="form-control" id="field_nextRecommendation" name="nextRecommendation" [(ngModel)]="recommendation.nextRecommendation" >
+                    <select class="form-control" id="field_nextRecommendation" name="nextRecommendation" [(ngModel)]="recommendation.nextRecommendationId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="recommendationOption.id === recommendation.nextRecommendation?.id ? recommendation.nextRecommendation : recommendationOption" *ngFor="let recommendationOption of recommendations; trackBy: trackRecommendationById">{{recommendationOption.content}}</option>
+                        <option [ngValue]="recommendationOption.id" *ngFor="let recommendationOption of recommendations; trackBy: trackRecommendationById">{{recommendationOption.content}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="field_nextQuestions">Next Questions</label>
                     <select class="form-control" id="field_nextQuestions" multiple name="nextQuestions" [(ngModel)]="recommendation.nextQuestions">
                         <option [ngValue]="getSelected(recommendation.nextQuestions, questionOption)" *ngFor="let questionOption of questions; trackBy: trackQuestionById">{{questionOption.question}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_module">Module</label>
+                    <select class="form-control" id="field_module" name="module" [(ngModel)]="recommendation.moduleId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="moduleOption.id" *ngFor="let moduleOption of modules; trackBy: trackModuleById">{{moduleOption.title}}</option>
                     </select>
                 </div>
             </div>

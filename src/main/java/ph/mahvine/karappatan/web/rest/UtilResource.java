@@ -25,10 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ph.mahvine.karappatan.domain.Annex;
 import ph.mahvine.karappatan.domain.Answer;
+import ph.mahvine.karappatan.domain.Module;
 import ph.mahvine.karappatan.domain.Question;
 import ph.mahvine.karappatan.domain.Recommendation;
 import ph.mahvine.karappatan.repository.AnnexRepository;
 import ph.mahvine.karappatan.repository.AnswerRepository;
+import ph.mahvine.karappatan.repository.ModuleRepository;
 import ph.mahvine.karappatan.repository.QuestionRepository;
 import ph.mahvine.karappatan.repository.RecommendationRepository;
 
@@ -50,14 +52,31 @@ public class UtilResource {
 	@Autowired
 	AnswerRepository answerRepository;
 	
+	@Autowired
+	ModuleRepository moduleRepository;
+	
+	static boolean running = false;
+	
+	Module module;
 	
 	@PostMapping("/uploadExcelFile")
 	public void uploadExcelSheet() throws IOException {
-	    loadQuestions(false);
-	    loadRecommendations(false);
-	    loadAnnexes(false);
-	    loadQuestions(true);
-	    loadRecommendations(true);
+		if(!running) {
+			module = moduleRepository.getOne(1L);
+			try {
+				running = true;
+				loadQuestions(false);
+				loadRecommendations(false);
+				loadAnnexes(false);
+				loadQuestions(true);
+				loadRecommendations(true);
+				loadAnnexes(true);
+			} finally {
+				running = false;
+			}
+		} else {
+			logger.error("Upload excel file currently running");
+		}
 	}
 	
 	@GetMapping
@@ -71,7 +90,7 @@ public class UtilResource {
 		logger.info("Question Present:"+questionRepository.findOneByIdentifier("Q1").isPresent());
 		
 	    try {
-	    	FileInputStream fileInputStream = new FileInputStream(new File("Karappatan.xlsx"));
+	    	FileInputStream fileInputStream = new FileInputStream(new File(getClass().getResource("/Karappatan.xlsx").getFile()));
             Workbook workbook = new XSSFWorkbook(fileInputStream);
             Sheet datatypeSheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = datatypeSheet.iterator();
@@ -79,7 +98,7 @@ public class UtilResource {
             while (iterator.hasNext()) {
 
                 Row currentRow = iterator.next();
-                if(currentRow.getRowNum() <3) {
+                if(currentRow.getRowNum() <2) {
                 	currentRow = iterator.next();
                 }
                 
@@ -94,11 +113,12 @@ public class UtilResource {
                 String questionContent = currentRow.getCell(i)!= null && currentRow.getCell(i).getCellType() == CellType.STRING?currentRow.getCell(i).getStringCellValue(): currentRow.getCell(i).getCellType()==CellType.NUMERIC ? currentRow.getCell(i).getNumericCellValue()+"":null; i++;
                 String questionInfo = currentRow.getCell(i)!= null && currentRow.getCell(i).getCellType() == CellType.STRING?currentRow.getCell(i).getStringCellValue(): currentRow.getCell(i).getCellType()==CellType.NUMERIC ? currentRow.getCell(i).getNumericCellValue()+"":null; i++;
 
-                logger.info("Row:{},i:{}, ID:{}, question:{}",currentRow.getRowNum(),i, questionId, questionContent);
+                logger.debug("Row:{},i:{}, ID:{}, question:{}",currentRow.getRowNum(),i, questionId, questionContent);
                 
                 if(questionContent != null && questionId != null) {
 	                Question question = new Question();
 	                question.identifier(questionId);
+	                question.module(module);
 	                Optional<Question> optQuestion = questionRepository.findOneByIdentifier(questionId);
 	                if(optQuestion.isPresent()) {
 	                	question = optQuestion.get();
@@ -135,13 +155,13 @@ public class UtilResource {
 		                	if(loadReferences) {
 		                		Question nextQuestion = null;
 		                		if(answerNextQuestion!=null && !answerNextQuestion.trim().isEmpty() && !answerNextQuestion.trim().equals("?")) { 
-		                			logger.info("question:{}",answerNextQuestion);
+		                			logger.debug("question:{}",answerNextQuestion);
 		                			nextQuestion = questionRepository.findOneByIdentifier(answerNextQuestion.trim()).orElse(null);	 
 		                			answer.nextQuestion(nextQuestion);
 		                		}
 		                		Recommendation recommendation = null;
 		                		if(answerRecommendation!=null && !answerRecommendation.trim().isEmpty()) {
-		                			logger.info("Answer Recommendation:"+answerRecommendation);
+		                			logger.debug("Answer Recommendation:"+answerRecommendation);
 		                			recommendation = recommendationRepository.findOneByIdentifier(answerRecommendation.trim()).orElse(null);
 		                			answer.recommendation(recommendation);
 		                		}
@@ -174,7 +194,7 @@ public class UtilResource {
 	    logger.info("start recommendations");
 	    try { 
 	    	// Recommendation
-	    	FileInputStream fileInputStream = new FileInputStream(new File("Karappatan.xlsx"));
+	    	FileInputStream fileInputStream = new FileInputStream(new File(getClass().getResource("/Karappatan.xlsx").getFile()));
             Workbook workbook = new XSSFWorkbook(fileInputStream);
             Sheet sheet = workbook.getSheetAt(1);
             int rowNum = 2;
@@ -190,6 +210,7 @@ public class UtilResource {
                 	i++;
                 }
                 String content = currentRow.getCell(i)!= null && currentRow.getCell(i).getCellType() == CellType.STRING?currentRow.getCell(i).getStringCellValue(): currentRow.getCell(i).getCellType()==CellType.NUMERIC ? currentRow.getCell(i).getNumericCellValue()+"":null; i++;
+            	currentRow.getCell(i).setCellType(CellType.STRING);
                 String nextQuestionIDs = currentRow.getCell(i)!= null && currentRow.getCell(i).getCellType() == CellType.STRING?currentRow.getCell(i).getStringCellValue(): currentRow.getCell(i).getCellType()==CellType.NUMERIC ? currentRow.getCell(i).getNumericCellValue()+"":null; i++;
                 String nextRecommendationID = null;
                 if(currentRow.getCell(i)!= null) {
@@ -202,10 +223,11 @@ public class UtilResource {
                 	if(optRecommendation.isPresent()) {
                 		recommendation = optRecommendation.get();
                 	}
+                	recommendation.module(module);
                 	recommendation.identifier(recommendationId).content(content);
                 	recommendationRepository.save(recommendation);
                 	if(loadReferences) {
-                		if(nextQuestionIDs !=null ) {
+                		if(nextQuestionIDs !=null && !nextQuestionIDs.isEmpty()) {
 	                		String[] arrayIds = nextQuestionIDs.split(",");
 	                		recommendation.getNextQuestions().clear();
 	                		for(int j=0; j<arrayIds.length;j++ ) {
@@ -213,6 +235,8 @@ public class UtilResource {
 	                			Question nextQuestion = nextQuestionID!=null?questionRepository.findOneByIdentifier(nextQuestionID.trim()).orElse(null): null;
 	                			if(nextQuestion!=null) {                				
 	                				recommendation.getNextQuestions().add(nextQuestion);                			
+	                			} else {
+	                				logger.error("Question not found for recommendation:"+nextQuestionID);
 	                			}
 	                		}
                 		}
@@ -222,7 +246,7 @@ public class UtilResource {
                 	}
                 }
                 
-                logger.info("Row:{},i:{}, ID:{}, question:{}",currentRow.getRowNum(),i, recommendationId, nextRecommendationID);
+                logger.debug("Row:{},i:{}, ID:{}, question:{}",currentRow.getRowNum(),i, recommendationId, nextRecommendationID);
                 rowNum++;
             }
             workbook.close();
@@ -239,7 +263,7 @@ public class UtilResource {
 	private void loadAnnexes(boolean loadReferences) {
 	    try { 
 	    	// Annex
-	    	FileInputStream fileInputStream = new FileInputStream(new File("Karappatan.xlsx"));
+	    	FileInputStream fileInputStream = new FileInputStream(new File(getClass().getResource("/Karappatan.xlsx").getFile()));
             Workbook workbook = new XSSFWorkbook(fileInputStream);
             Sheet sheet = workbook.getSheetAt(2);
             int rowNum = 2;
@@ -257,10 +281,10 @@ public class UtilResource {
 
                 String content = currentRow.getCell(i)!= null && currentRow.getCell(i).getCellType() == CellType.STRING?currentRow.getCell(i).getStringCellValue(): currentRow.getCell(i).getCellType()==CellType.NUMERIC ? currentRow.getCell(i).getNumericCellValue()+"":null; i++;
 
-            	String nextQuestionID = null;
+            	String nextQuestionIDs = null;
                 if(currentRow.getCell(i)!= null) {
                 	currentRow.getCell(i).setCellType(CellType.STRING);
-                	nextQuestionID =  currentRow.getCell(i).getStringCellValue();
+                	nextQuestionIDs =  currentRow.getCell(i).getStringCellValue();
                 }
 
                 if(annexID != null && content!=null) {
@@ -269,11 +293,29 @@ public class UtilResource {
 	                if(optAnnex.isPresent()) {
 	                	annex = optAnnex.get();
 	                }
+	                annex.module(module);
+	                if(loadReferences) {
+	                	annex.getNextQuestions().clear();
+	                	if(nextQuestionIDs !=null ) {
+	                		String[] arrayIds = nextQuestionIDs.split(",");
+	                		for(int j=0; j<arrayIds.length;j++ ) {
+	                			String nextQuestionID = arrayIds[j];
+	                			Question nextQuestion = nextQuestionID!=null?questionRepository.findOneByIdentifier(nextQuestionID.trim()).orElse(null): null;
+	                			if(nextQuestion!=null) {                				
+	                				annex.getNextQuestions().add(nextQuestion);                			
+	                			} else {
+	                				logger.error("Question not found for annex:"+nextQuestionID);
+	                			}
+
+	                		}
+                		}
+	                }
+	                
 	                annex.identifier(annexID).content(content);
 	                annexRepository.save(annex);
                 }
                 
-                logger.info("Row:{},i:{}, ID:{}, question:{}",currentRow.getRowNum(),i, annexID, nextQuestionID);
+                logger.debug("Row:{},i:{}, ID:{}, question:{}",currentRow.getRowNum(),i, annexID, nextQuestionIDs);
                 rowNum++;
                 if(annexID == null)
                 	break;

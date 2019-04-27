@@ -15,26 +15,26 @@
                 </dd>
                 <dt><span>Annex</span></dt>
                 <dd>
-                    <div *ngIf="answer.annex">
-                        <a [routerLink]="['/annex', answer.annex?.id, 'view']">{{answer.annex?.content}}</a>
+                    <div *ngIf="answer.annexId">
+                        <a [routerLink]="['/annex', answer.annexId, 'view']">{{answer.annexContent}}</a>
                     </div>
                 </dd>
                 <dt><span>Recommendation</span></dt>
                 <dd>
-                    <div *ngIf="answer.recommendation">
-                        <a [routerLink]="['/recommendation', answer.recommendation?.id, 'view']">{{answer.recommendation?.content}}</a>
+                    <div *ngIf="answer.recommendationId">
+                        <a [routerLink]="['/recommendation', answer.recommendationId, 'view']">{{answer.recommendationContent}}</a>
                     </div>
                 </dd>
                 <dt><span>Next Question</span></dt>
                 <dd>
-                    <div *ngIf="answer.nextQuestion">
-                        <a [routerLink]="['/question', answer.nextQuestion?.id, 'view']">{{answer.nextQuestion?.question}}</a>
+                    <div *ngIf="answer.nextQuestionId">
+                        <a [routerLink]="['/question', answer.nextQuestionId, 'view']">{{answer.nextQuestionQuestion}}</a>
                     </div>
                 </dd>
                 <dt><span>Question</span></dt>
                 <dd>
-                    <div *ngIf="answer.question">
-                        <a [routerLink]="['/question', answer.question?.id, 'view']">{{answer.question?.question}}</a>
+                    <div *ngIf="answer.questionId">
+                        <a [routerLink]="['/question', answer.questionId, 'view']">{{answer.questionQuestion}}</a>
                     </div>
                 </dd>
             </dl>

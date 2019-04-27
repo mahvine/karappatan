@@ -37,6 +37,13 @@
                         [(ngModel)]="question.info" ></textarea>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" for="field_module">Module</label>
+                    <select class="form-control" id="field_module" name="module" [(ngModel)]="question.moduleId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="moduleOption.id" *ngFor="let moduleOption of modules; trackBy: trackModuleById">{{moduleOption.title}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

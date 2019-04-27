@@ -3,6 +3,7 @@ package ph.mahvine.karappatan.repository;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import ph.mahvine.karappatan.domain.Question;
@@ -13,6 +14,8 @@ import ph.mahvine.karappatan.domain.Question;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface QuestionRepository extends JpaRepository<Question, Long> {
+public interface QuestionRepository extends JpaRepository<Question, Long>, JpaSpecificationExecutor<Question> {
+
 	Optional<Question> findOneByIdentifier(String identifier);
+	
 }

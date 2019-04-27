@@ -24,28 +24,26 @@ public class Answer implements Serializable {
     private Long id;
 
     
-    @Lob
     @Column(name = "answer", nullable = false)
     private String answer;
 
-    @Lob
     @Column(name = "instructions")
     private String instructions;
 
     @ManyToOne
-    @JsonIgnoreProperties("answers")
+    @JsonIgnoreProperties({"answers","module"})
     private Annex annex;
 
     @ManyToOne
-    @JsonIgnoreProperties("answers")
+    @JsonIgnoreProperties({"answers","module"})
     private Recommendation recommendation;
 
     @ManyToOne
-    @JsonIgnoreProperties("answers")
+    @JsonIgnoreProperties({"answers","module"})
     private Question nextQuestion;
 
     @ManyToOne
-    @JsonIgnoreProperties("answers")
+    @JsonIgnoreProperties({"answers","module"})
     private Question question;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

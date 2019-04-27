@@ -15,8 +15,8 @@
                 </dd>
                 <dt><span>Next Recommendation</span></dt>
                 <dd>
-                    <div *ngIf="recommendation.nextRecommendation">
-                        <a [routerLink]="['/recommendation', recommendation.nextRecommendation?.id, 'view']">{{recommendation.nextRecommendation?.content}}</a>
+                    <div *ngIf="recommendation.nextRecommendationId">
+                        <a [routerLink]="['/recommendation', recommendation.nextRecommendationId, 'view']">{{recommendation.nextRecommendationContent}}</a>
                     </div>
                 </dd>
                 <dt><span>Next Questions</span></dt>
@@ -24,6 +24,12 @@
                     <span *ngFor="let nextQuestions of recommendation.nextQuestions; let last = last">
                         <a [routerLink]="['/question', nextQuestions?.id, 'view' ]">{{nextQuestions.question}}</a>{{last ? '' : ', '}}
                     </span>
+                </dd>
+                <dt><span>Module</span></dt>
+                <dd>
+                    <div *ngIf="recommendation.moduleId">
+                        <a [routerLink]="['/module', recommendation.moduleId, 'view']">{{recommendation.moduleTitle}}</a>
+                    </div>
                 </dd>
             </dl>
 

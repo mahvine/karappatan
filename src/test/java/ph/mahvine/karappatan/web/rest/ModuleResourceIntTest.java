@@ -4,6 +4,8 @@ import ph.mahvine.karappatan.KarappatanApp;
 
 import ph.mahvine.karappatan.domain.Module;
 import ph.mahvine.karappatan.repository.ModuleRepository;
+import ph.mahvine.karappatan.service.dto.ModuleDTO;
+import ph.mahvine.karappatan.service.mapper.ModuleMapper;
 import ph.mahvine.karappatan.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -58,6 +60,9 @@ public class ModuleResourceIntTest {
     private ModuleRepository moduleRepositoryMock;
 
     @Autowired
+    private ModuleMapper moduleMapper;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -79,7 +84,7 @@ public class ModuleResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ModuleResource moduleResource = new ModuleResource(moduleRepository);
+        final ModuleResource moduleResource = new ModuleResource(moduleRepository, moduleMapper);
         this.restModuleMockMvc = MockMvcBuilders.standaloneSetup(moduleResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -112,9 +117,10 @@ public class ModuleResourceIntTest {
         int databaseSizeBeforeCreate = moduleRepository.findAll().size();
 
         // Create the Module
+        ModuleDTO moduleDTO = moduleMapper.toDto(module);
         restModuleMockMvc.perform(post("/api/modules")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(module)))
+            .content(TestUtil.convertObjectToJsonBytes(moduleDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Module in the database
@@ -132,11 +138,12 @@ public class ModuleResourceIntTest {
 
         // Create the Module with an existing ID
         module.setId(1L);
+        ModuleDTO moduleDTO = moduleMapper.toDto(module);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restModuleMockMvc.perform(post("/api/modules")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(module)))
+            .content(TestUtil.convertObjectToJsonBytes(moduleDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Module in the database
@@ -152,10 +159,11 @@ public class ModuleResourceIntTest {
         module.setTitle(null);
 
         // Create the Module, which fails.
+        ModuleDTO moduleDTO = moduleMapper.toDto(module);
 
         restModuleMockMvc.perform(post("/api/modules")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(module)))
+            .content(TestUtil.convertObjectToJsonBytes(moduleDTO)))
             .andExpect(status().isBadRequest());
 
         List<Module> moduleList = moduleRepository.findAll();
@@ -179,7 +187,7 @@ public class ModuleResourceIntTest {
     
     @SuppressWarnings({"unchecked"})
     public void getAllModulesWithEagerRelationshipsIsEnabled() throws Exception {
-        ModuleResource moduleResource = new ModuleResource(moduleRepositoryMock);
+        ModuleResource moduleResource = new ModuleResource(moduleRepositoryMock, moduleMapper);
         when(moduleRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         MockMvc restModuleMockMvc = MockMvcBuilders.standaloneSetup(moduleResource)
@@ -196,7 +204,7 @@ public class ModuleResourceIntTest {
 
     @SuppressWarnings({"unchecked"})
     public void getAllModulesWithEagerRelationshipsIsNotEnabled() throws Exception {
-        ModuleResource moduleResource = new ModuleResource(moduleRepositoryMock);
+        ModuleResource moduleResource = new ModuleResource(moduleRepositoryMock, moduleMapper);
             when(moduleRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
             MockMvc restModuleMockMvc = MockMvcBuilders.standaloneSetup(moduleResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
@@ -248,10 +256,11 @@ public class ModuleResourceIntTest {
         updatedModule
             .title(UPDATED_TITLE)
             .details(UPDATED_DETAILS);
+        ModuleDTO moduleDTO = moduleMapper.toDto(updatedModule);
 
         restModuleMockMvc.perform(put("/api/modules")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedModule)))
+            .content(TestUtil.convertObjectToJsonBytes(moduleDTO)))
             .andExpect(status().isOk());
 
         // Validate the Module in the database
@@ -268,11 +277,12 @@ public class ModuleResourceIntTest {
         int databaseSizeBeforeUpdate = moduleRepository.findAll().size();
 
         // Create the Module
+        ModuleDTO moduleDTO = moduleMapper.toDto(module);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restModuleMockMvc.perform(put("/api/modules")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(module)))
+            .content(TestUtil.convertObjectToJsonBytes(moduleDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Module in the database
@@ -311,5 +321,28 @@ public class ModuleResourceIntTest {
         assertThat(module1).isNotEqualTo(module2);
         module1.setId(null);
         assertThat(module1).isNotEqualTo(module2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(ModuleDTO.class);
+        ModuleDTO moduleDTO1 = new ModuleDTO();
+        moduleDTO1.setId(1L);
+        ModuleDTO moduleDTO2 = new ModuleDTO();
+        assertThat(moduleDTO1).isNotEqualTo(moduleDTO2);
+        moduleDTO2.setId(moduleDTO1.getId());
+        assertThat(moduleDTO1).isEqualTo(moduleDTO2);
+        moduleDTO2.setId(2L);
+        assertThat(moduleDTO1).isNotEqualTo(moduleDTO2);
+        moduleDTO1.setId(null);
+        assertThat(moduleDTO1).isNotEqualTo(moduleDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(moduleMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(moduleMapper.fromId(null)).isNull();
     }
 }

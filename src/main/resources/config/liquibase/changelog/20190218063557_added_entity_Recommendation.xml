@@ -26,10 +26,14 @@
             </column>
 
             <column name="identifier" type="varchar(255)">
-                <constraints nullable="false" unique="true" uniqueConstraintName="ux_krptn_recommendation_identifier" />
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_krptn_recommendation_identifier" />
             </column>
 
             <column name="next_recommendation_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="module_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

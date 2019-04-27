@@ -1,6 +1,7 @@
 package ph.mahvine.karappatan.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -35,7 +36,12 @@ public class Annex implements Serializable {
     @JoinTable(name = "krptn_annex_next_questions",
                joinColumns = @JoinColumn(name = "annex_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "next_questions_id", referencedColumnName = "id"))
+    @JsonIgnoreProperties("module")
     private Set<Question> nextQuestions = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("annexes")
+    private Module module;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -93,6 +99,19 @@ public class Annex implements Serializable {
 
     public void setNextQuestions(Set<Question> questions) {
         this.nextQuestions = questions;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public Annex module(Module module) {
+        this.module = module;
+        return this;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

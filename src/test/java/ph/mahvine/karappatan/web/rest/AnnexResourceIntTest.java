@@ -4,6 +4,9 @@ import ph.mahvine.karappatan.KarappatanApp;
 
 import ph.mahvine.karappatan.domain.Annex;
 import ph.mahvine.karappatan.repository.AnnexRepository;
+import ph.mahvine.karappatan.service.AnnexService;
+import ph.mahvine.karappatan.service.dto.AnnexDTO;
+import ph.mahvine.karappatan.service.mapper.AnnexMapper;
 import ph.mahvine.karappatan.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -59,6 +62,15 @@ public class AnnexResourceIntTest {
     private AnnexRepository annexRepositoryMock;
 
     @Autowired
+    private AnnexMapper annexMapper;
+
+    @Mock
+    private AnnexService annexServiceMock;
+
+    @Autowired
+    private AnnexService annexService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -80,7 +92,7 @@ public class AnnexResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final AnnexResource annexResource = new AnnexResource(annexRepository);
+        final AnnexResource annexResource = new AnnexResource(annexService);
         this.restAnnexMockMvc = MockMvcBuilders.standaloneSetup(annexResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -113,9 +125,10 @@ public class AnnexResourceIntTest {
         int databaseSizeBeforeCreate = annexRepository.findAll().size();
 
         // Create the Annex
+        AnnexDTO annexDTO = annexMapper.toDto(annex);
         restAnnexMockMvc.perform(post("/api/annexes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(annex)))
+            .content(TestUtil.convertObjectToJsonBytes(annexDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Annex in the database
@@ -133,11 +146,12 @@ public class AnnexResourceIntTest {
 
         // Create the Annex with an existing ID
         annex.setId(1L);
+        AnnexDTO annexDTO = annexMapper.toDto(annex);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restAnnexMockMvc.perform(post("/api/annexes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(annex)))
+            .content(TestUtil.convertObjectToJsonBytes(annexDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Annex in the database
@@ -162,8 +176,8 @@ public class AnnexResourceIntTest {
     
     @SuppressWarnings({"unchecked"})
     public void getAllAnnexesWithEagerRelationshipsIsEnabled() throws Exception {
-        AnnexResource annexResource = new AnnexResource(annexRepositoryMock);
-        when(annexRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        AnnexResource annexResource = new AnnexResource(annexServiceMock);
+        when(annexServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         MockMvc restAnnexMockMvc = MockMvcBuilders.standaloneSetup(annexResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
@@ -174,13 +188,13 @@ public class AnnexResourceIntTest {
         restAnnexMockMvc.perform(get("/api/annexes?eagerload=true"))
         .andExpect(status().isOk());
 
-        verify(annexRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+        verify(annexServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @SuppressWarnings({"unchecked"})
     public void getAllAnnexesWithEagerRelationshipsIsNotEnabled() throws Exception {
-        AnnexResource annexResource = new AnnexResource(annexRepositoryMock);
-            when(annexRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        AnnexResource annexResource = new AnnexResource(annexServiceMock);
+            when(annexServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
             MockMvc restAnnexMockMvc = MockMvcBuilders.standaloneSetup(annexResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -190,7 +204,7 @@ public class AnnexResourceIntTest {
         restAnnexMockMvc.perform(get("/api/annexes?eagerload=true"))
         .andExpect(status().isOk());
 
-            verify(annexRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+            verify(annexServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test
@@ -231,10 +245,11 @@ public class AnnexResourceIntTest {
         updatedAnnex
             .content(UPDATED_CONTENT)
             .identifier(UPDATED_IDENTIFIER);
+        AnnexDTO annexDTO = annexMapper.toDto(updatedAnnex);
 
         restAnnexMockMvc.perform(put("/api/annexes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedAnnex)))
+            .content(TestUtil.convertObjectToJsonBytes(annexDTO)))
             .andExpect(status().isOk());
 
         // Validate the Annex in the database
@@ -251,11 +266,12 @@ public class AnnexResourceIntTest {
         int databaseSizeBeforeUpdate = annexRepository.findAll().size();
 
         // Create the Annex
+        AnnexDTO annexDTO = annexMapper.toDto(annex);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAnnexMockMvc.perform(put("/api/annexes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(annex)))
+            .content(TestUtil.convertObjectToJsonBytes(annexDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Annex in the database
@@ -294,5 +310,28 @@ public class AnnexResourceIntTest {
         assertThat(annex1).isNotEqualTo(annex2);
         annex1.setId(null);
         assertThat(annex1).isNotEqualTo(annex2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(AnnexDTO.class);
+        AnnexDTO annexDTO1 = new AnnexDTO();
+        annexDTO1.setId(1L);
+        AnnexDTO annexDTO2 = new AnnexDTO();
+        assertThat(annexDTO1).isNotEqualTo(annexDTO2);
+        annexDTO2.setId(annexDTO1.getId());
+        assertThat(annexDTO1).isEqualTo(annexDTO2);
+        annexDTO2.setId(2L);
+        assertThat(annexDTO1).isNotEqualTo(annexDTO2);
+        annexDTO1.setId(null);
+        assertThat(annexDTO1).isNotEqualTo(annexDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(annexMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(annexMapper.fromId(null)).isNull();
     }
 }

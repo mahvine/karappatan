@@ -51,9 +51,9 @@
         }
     ],
     "changelogDate": "20190218065140",
-    "dto": "no",
+    "dto": "mapstruct",
     "searchEngine": false,
-    "service": "no",
+    "service": "serviceClass",
     "entityTableName": "krptn_answer",
     "databaseType": "sql",
     "jpaMetamodelFiltering": false,

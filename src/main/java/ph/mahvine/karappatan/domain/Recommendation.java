@@ -7,9 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.Objects;
 
@@ -30,11 +28,11 @@ public class Recommendation implements Serializable {
     @Column(name = "content")
     private String content;
 
-    @NotNull
-    @Column(name = "identifier", nullable = false, unique = true)
+    
+    @Column(name = "identifier", unique = true)
     private String identifier;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     @JsonIgnoreProperties("recommendations")
     private Recommendation nextRecommendation;
 
@@ -42,7 +40,11 @@ public class Recommendation implements Serializable {
     @JoinTable(name = "krptn_recommendation_next_questions",
                joinColumns = @JoinColumn(name = "recommendation_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "next_questions_id", referencedColumnName = "id"))
-    private List<Question> nextQuestions = new ArrayList<>();
+    private Set<Question> nextQuestions = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("recommendations")
+    private Module module;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -92,11 +94,11 @@ public class Recommendation implements Serializable {
         this.nextRecommendation = recommendation;
     }
 
-    public List<Question> getNextQuestions() {
+    public Set<Question> getNextQuestions() {
         return nextQuestions;
     }
 
-    public Recommendation nextQuestions(List<Question> questions) {
+    public Recommendation nextQuestions(Set<Question> questions) {
         this.nextQuestions = questions;
         return this;
     }
@@ -111,8 +113,21 @@ public class Recommendation implements Serializable {
         return this;
     }
 
-    public void setNextQuestions(List<Question> questions) {
+    public void setNextQuestions(Set<Question> questions) {
         this.nextQuestions = questions;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public Recommendation module(Module module) {
+        this.module = module;
+        return this;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

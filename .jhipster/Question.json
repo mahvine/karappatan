@@ -8,6 +8,14 @@
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "question",
             "otherEntityRelationshipNameUndefined": false
+        },
+        {
+            "relationshipName": "module",
+            "otherEntityName": "module",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "title",
+            "otherEntityRelationshipName": "question",
+            "otherEntityRelationshipNameUndefined": true
         }
     ],
     "fields": [
@@ -34,11 +42,11 @@
         }
     ],
     "changelogDate": "20190218072351",
-    "dto": "no",
+    "dto": "mapstruct",
     "searchEngine": false,
-    "service": "no",
+    "service": "serviceClass",
     "entityTableName": "krptn_question",
     "databaseType": "sql",
-    "jpaMetamodelFiltering": false,
+    "jpaMetamodelFiltering": true,
     "pagination": "pagination"
 }

@@ -1,12 +1,14 @@
-import { IRecommendation } from 'app/shared/model/recommendation.model';
 import { IQuestion } from 'app/shared/model/question.model';
 
 export interface IRecommendation {
     id?: number;
     content?: any;
     identifier?: string;
-    nextRecommendation?: IRecommendation;
+    nextRecommendationContent?: string;
+    nextRecommendationId?: number;
     nextQuestions?: IQuestion[];
+    moduleTitle?: string;
+    moduleId?: number;
 }
 
 export class Recommendation implements IRecommendation {
@@ -14,7 +16,10 @@ export class Recommendation implements IRecommendation {
         public id?: number,
         public content?: any,
         public identifier?: string,
-        public nextRecommendation?: IRecommendation,
-        public nextQuestions?: IQuestion[]
+        public nextRecommendationContent?: string,
+        public nextRecommendationId?: number,
+        public nextQuestions?: IQuestion[],
+        public moduleTitle?: string,
+        public moduleId?: number
     ) {}
 }

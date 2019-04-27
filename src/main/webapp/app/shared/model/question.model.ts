@@ -6,8 +6,18 @@ export interface IQuestion {
     identifier?: string;
     info?: any;
     answers?: IAnswer[];
+    moduleTitle?: string;
+    moduleId?: number;
 }
 
 export class Question implements IQuestion {
-    constructor(public id?: number, public question?: any, public identifier?: string, public info?: any, public answers?: IAnswer[]) {}
+    constructor(
+        public id?: number,
+        public question?: any,
+        public identifier?: string,
+        public info?: any,
+        public answers?: IAnswer[],
+        public moduleTitle?: string,
+        public moduleId?: number
+    ) {}
 }

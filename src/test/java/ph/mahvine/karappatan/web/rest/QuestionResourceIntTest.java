@@ -3,8 +3,15 @@ package ph.mahvine.karappatan.web.rest;
 import ph.mahvine.karappatan.KarappatanApp;
 
 import ph.mahvine.karappatan.domain.Question;
+import ph.mahvine.karappatan.domain.Answer;
+import ph.mahvine.karappatan.domain.Module;
 import ph.mahvine.karappatan.repository.QuestionRepository;
+import ph.mahvine.karappatan.service.QuestionService;
+import ph.mahvine.karappatan.service.dto.QuestionDTO;
+import ph.mahvine.karappatan.service.mapper.QuestionMapper;
 import ph.mahvine.karappatan.web.rest.errors.ExceptionTranslator;
+import ph.mahvine.karappatan.service.dto.QuestionCriteria;
+import ph.mahvine.karappatan.service.QuestionQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,6 +61,15 @@ public class QuestionResourceIntTest {
     private QuestionRepository questionRepository;
 
     @Autowired
+    private QuestionMapper questionMapper;
+
+    @Autowired
+    private QuestionService questionService;
+
+    @Autowired
+    private QuestionQueryService questionQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -75,7 +91,7 @@ public class QuestionResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final QuestionResource questionResource = new QuestionResource(questionRepository);
+        final QuestionResource questionResource = new QuestionResource(questionService, questionQueryService);
         this.restQuestionMockMvc = MockMvcBuilders.standaloneSetup(questionResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -109,9 +125,10 @@ public class QuestionResourceIntTest {
         int databaseSizeBeforeCreate = questionRepository.findAll().size();
 
         // Create the Question
+        QuestionDTO questionDTO = questionMapper.toDto(question);
         restQuestionMockMvc.perform(post("/api/questions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(question)))
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Question in the database
@@ -130,11 +147,12 @@ public class QuestionResourceIntTest {
 
         // Create the Question with an existing ID
         question.setId(1L);
+        QuestionDTO questionDTO = questionMapper.toDto(question);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restQuestionMockMvc.perform(post("/api/questions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(question)))
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Question in the database
@@ -150,10 +168,11 @@ public class QuestionResourceIntTest {
         question.setIdentifier(null);
 
         // Create the Question, which fails.
+        QuestionDTO questionDTO = questionMapper.toDto(question);
 
         restQuestionMockMvc.perform(post("/api/questions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(question)))
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
             .andExpect(status().isBadRequest());
 
         List<Question> questionList = questionRepository.findAll();
@@ -194,6 +213,119 @@ public class QuestionResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllQuestionsByIdentifierIsEqualToSomething() throws Exception {
+        // Initialize the database
+        questionRepository.saveAndFlush(question);
+
+        // Get all the questionList where identifier equals to DEFAULT_IDENTIFIER
+        defaultQuestionShouldBeFound("identifier.equals=" + DEFAULT_IDENTIFIER);
+
+        // Get all the questionList where identifier equals to UPDATED_IDENTIFIER
+        defaultQuestionShouldNotBeFound("identifier.equals=" + UPDATED_IDENTIFIER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllQuestionsByIdentifierIsInShouldWork() throws Exception {
+        // Initialize the database
+        questionRepository.saveAndFlush(question);
+
+        // Get all the questionList where identifier in DEFAULT_IDENTIFIER or UPDATED_IDENTIFIER
+        defaultQuestionShouldBeFound("identifier.in=" + DEFAULT_IDENTIFIER + "," + UPDATED_IDENTIFIER);
+
+        // Get all the questionList where identifier equals to UPDATED_IDENTIFIER
+        defaultQuestionShouldNotBeFound("identifier.in=" + UPDATED_IDENTIFIER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllQuestionsByIdentifierIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        questionRepository.saveAndFlush(question);
+
+        // Get all the questionList where identifier is not null
+        defaultQuestionShouldBeFound("identifier.specified=true");
+
+        // Get all the questionList where identifier is null
+        defaultQuestionShouldNotBeFound("identifier.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllQuestionsByAnswersIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Answer answers = AnswerResourceIntTest.createEntity(em);
+        em.persist(answers);
+        em.flush();
+        question.addAnswers(answers);
+        questionRepository.saveAndFlush(question);
+        Long answersId = answers.getId();
+
+        // Get all the questionList where answers equals to answersId
+        defaultQuestionShouldBeFound("answersId.equals=" + answersId);
+
+        // Get all the questionList where answers equals to answersId + 1
+        defaultQuestionShouldNotBeFound("answersId.equals=" + (answersId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllQuestionsByModuleIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Module module = ModuleResourceIntTest.createEntity(em);
+        em.persist(module);
+        em.flush();
+        question.setModule(module);
+        questionRepository.saveAndFlush(question);
+        Long moduleId = module.getId();
+
+        // Get all the questionList where module equals to moduleId
+        defaultQuestionShouldBeFound("moduleId.equals=" + moduleId);
+
+        // Get all the questionList where module equals to moduleId + 1
+        defaultQuestionShouldNotBeFound("moduleId.equals=" + (moduleId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultQuestionShouldBeFound(String filter) throws Exception {
+        restQuestionMockMvc.perform(get("/api/questions?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(question.getId().intValue())))
+            .andExpect(jsonPath("$.[*].question").value(hasItem(DEFAULT_QUESTION.toString())))
+            .andExpect(jsonPath("$.[*].identifier").value(hasItem(DEFAULT_IDENTIFIER)))
+            .andExpect(jsonPath("$.[*].info").value(hasItem(DEFAULT_INFO.toString())));
+
+        // Check, that the count call also returns 1
+        restQuestionMockMvc.perform(get("/api/questions/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultQuestionShouldNotBeFound(String filter) throws Exception {
+        restQuestionMockMvc.perform(get("/api/questions?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restQuestionMockMvc.perform(get("/api/questions/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
+
+    @Test
+    @Transactional
     public void getNonExistingQuestion() throws Exception {
         // Get the question
         restQuestionMockMvc.perform(get("/api/questions/{id}", Long.MAX_VALUE))
@@ -216,10 +348,11 @@ public class QuestionResourceIntTest {
             .question(UPDATED_QUESTION)
             .identifier(UPDATED_IDENTIFIER)
             .info(UPDATED_INFO);
+        QuestionDTO questionDTO = questionMapper.toDto(updatedQuestion);
 
         restQuestionMockMvc.perform(put("/api/questions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedQuestion)))
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
             .andExpect(status().isOk());
 
         // Validate the Question in the database
@@ -237,11 +370,12 @@ public class QuestionResourceIntTest {
         int databaseSizeBeforeUpdate = questionRepository.findAll().size();
 
         // Create the Question
+        QuestionDTO questionDTO = questionMapper.toDto(question);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restQuestionMockMvc.perform(put("/api/questions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(question)))
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Question in the database
@@ -280,5 +414,28 @@ public class QuestionResourceIntTest {
         assertThat(question1).isNotEqualTo(question2);
         question1.setId(null);
         assertThat(question1).isNotEqualTo(question2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(QuestionDTO.class);
+        QuestionDTO questionDTO1 = new QuestionDTO();
+        questionDTO1.setId(1L);
+        QuestionDTO questionDTO2 = new QuestionDTO();
+        assertThat(questionDTO1).isNotEqualTo(questionDTO2);
+        questionDTO2.setId(questionDTO1.getId());
+        assertThat(questionDTO1).isEqualTo(questionDTO2);
+        questionDTO2.setId(2L);
+        assertThat(questionDTO1).isNotEqualTo(questionDTO2);
+        questionDTO1.setId(null);
+        assertThat(questionDTO1).isNotEqualTo(questionDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(questionMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(questionMapper.fromId(null)).isNull();
     }
 }

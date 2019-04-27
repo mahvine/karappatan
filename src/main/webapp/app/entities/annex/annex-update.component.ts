@@ -8,6 +8,8 @@ import { IAnnex } from 'app/shared/model/annex.model';
 import { AnnexService } from './annex.service';
 import { IQuestion } from 'app/shared/model/question.model';
 import { QuestionService } from 'app/entities/question';
+import { IModule } from 'app/shared/model/module.model';
+import { ModuleService } from 'app/entities/module';
 
 @Component({
     selector: 'jhi-annex-update',
@@ -19,11 +21,14 @@ export class AnnexUpdateComponent implements OnInit {
 
     questions: IQuestion[];
 
+    modules: IModule[];
+
     constructor(
         protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected annexService: AnnexService,
         protected questionService: QuestionService,
+        protected moduleService: ModuleService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -39,6 +44,13 @@ export class AnnexUpdateComponent implements OnInit {
                 map((response: HttpResponse<IQuestion[]>) => response.body)
             )
             .subscribe((res: IQuestion[]) => (this.questions = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.moduleService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IModule[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IModule[]>) => response.body)
+            )
+            .subscribe((res: IModule[]) => (this.modules = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -84,6 +96,10 @@ export class AnnexUpdateComponent implements OnInit {
     }
 
     trackQuestionById(index: number, item: IQuestion) {
+        return item.id;
+    }
+
+    trackModuleById(index: number, item: IModule) {
         return item.id;
     }
 

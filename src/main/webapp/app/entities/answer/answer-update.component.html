@@ -28,30 +28,30 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_annex">Annex</label>
-                    <select class="form-control" id="field_annex" name="annex" [(ngModel)]="answer.annex" >
+                    <select class="form-control" id="field_annex" name="annex" [(ngModel)]="answer.annexId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="annexOption.id === answer.annex?.id ? answer.annex : annexOption" *ngFor="let annexOption of annexes; trackBy: trackAnnexById">{{annexOption.content}}</option>
+                        <option [ngValue]="annexOption.id" *ngFor="let annexOption of annexes; trackBy: trackAnnexById">{{annexOption.content}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_recommendation">Recommendation</label>
-                    <select class="form-control" id="field_recommendation" name="recommendation" [(ngModel)]="answer.recommendation" >
+                    <select class="form-control" id="field_recommendation" name="recommendation" [(ngModel)]="answer.recommendationId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="recommendationOption.id === answer.recommendation?.id ? answer.recommendation : recommendationOption" *ngFor="let recommendationOption of recommendations; trackBy: trackRecommendationById">{{recommendationOption.content}}</option>
+                        <option [ngValue]="recommendationOption.id" *ngFor="let recommendationOption of recommendations; trackBy: trackRecommendationById">{{recommendationOption.content}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_nextQuestion">Next Question</label>
-                    <select class="form-control" id="field_nextQuestion" name="nextQuestion" [(ngModel)]="answer.nextQuestion" >
+                    <select class="form-control" id="field_nextQuestion" name="nextQuestion" [(ngModel)]="answer.nextQuestionId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="questionOption.id === answer.nextQuestion?.id ? answer.nextQuestion : questionOption" *ngFor="let questionOption of questions; trackBy: trackQuestionById">{{questionOption.question}}</option>
+                        <option [ngValue]="questionOption.id" *ngFor="let questionOption of questions; trackBy: trackQuestionById">{{questionOption.question}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_question">Question</label>
-                    <select class="form-control" id="field_question" name="question" [(ngModel)]="answer.question" >
+                    <select class="form-control" id="field_question" name="question" [(ngModel)]="answer.questionId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="questionOption.id === answer.question?.id ? answer.question : questionOption" *ngFor="let questionOption of questions; trackBy: trackQuestionById">{{questionOption.question}}</option>
+                        <option [ngValue]="questionOption.id" *ngFor="let questionOption of questions; trackBy: trackQuestionById">{{questionOption.question}}</option>
                     </select>
                 </div>
             </div>

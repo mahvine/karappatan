@@ -10,6 +10,14 @@
             "ownerSide": true,
             "otherEntityRelationshipName": "annex",
             "otherEntityRelationshipNameUndefined": false
+        },
+        {
+            "relationshipName": "module",
+            "otherEntityName": "module",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "title",
+            "otherEntityRelationshipName": "annex",
+            "otherEntityRelationshipNameUndefined": true
         }
     ],
     "fields": [
@@ -27,9 +35,9 @@
         }
     ],
     "changelogDate": "20190218064552",
-    "dto": "no",
+    "dto": "mapstruct",
     "searchEngine": false,
-    "service": "no",
+    "service": "serviceClass",
     "entityTableName": "krptn_annex",
     "databaseType": "sql",
     "jpaMetamodelFiltering": false,

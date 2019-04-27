@@ -1,9 +1,11 @@
 package ph.mahvine.karappatan.web.rest;
-import ph.mahvine.karappatan.domain.Question;
-import ph.mahvine.karappatan.repository.QuestionRepository;
+import ph.mahvine.karappatan.service.QuestionService;
 import ph.mahvine.karappatan.web.rest.errors.BadRequestAlertException;
 import ph.mahvine.karappatan.web.rest.util.HeaderUtil;
 import ph.mahvine.karappatan.web.rest.util.PaginationUtil;
+import ph.mahvine.karappatan.service.dto.QuestionDTO;
+import ph.mahvine.karappatan.service.dto.QuestionCriteria;
+import ph.mahvine.karappatan.service.QuestionQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,26 +34,29 @@ public class QuestionResource {
 
     private static final String ENTITY_NAME = "question";
 
-    private final QuestionRepository questionRepository;
+    private final QuestionService questionService;
 
-    public QuestionResource(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
+    private final QuestionQueryService questionQueryService;
+
+    public QuestionResource(QuestionService questionService, QuestionQueryService questionQueryService) {
+        this.questionService = questionService;
+        this.questionQueryService = questionQueryService;
     }
 
     /**
      * POST  /questions : Create a new question.
      *
-     * @param question the question to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new question, or with status 400 (Bad Request) if the question has already an ID
+     * @param questionDTO the questionDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new questionDTO, or with status 400 (Bad Request) if the question has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/questions")
-    public ResponseEntity<Question> createQuestion(@Valid @RequestBody Question question) throws URISyntaxException {
-        log.debug("REST request to save Question : {}", question);
-        if (question.getId() != null) {
+    public ResponseEntity<QuestionDTO> createQuestion(@Valid @RequestBody QuestionDTO questionDTO) throws URISyntaxException {
+        log.debug("REST request to save Question : {}", questionDTO);
+        if (questionDTO.getId() != null) {
             throw new BadRequestAlertException("A new question cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Question result = questionRepository.save(question);
+        QuestionDTO result = questionService.save(questionDTO);
         return ResponseEntity.created(new URI("/api/questions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -60,21 +65,21 @@ public class QuestionResource {
     /**
      * PUT  /questions : Updates an existing question.
      *
-     * @param question the question to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated question,
-     * or with status 400 (Bad Request) if the question is not valid,
-     * or with status 500 (Internal Server Error) if the question couldn't be updated
+     * @param questionDTO the questionDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated questionDTO,
+     * or with status 400 (Bad Request) if the questionDTO is not valid,
+     * or with status 500 (Internal Server Error) if the questionDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/questions")
-    public ResponseEntity<Question> updateQuestion(@Valid @RequestBody Question question) throws URISyntaxException {
-        log.debug("REST request to update Question : {}", question);
-        if (question.getId() == null) {
+    public ResponseEntity<QuestionDTO> updateQuestion(@Valid @RequestBody QuestionDTO questionDTO) throws URISyntaxException {
+        log.debug("REST request to update Question : {}", questionDTO);
+        if (questionDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Question result = questionRepository.save(question);
+        QuestionDTO result = questionService.save(questionDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, question.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, questionDTO.getId().toString()))
             .body(result);
     }
 
@@ -82,39 +87,52 @@ public class QuestionResource {
      * GET  /questions : get all the questions.
      *
      * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of questions in body
      */
     @GetMapping("/questions")
-    public ResponseEntity<List<Question>> getAllQuestions(Pageable pageable) {
-        log.debug("REST request to get a page of Questions");
-        Page<Question> page = questionRepository.findAll(pageable);
+    public ResponseEntity<List<QuestionDTO>> getAllQuestions(QuestionCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Questions by criteria: {}", criteria);
+        Page<QuestionDTO> page = questionQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/questions");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**
+    * GET  /questions/count : count all the questions.
+    *
+    * @param criteria the criterias which the requested entities should match
+    * @return the ResponseEntity with status 200 (OK) and the count in body
+    */
+    @GetMapping("/questions/count")
+    public ResponseEntity<Long> countQuestions(QuestionCriteria criteria) {
+        log.debug("REST request to count Questions by criteria: {}", criteria);
+        return ResponseEntity.ok().body(questionQueryService.countByCriteria(criteria));
+    }
+
+    /**
      * GET  /questions/:id : get the "id" question.
      *
-     * @param id the id of the question to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the question, or with status 404 (Not Found)
+     * @param id the id of the questionDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the questionDTO, or with status 404 (Not Found)
      */
     @GetMapping("/questions/{id}")
-    public ResponseEntity<Question> getQuestion(@PathVariable Long id) {
+    public ResponseEntity<QuestionDTO> getQuestion(@PathVariable Long id) {
         log.debug("REST request to get Question : {}", id);
-        Optional<Question> question = questionRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(question);
+        Optional<QuestionDTO> questionDTO = questionService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(questionDTO);
     }
 
     /**
      * DELETE  /questions/:id : delete the "id" question.
      *
-     * @param id the id of the question to delete
+     * @param id the id of the questionDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/questions/{id}")
     public ResponseEntity<Void> deleteQuestion(@PathVariable Long id) {
         log.debug("REST request to delete Question : {}", id);
-        questionRepository.deleteById(id);
+        questionService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

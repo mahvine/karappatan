@@ -4,6 +4,8 @@ import ph.mahvine.karappatan.repository.ModuleRepository;
 import ph.mahvine.karappatan.web.rest.errors.BadRequestAlertException;
 import ph.mahvine.karappatan.web.rest.util.HeaderUtil;
 import ph.mahvine.karappatan.web.rest.util.PaginationUtil;
+import ph.mahvine.karappatan.service.dto.ModuleDTO;
+import ph.mahvine.karappatan.service.mapper.ModuleMapper;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,24 +36,29 @@ public class ModuleResource {
 
     private final ModuleRepository moduleRepository;
 
-    public ModuleResource(ModuleRepository moduleRepository) {
+    private final ModuleMapper moduleMapper;
+
+    public ModuleResource(ModuleRepository moduleRepository, ModuleMapper moduleMapper) {
         this.moduleRepository = moduleRepository;
+        this.moduleMapper = moduleMapper;
     }
 
     /**
      * POST  /modules : Create a new module.
      *
-     * @param module the module to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new module, or with status 400 (Bad Request) if the module has already an ID
+     * @param moduleDTO the moduleDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new moduleDTO, or with status 400 (Bad Request) if the module has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/modules")
-    public ResponseEntity<Module> createModule(@Valid @RequestBody Module module) throws URISyntaxException {
-        log.debug("REST request to save Module : {}", module);
-        if (module.getId() != null) {
+    public ResponseEntity<ModuleDTO> createModule(@Valid @RequestBody ModuleDTO moduleDTO) throws URISyntaxException {
+        log.debug("REST request to save Module : {}", moduleDTO);
+        if (moduleDTO.getId() != null) {
             throw new BadRequestAlertException("A new module cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Module result = moduleRepository.save(module);
+        Module module = moduleMapper.toEntity(moduleDTO);
+        module = moduleRepository.save(module);
+        ModuleDTO result = moduleMapper.toDto(module);
         return ResponseEntity.created(new URI("/api/modules/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -60,21 +67,23 @@ public class ModuleResource {
     /**
      * PUT  /modules : Updates an existing module.
      *
-     * @param module the module to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated module,
-     * or with status 400 (Bad Request) if the module is not valid,
-     * or with status 500 (Internal Server Error) if the module couldn't be updated
+     * @param moduleDTO the moduleDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated moduleDTO,
+     * or with status 400 (Bad Request) if the moduleDTO is not valid,
+     * or with status 500 (Internal Server Error) if the moduleDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/modules")
-    public ResponseEntity<Module> updateModule(@Valid @RequestBody Module module) throws URISyntaxException {
-        log.debug("REST request to update Module : {}", module);
-        if (module.getId() == null) {
+    public ResponseEntity<ModuleDTO> updateModule(@Valid @RequestBody ModuleDTO moduleDTO) throws URISyntaxException {
+        log.debug("REST request to update Module : {}", moduleDTO);
+        if (moduleDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Module result = moduleRepository.save(module);
+        Module module = moduleMapper.toEntity(moduleDTO);
+        module = moduleRepository.save(module);
+        ModuleDTO result = moduleMapper.toDto(module);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, module.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, moduleDTO.getId().toString()))
             .body(result);
     }
 
@@ -86,13 +95,13 @@ public class ModuleResource {
      * @return the ResponseEntity with status 200 (OK) and the list of modules in body
      */
     @GetMapping("/modules")
-    public ResponseEntity<List<Module>> getAllModules(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public ResponseEntity<List<ModuleDTO>> getAllModules(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Modules");
-        Page<Module> page;
+        Page<ModuleDTO> page;
         if (eagerload) {
-            page = moduleRepository.findAllWithEagerRelationships(pageable);
+            page = moduleRepository.findAllWithEagerRelationships(pageable).map(moduleMapper::toDto);
         } else {
-            page = moduleRepository.findAll(pageable);
+            page = moduleRepository.findAll(pageable).map(moduleMapper::toDto);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/modules?eagerload=%b", eagerload));
         return ResponseEntity.ok().headers(headers).body(page.getContent());
@@ -101,20 +110,21 @@ public class ModuleResource {
     /**
      * GET  /modules/:id : get the "id" module.
      *
-     * @param id the id of the module to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the module, or with status 404 (Not Found)
+     * @param id the id of the moduleDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the moduleDTO, or with status 404 (Not Found)
      */
     @GetMapping("/modules/{id}")
-    public ResponseEntity<Module> getModule(@PathVariable Long id) {
+    public ResponseEntity<ModuleDTO> getModule(@PathVariable Long id) {
         log.debug("REST request to get Module : {}", id);
-        Optional<Module> module = moduleRepository.findOneWithEagerRelationships(id);
-        return ResponseUtil.wrapOrNotFound(module);
+        Optional<ModuleDTO> moduleDTO = moduleRepository.findOneWithEagerRelationships(id)
+            .map(moduleMapper::toDto);
+        return ResponseUtil.wrapOrNotFound(moduleDTO);
     }
 
     /**
      * DELETE  /modules/:id : delete the "id" module.
      *
-     * @param id the id of the module to delete
+     * @param id the id of the moduleDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/modules/{id}")

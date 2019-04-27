@@ -19,6 +19,12 @@
                         <a [routerLink]="['/question', nextQuestions?.id, 'view' ]">{{nextQuestions.content}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
+                <dt><span>Module</span></dt>
+                <dd>
+                    <div *ngIf="annex.moduleId">
+                        <a [routerLink]="['/module', annex.moduleId, 'view']">{{annex.moduleTitle}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

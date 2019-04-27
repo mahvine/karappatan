@@ -2,6 +2,7 @@ package ph.mahvine.karappatan.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -25,8 +26,6 @@ public class Question implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    
-    @Lob
     @Column(name = "question", nullable = false)
     private String question;
 
@@ -34,12 +33,17 @@ public class Question implements Serializable {
     @Column(name = "identifier", nullable = false, unique = true)
     private String identifier;
 
-    @Lob
     @Column(name = "info")
     private String info;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", fetch=FetchType.EAGER)
+    @JsonIgnoreProperties({"question"})
     private Set<Answer> answers = new HashSet<>();
+    
+    @ManyToOne
+    @JsonIgnoreProperties("questions")
+    private Module module;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -111,6 +115,19 @@ public class Question implements Serializable {
 
     public void setAnswers(Set<Answer> answers) {
         this.answers = answers;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public Question module(Module module) {
+        this.module = module;
+        return this;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

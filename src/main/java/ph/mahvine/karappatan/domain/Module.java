@@ -5,6 +5,8 @@ package ph.mahvine.karappatan.domain;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,18 +37,21 @@ public class Module implements Serializable {
     @JoinTable(name = "krptn_module_questions",
                joinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "questions_id", referencedColumnName = "id"))
+    @JsonIgnoreProperties("module")
     private Set<Question> questions = new HashSet<>();
 
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "krptn_module_annexes",
                joinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "annexes_id", referencedColumnName = "id"))
+    @JsonIgnoreProperties("module")
     private Set<Annex> annexes = new HashSet<>();
 
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "krptn_module_recommendations",
                joinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "recommendations_id", referencedColumnName = "id"))
+    @JsonIgnoreProperties("module")
     private Set<Recommendation> recommendations = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

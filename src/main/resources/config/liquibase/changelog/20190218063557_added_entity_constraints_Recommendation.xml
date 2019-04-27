@@ -25,5 +25,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="krptn_question"/>
         
+        <addForeignKeyConstraint baseColumnNames="module_id"
+                                 baseTableName="krptn_recommendation"
+                                 constraintName="fk_krptn_recommendation_module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="krptn_module"/>
+
     </changeSet>
 </databaseChangeLog>

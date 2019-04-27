@@ -4,6 +4,9 @@ import ph.mahvine.karappatan.KarappatanApp;
 
 import ph.mahvine.karappatan.domain.Recommendation;
 import ph.mahvine.karappatan.repository.RecommendationRepository;
+import ph.mahvine.karappatan.service.RecommendationService;
+import ph.mahvine.karappatan.service.dto.RecommendationDTO;
+import ph.mahvine.karappatan.service.mapper.RecommendationMapper;
 import ph.mahvine.karappatan.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -59,6 +62,15 @@ public class RecommendationResourceIntTest {
     private RecommendationRepository recommendationRepositoryMock;
 
     @Autowired
+    private RecommendationMapper recommendationMapper;
+
+    @Mock
+    private RecommendationService recommendationServiceMock;
+
+    @Autowired
+    private RecommendationService recommendationService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -80,7 +92,7 @@ public class RecommendationResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final RecommendationResource recommendationResource = new RecommendationResource(recommendationRepository);
+        final RecommendationResource recommendationResource = new RecommendationResource(recommendationService);
         this.restRecommendationMockMvc = MockMvcBuilders.standaloneSetup(recommendationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -113,9 +125,10 @@ public class RecommendationResourceIntTest {
         int databaseSizeBeforeCreate = recommendationRepository.findAll().size();
 
         // Create the Recommendation
+        RecommendationDTO recommendationDTO = recommendationMapper.toDto(recommendation);
         restRecommendationMockMvc.perform(post("/api/recommendations")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(recommendation)))
+            .content(TestUtil.convertObjectToJsonBytes(recommendationDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Recommendation in the database
@@ -133,34 +146,17 @@ public class RecommendationResourceIntTest {
 
         // Create the Recommendation with an existing ID
         recommendation.setId(1L);
+        RecommendationDTO recommendationDTO = recommendationMapper.toDto(recommendation);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restRecommendationMockMvc.perform(post("/api/recommendations")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(recommendation)))
+            .content(TestUtil.convertObjectToJsonBytes(recommendationDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Recommendation in the database
         List<Recommendation> recommendationList = recommendationRepository.findAll();
         assertThat(recommendationList).hasSize(databaseSizeBeforeCreate);
-    }
-
-    @Test
-    @Transactional
-    public void checkIdentifierIsRequired() throws Exception {
-        int databaseSizeBeforeTest = recommendationRepository.findAll().size();
-        // set the field null
-        recommendation.setIdentifier(null);
-
-        // Create the Recommendation, which fails.
-
-        restRecommendationMockMvc.perform(post("/api/recommendations")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(recommendation)))
-            .andExpect(status().isBadRequest());
-
-        List<Recommendation> recommendationList = recommendationRepository.findAll();
-        assertThat(recommendationList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -180,8 +176,8 @@ public class RecommendationResourceIntTest {
     
     @SuppressWarnings({"unchecked"})
     public void getAllRecommendationsWithEagerRelationshipsIsEnabled() throws Exception {
-        RecommendationResource recommendationResource = new RecommendationResource(recommendationRepositoryMock);
-        when(recommendationRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        RecommendationResource recommendationResource = new RecommendationResource(recommendationServiceMock);
+        when(recommendationServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         MockMvc restRecommendationMockMvc = MockMvcBuilders.standaloneSetup(recommendationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
@@ -192,13 +188,13 @@ public class RecommendationResourceIntTest {
         restRecommendationMockMvc.perform(get("/api/recommendations?eagerload=true"))
         .andExpect(status().isOk());
 
-        verify(recommendationRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+        verify(recommendationServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @SuppressWarnings({"unchecked"})
     public void getAllRecommendationsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        RecommendationResource recommendationResource = new RecommendationResource(recommendationRepositoryMock);
-            when(recommendationRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        RecommendationResource recommendationResource = new RecommendationResource(recommendationServiceMock);
+            when(recommendationServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
             MockMvc restRecommendationMockMvc = MockMvcBuilders.standaloneSetup(recommendationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -208,7 +204,7 @@ public class RecommendationResourceIntTest {
         restRecommendationMockMvc.perform(get("/api/recommendations?eagerload=true"))
         .andExpect(status().isOk());
 
-            verify(recommendationRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+            verify(recommendationServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test
@@ -249,10 +245,11 @@ public class RecommendationResourceIntTest {
         updatedRecommendation
             .content(UPDATED_CONTENT)
             .identifier(UPDATED_IDENTIFIER);
+        RecommendationDTO recommendationDTO = recommendationMapper.toDto(updatedRecommendation);
 
         restRecommendationMockMvc.perform(put("/api/recommendations")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedRecommendation)))
+            .content(TestUtil.convertObjectToJsonBytes(recommendationDTO)))
             .andExpect(status().isOk());
 
         // Validate the Recommendation in the database
@@ -269,11 +266,12 @@ public class RecommendationResourceIntTest {
         int databaseSizeBeforeUpdate = recommendationRepository.findAll().size();
 
         // Create the Recommendation
+        RecommendationDTO recommendationDTO = recommendationMapper.toDto(recommendation);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restRecommendationMockMvc.perform(put("/api/recommendations")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(recommendation)))
+            .content(TestUtil.convertObjectToJsonBytes(recommendationDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Recommendation in the database
@@ -312,5 +310,28 @@ public class RecommendationResourceIntTest {
         assertThat(recommendation1).isNotEqualTo(recommendation2);
         recommendation1.setId(null);
         assertThat(recommendation1).isNotEqualTo(recommendation2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(RecommendationDTO.class);
+        RecommendationDTO recommendationDTO1 = new RecommendationDTO();
+        recommendationDTO1.setId(1L);
+        RecommendationDTO recommendationDTO2 = new RecommendationDTO();
+        assertThat(recommendationDTO1).isNotEqualTo(recommendationDTO2);
+        recommendationDTO2.setId(recommendationDTO1.getId());
+        assertThat(recommendationDTO1).isEqualTo(recommendationDTO2);
+        recommendationDTO2.setId(2L);
+        assertThat(recommendationDTO1).isNotEqualTo(recommendationDTO2);
+        recommendationDTO1.setId(null);
+        assertThat(recommendationDTO1).isNotEqualTo(recommendationDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(recommendationMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(recommendationMapper.fromId(null)).isNull();
     }
 }

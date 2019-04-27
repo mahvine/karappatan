@@ -4,6 +4,9 @@ import ph.mahvine.karappatan.KarappatanApp;
 
 import ph.mahvine.karappatan.domain.Answer;
 import ph.mahvine.karappatan.repository.AnswerRepository;
+import ph.mahvine.karappatan.service.AnswerService;
+import ph.mahvine.karappatan.service.dto.AnswerDTO;
+import ph.mahvine.karappatan.service.mapper.AnswerMapper;
 import ph.mahvine.karappatan.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -51,6 +54,12 @@ public class AnswerResourceIntTest {
     private AnswerRepository answerRepository;
 
     @Autowired
+    private AnswerMapper answerMapper;
+
+    @Autowired
+    private AnswerService answerService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -72,7 +81,7 @@ public class AnswerResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final AnswerResource answerResource = new AnswerResource(answerRepository);
+        final AnswerResource answerResource = new AnswerResource(answerService);
         this.restAnswerMockMvc = MockMvcBuilders.standaloneSetup(answerResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -105,9 +114,10 @@ public class AnswerResourceIntTest {
         int databaseSizeBeforeCreate = answerRepository.findAll().size();
 
         // Create the Answer
+        AnswerDTO answerDTO = answerMapper.toDto(answer);
         restAnswerMockMvc.perform(post("/api/answers")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(answer)))
+            .content(TestUtil.convertObjectToJsonBytes(answerDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Answer in the database
@@ -125,11 +135,12 @@ public class AnswerResourceIntTest {
 
         // Create the Answer with an existing ID
         answer.setId(1L);
+        AnswerDTO answerDTO = answerMapper.toDto(answer);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restAnswerMockMvc.perform(post("/api/answers")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(answer)))
+            .content(TestUtil.convertObjectToJsonBytes(answerDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Answer in the database
@@ -190,10 +201,11 @@ public class AnswerResourceIntTest {
         updatedAnswer
             .answer(UPDATED_ANSWER)
             .instructions(UPDATED_INSTRUCTIONS);
+        AnswerDTO answerDTO = answerMapper.toDto(updatedAnswer);
 
         restAnswerMockMvc.perform(put("/api/answers")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedAnswer)))
+            .content(TestUtil.convertObjectToJsonBytes(answerDTO)))
             .andExpect(status().isOk());
 
         // Validate the Answer in the database
@@ -210,11 +222,12 @@ public class AnswerResourceIntTest {
         int databaseSizeBeforeUpdate = answerRepository.findAll().size();
 
         // Create the Answer
+        AnswerDTO answerDTO = answerMapper.toDto(answer);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAnswerMockMvc.perform(put("/api/answers")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(answer)))
+            .content(TestUtil.convertObjectToJsonBytes(answerDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Answer in the database
@@ -253,5 +266,28 @@ public class AnswerResourceIntTest {
         assertThat(answer1).isNotEqualTo(answer2);
         answer1.setId(null);
         assertThat(answer1).isNotEqualTo(answer2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(AnswerDTO.class);
+        AnswerDTO answerDTO1 = new AnswerDTO();
+        answerDTO1.setId(1L);
+        AnswerDTO answerDTO2 = new AnswerDTO();
+        assertThat(answerDTO1).isNotEqualTo(answerDTO2);
+        answerDTO2.setId(answerDTO1.getId());
+        assertThat(answerDTO1).isEqualTo(answerDTO2);
+        answerDTO2.setId(2L);
+        assertThat(answerDTO1).isNotEqualTo(answerDTO2);
+        answerDTO1.setId(null);
+        assertThat(answerDTO1).isNotEqualTo(answerDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(answerMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(answerMapper.fromId(null)).isNull();
     }
 }

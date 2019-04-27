@@ -139,6 +139,58 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'annex',
                 loadChildren: './annex/annex.module#KarappatanAnnexModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'annex',
+                loadChildren: './annex/annex.module#KarappatanAnnexModule'
+            },
+            {
+                path: 'recommendation',
+                loadChildren: './recommendation/recommendation.module#KarappatanRecommendationModule'
+            },
+            {
+                path: 'answer',
+                loadChildren: './answer/answer.module#KarappatanAnswerModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'module',
+                loadChildren: './module/module.module#KarappatanModuleModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'question',
+                loadChildren: './question/question.module#KarappatanQuestionModule'
+            },
+            {
+                path: 'recommendation',
+                loadChildren: './recommendation/recommendation.module#KarappatanRecommendationModule'
+            },
+            {
+                path: 'annex',
+                loadChildren: './annex/annex.module#KarappatanAnnexModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

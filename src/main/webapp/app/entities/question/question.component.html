@@ -18,6 +18,7 @@
             <th jhiSortBy="question"><span>Question</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="identifier"><span>Identifier</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="info"><span>Info</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="moduleTitle"><span>Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -27,6 +28,11 @@
                 <td>{{question.question}}</td>
                 <td>{{question.identifier}}</td>
                 <td>{{question.info}}</td>
+                <td>
+                    <div *ngIf="question.moduleId">
+                        <a [routerLink]="['../module', question.moduleId , 'view' ]" >{{question.moduleTitle}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

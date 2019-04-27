@@ -8,6 +8,8 @@ import { IRecommendation } from 'app/shared/model/recommendation.model';
 import { RecommendationService } from './recommendation.service';
 import { IQuestion } from 'app/shared/model/question.model';
 import { QuestionService } from 'app/entities/question';
+import { IModule } from 'app/shared/model/module.model';
+import { ModuleService } from 'app/entities/module';
 
 @Component({
     selector: 'jhi-recommendation-update',
@@ -21,11 +23,14 @@ export class RecommendationUpdateComponent implements OnInit {
 
     questions: IQuestion[];
 
+    modules: IModule[];
+
     constructor(
         protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected recommendationService: RecommendationService,
         protected questionService: QuestionService,
+        protected moduleService: ModuleService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -48,6 +53,13 @@ export class RecommendationUpdateComponent implements OnInit {
                 map((response: HttpResponse<IQuestion[]>) => response.body)
             )
             .subscribe((res: IQuestion[]) => (this.questions = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.moduleService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IModule[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IModule[]>) => response.body)
+            )
+            .subscribe((res: IModule[]) => (this.modules = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -97,6 +109,10 @@ export class RecommendationUpdateComponent implements OnInit {
     }
 
     trackQuestionById(index: number, item: IQuestion) {
+        return item.id;
+    }
+
+    trackModuleById(index: number, item: IModule) {
         return item.id;
     }
 
