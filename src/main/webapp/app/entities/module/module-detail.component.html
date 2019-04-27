@@ -13,24 +13,6 @@
                 <dd>
                     <span>{{module.details}}</span>
                 </dd>
-                <dt><span>Questions</span></dt>
-                <dd>
-                    <span *ngFor="let questions of module.questions; let last = last">
-                        <a [routerLink]="['/question', questions?.id, 'view' ]">{{questions.question}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <dt><span>Annexes</span></dt>
-                <dd>
-                    <span *ngFor="let annexes of module.annexes; let last = last">
-                        <a [routerLink]="['/annex', annexes?.id, 'view' ]">{{annexes.content}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <dt><span>Recommendations</span></dt>
-                <dd>
-                    <span *ngFor="let recommendations of module.recommendations; let last = last">
-                        <a [routerLink]="['/recommendation', recommendations?.id, 'view' ]">{{recommendations.content}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
             </dl>
 
             <button type="submit"

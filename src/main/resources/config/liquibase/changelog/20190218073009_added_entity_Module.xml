@@ -32,39 +32,6 @@
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         
-        <createTable tableName="krptn_module_questions">
-            <column name="questions_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="module_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="module_id, questions_id" tableName="krptn_module_questions"/>
-        
-        <createTable tableName="krptn_module_annexes">
-            <column name="annexes_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="module_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="module_id, annexes_id" tableName="krptn_module_annexes"/>
-        
-        <createTable tableName="krptn_module_recommendations">
-            <column name="recommendations_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="module_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="module_id, recommendations_id" tableName="krptn_module_recommendations"/>
-        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

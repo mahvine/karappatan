@@ -1,0 +1,295 @@
+1001,Are you employed by the government or a government owned or controlled corporation?,1,,1
+1002,"Do you have a grievance against a co-worker or your employer / superior / management, or in relation to labor unions / organizations / the right of representation?",2,,1
+1003,Are you a domestic worker?,3,"“Domestic Worker” or '"Kasambahay'" refers to any person engaged in domestic work within an employment relationship such as, but not limited to, the following: general househelp, nursemaid or '"yaya'", cook, gardener, or laundry person, but shall exclude any person who performs domestic work only occasionally or sporadically and not on an occupational basis. The term shall not include children who are under foster family arrangement, and are provided access to education and given an allowance incidental to education, i.e. '"baon'", transportation, school projects and school activities. (Sec. 4, R.A. 10361)",1
+1004,"Do you engage in work such as or similar to general househelp, nursemaid or '"yaya'", cook, gardener, or laundry person?",4,,1
+1005,Do you engage in such work only from time to time or is it your primary occupation?,5,,1
+1006,"Are you a child under the foster family arrangement, whose education is supported by the employer?",6,,1
+1007,Are you a rank and file employee?,7,,1
+1008,Are you a managerial employee?,8,"Managerial employees are those who are vested with the powers or prerogatives to lay down and execute management policies and/or to hire, transfer, suspend, lay-off, recall, discharge, assign or discipline employees. (Art. 219 (m), Labor Code)",1
+1009,Are you a supervisory employee?,9,"Supervisory employees are those who, in the interest of the employer, effectively recommend such managerial actions if the exercise of such authority is not merely routinary or clerical in nature but requires the use of independent judgment. (Art. 219 (m), Labor Code)",1
+1010,Were you directly hired by your employer or were you hired through a contractor or agency?,10,,1
+1011,"Does your employer have the following powers:
+a)	Power to select and hire employees;
+b)	Power to pay wages;
+c)	Power to terminate employment; and
+d)	Control over the employee’s way or manner of working as well as the product of your work?",11,"Please note that he must have the right to exercise all of these powers, but it is not necessary that he has already exercised all of them.",1
+1012,Does your employer have the power to control how you do your work as well as what you are able to deliver?,12,"You are considered under the control of your employer if the employer reserves the right to control not only the end to be achieved but also the manner and means to be used in reaching such end. (Francisco v. NLRC, G.R. No. 170087, 31 August 2006)",1
+1013,Are you dependent on the employer for your continued employment in that line of business?,13,"You can be said to be dependent if the employer is your only source of income in the industry he is engaged in (Orozco v. CA, G.R. No. 155207, 13 August 2008) or if you have been working exclusively for him for a long period of time. (Francisco v. NLRC, G.R. No. 170087, 31 August 2006)",1
+1014,What is your grievance about?,14,,1
+1015,"Does the contractor or agency have substantial capital or investment (e.g. tools, equipment, machineries, work premises)?",LOCQ 1,,1
+1016,Does the contractor or agency carry on a distinct and independent business from your employer?,LOCQ 2,,1
+1017,Does the contractor or agency supply workers who perform activities directly related to the business of the employer?,LOCQ 3,,1
+1018,Do you have money claims because you were illegally dismissed?,MCQ 1,"a)	An employee who is illegally dismissed may ask for reinstatement, backwages, damages, and other benefits that are due him until he is reinstated. (Art. 294, Labor Code; Arriola v. Pilipino Star Ngayon, G.R. No 175689, 13 August 2014) If reinstatement is impossible, the employee can seek separation pay instead. (South East International Rattan, Inc. v. Coming, G.R. No. 186621, 12 Match 2014)
+b)	Money claims that do not arise from illegal dismissal include overtime pay, holiday pay, service incentive leave pay, bonuses, salary differentials, illegal deductions by an employer, or money claims arising from seafarer contracts. (Arriola v. Pilipino Star Ngayon, G.R. No 175689, 13 August 2014)",1
+1019,Has it been more than 3 years from the time the cause of the money claim happened? ,MCQ 2,"For example, has it been more than 3 years from the time when you were supposed to be paid?",1
+1020,"Before the 3 years lapsed, were you able to institute a claim with the Department of Labor and Employment (DOLE)?",MCQ 3,,1
+1021,Are you a government employee?,MCQ 4,"The terms and conditions of employment of all government employees, including employees of government-owned and controlled corporations, shall be governed by the Civil Service Law, rules and regulations. (Art. 291, Labor Code)",1
+1022,Are you a managerial employee?,MCQ 5,"Managerial employees refer to those whose primary duty consists of the management of the establishment in which they are employed or of a department or subdivision thereof, and to other officers or members of the managerial staff. (Art. 82, Labor Code) They are not entitled to 13th Month Pay. (Revised Guidelines on the Implementation of the 13th Month Pay Law, 16 November 1987) They are entitled to Retirement Pay. (Art. 302, Labor Code)They are not entitled to Service Incentive Leave. (Sec. 1, Rule V, Book III, Rules Implementing the Labor Code)",1
+1023,Are you a member of the managerial staff?,MCQ 6,"Supervisory employees are considered members of the managerial staff. Members of the managerial staff are those who…
+a)	primarily perform work that is directly related to management policies of the employer; 
+b)	Customarily and regularly exercise discretion and independent judgment;
+c)	Regularly and directly assist a proprietor or managerial employee in the management of the establishment or subdivision thereof; 
+or execute, under general supervision, work along specialized or technical lines requiring special training, experience, or knowledge; 
+or execute, under general supervision, special assignments and tasks; and
+d)	Do not devote more than 20% of their hours worked in a workweek to activities which are not directly and closely related to the performance of the work described above. (DOLE Handbook on Workers’ Statutory Monetary Benefits, 2017)",1
+1024,Do you primarily perform work that is directly related to management policies of the employer?,MCQ 7,,1
+1025,Do you customarily and regularly exercise discretion and independent judgment?,MCQ 8,,1
+1026,Do you regularly and directly assist a proprietor or managerial employee in the management of the establishment or subdivision thereof?,MCQ 9,,1
+1027,"Does your work require special training, experience, or knowledge?",MCQ 10,,1
+1028,Do you execute special assignments and tasks?,MCQ 11,,1
+1029,Do you devote more than 20% of your hours worked in a workweek to activities which are not directly and closely related to the performance such work?,MCQ 12,,1
+1030,Are you a field personnel?,MCQ 13,"Field personnel are non-agricultural employees who regularly perform their duties away from the principal place of business or branch office of the employer and whose actual hours of work in the field cannot be determined with reasonable certainty. (Art. 82, Labor Code)Such employees are not entitled to holiday pay, premium pay, overtime pay, or night shift differentials under the Labor Code.(Art. 82, Labor Code) They are entitled to Retirement Pay. (Art. 302, Labor Code) Rank-and-file field personnel are entitled to 13th Month Pay. (Revised Guidelines on the Implementation of the 13th Month Pay Law, 16 November 1987) They are not entitled to Service Incentive Leave. (Sec. 1, Rule V, Book III, Rules Implementing the Labor Code)",1
+1031,Are you a member of the employer’s family who is dependent on him for support?,MCQ 14,,1
+1032,Are you in the personal service of the employer?,MCQ 15,,1
+1033,Are you paid based on results rather than time worked?,MCQ 16,"Workers paid by results include those under “pakyaw,” piecework, and other non-time work. (Art. 101, Labor Code)",1
+1034,Are you a domestic worker or kasambahay?,MCQ 17,"Domestic worker or '"Kasambahay'" refers to any person engaged in domestic work within an employment relationship such as, but not limited to, the following: general househelp, nursemaid or '"yaya'", cook, gardener, or laundry person, but shall exclude any person who performs domestic work only occasionally or sporadically and not on an occupational basis.The term shall not include children who are under foster family arrangement, and are provided access to education and given an allowance incidental to education, i.e. '"baon'", transportation, school projects and school activities. (Sec. 4 (d), Republic Act No. 10361)",1
+1035,What does the money claim pertain to?,MCQ 18,,1
+1036,What is your specific concern with respect to basic wage or salary?,MCQ 19,,1
+1037,What region do you work in?,MCQ 20,,1
+1038,Are you a health personnel?,MCQ 21,"Health personnel include resident physicians, nurses, nutritionists, dieticians, pharmacists, social workers, laboratory technicians, paramedical technicians, psychologists, midwives, attendants and all other hospital or clinic personnel. (Art. 83, Labor Code)",1
+1039,"Are you a health personnel in a city or municipality with a population of at least 1,000,000?",MCQ 22,,1
+1040,Are you a health personnel employed in a hospital or clinic with a bed capacity of at least 100?,MCQ 23,,1
+1041,Are you working under a Compressed Work Week (CWW) system?,MCQ 24,"CWWs refer to a situation where the normal workweek is reduced to less than 6 days, but the total number of work hours of 48 hours remains. The normal workday is increased to more than 8 hours. Any time worked beyond 12 hours will be subject to overtime premium. If the firm normally works under a 5-day (or 40 hours) work week, its CWW would likely feature less than 5 days of work per week, while retaining the 40-hour total per week. (DOLE Department Advisory No. 2, series of 2004, 2 December 2004)",1
+1042,Did a majority of the employees (or their duly authorized representatives) to be covered by the CWW system voluntarily agree to the same?,MCQ 25,"The agreement may be expressed through collective bargaining agreements or other legitimate workplace mechanisms of participation, such as labor-management councils, employee assemblies, or referenda. (Chan, Bar Reviewer on Labor Law, Chan Robles Publishing Company: 2017)",1
+1043,"Do you work in a company which uses substances, chemicals, and processes or operating under conditions where there are airborne contaminants, human carcinogens, or noise which pose hazards to the employees’ health and safety?",MCQ 26,,1
+1044,Is there a certification that work beyond 8 hours is within the threshold limits or tolerable levels of exposure to such substances?,MCQ 27,"The certification may be issued by an accredited health and safety organization or practitioner or from the company’s safety committee. (Chan, Bar Reviewer on Labor Law, Chan Robles Publishing Company: 2017)",1
+1045,Did the employer notify the appropriate DOLE Regional Office of the adoption of the Compressed Work Week (CWW) system?,MCQ 28,,1
+1046,Do you work in a service or retail establishment that employs less than 10 workers?,MCQ 29,"A retail establishment is one principally engaged in the sale of goods to end-users for personal or household use. (Chan, Bar Reviewer on Labor Law, Chan Robles Publishing Company: 2017) A service establishment is one principally engaged in the sale of service to individuals for their own or household use and is generally recognized as such. (Chan, Bar Reviewer on Labor Law, Chan Robles Publishing Company: 2017)",1
+1047,Are you a seasonal worker? ,MCQ 30,"You are a seasonal employee if your work or service is performed seasonally and the employment is for the duration of the season only. (Article 295 [280], Labor Code; Section 5, Rule I, Book VI of the Rules to Implement the Labor Code)",1
+1048,Are you concerned about holiday pay during the off season?,MCQ 31,,1
+1049,Did you work during the off season concerned?,MCQ 32,,1
+1050,Are you a private school teacher?,MCQ 33,"“Private school teacher” here includes faculty members of private colleges and universities. (Sec. 8 (a), Rule IV, Book III, Rules to Implement the Labor Code)",1
+1201,Are you paid by the hour?,MCQ 34,,1
+1202,Do you have regular working days?,MCQ 35,,1
+1203,Have you been working with the employer for at least one month during the calendar year?,MCQ 36,,1
+1204,"Has your employer been paying its employees 13th month pay or more in a calendar year or its equivalent since November 16, 1987 or earlier?",MCQ 37,"“Its equivalent” includes Christmas bonus, mid-year bonus, cash bonuses and other payments amounting to not less than 1/12 of the basic salary but shall not include cash and stock dividends, cost of living allowances and all other allowances regularly enjoyed by the employee, as well as non-monetary benefits. (Revised Guidelines on the Implementation of the 13th Month Pay Law, 16 November 1987)",1
+1205,"Has the employer made such payments amounting to 1/12 of the basic salary, in addition to regular wages, for the calendar year?",MCQ 38,,1
+1206,Have you resigned or were you separated from service?,MCQ 39,,1
+1448,Is the work that you do duplicated?,TEQ 75,"There is duplication of work when two or more people do the work of one person. (Caltex [Phils.], Inc. v. NLRC, G.R. No. 159641, 15 October 2007)",1
+1449,Was the termination a cost-cutting measure?,TEQ 76,,1
+1450,Did the termination streamline operations?,TEQ 77,,1
+1207,"Were you terminated for causes such as or similar to the following:
+a)	Retrenchment, or
+b)	Closure of the company that was not due to serious business losses or financial reverses.",MCQ 40,"Retrenchment is the termination of employment by the employer through no fault of the employee which is resorted to primarily avoid or minimize serious business losses. (Atlantic Gulf and Pacific Company of Manila, Inc. [AG & P] v. NLRC, G.R. No. 127516, 28 May 1999)",1
+1208,"Were you terminated for causes such as or similar to the following:
+a)	Installation of labor-saving devices, or
+b)	Redundancy.",MCQ 41,"An example of labor-saving devices is the introduction of high-speed machines through modernization programs. (Abapo v. CA, G.R. No. 142405, 30 September 2004) There is redundancy when the services of an employee are in excess of what is required by a business. (Atlantic Gulf and Pacific Company of Manila, Inc. [AG & P] v. NLRC, G.R. No. 127516, 28 May 1999) Examples of these are over-hiring of workers, decreased volume of business, dropping of a particular product line or service activity or phasing out of service. (Nippon Housing Phil., Inc. v. Leynes, G.R. No. 177816, 3 August 2011)",1
+1209,Were you terminated because the company closed due to serious business losses or financial reverses?,MCQ 42,,1
+1210,Were you terminated due to a disease you are suffering from?,MCQ 43,,1
+1211,Were you illegally dismissed or forced to resign?,MCQ 44,"Illegal dismissal includes instances where the employer unjustly forces you to resign.(Grande v. Philippine Nautical Training College, G.R. No. 213137, 1 March 2017) When an employee is left with no other choice but to resign due to the harsh, hostile, and unfavorable conditions set by the employer, such resignation is deemed to be involuntary and is tantamount to constructive dismissal. (Gilles v. Court of Appeals, G.R. No. 149273, 5 June 2009)",1
+1212,Do you work in a service establishment that employs not more than 10 workers?,MCQ 45,"A service establishment is one principally engaged in the sale of service to individuals for their own or household use and is generally recognized as such. (Chan, Bar Reviewer on Labor Law, Chan Robles Publishing Company: 2017)",1
+1213,Do you work in a retail establishment that employs not more than 10 workers?,MCQ 46,"A retail establishment is one principally engaged in the sale of goods to end-users for personal or household use. It shall lose its retail character qualified for exemption if it is engaged in both retail and wholesale of goods. (Chan, Bar Reviewer on Labor Law, Chan Robles Publishing Company: 2017) ",1
+1214,Do you work in an agricultural establishment that employs not more than 10 workers?,MCQ 47 ,"An agricultural establishment refers to all farming activities in all branches and includes, among others, the cultivation and tillage of soil, production, cultivation, growing, and harvesting of any agricultural commodities, the culture of fish and other aquatic products in farms. However, it does not include the manufacture and/or processing of sugar, coconut, abaca, tobacco, pineapple, aquatic, or other farm products. (Sec. 2, Rule II, Implementing Rules of the Retirement Pay Law; Labor Advisory on Retirement Pay Law, 24 October 1996)",1
+1215,Are you an underground mining employee?,MCQ 48,"An underground mining employee refers to any person employed to extract mineral deposits underground or to work in excavations or workings such as shafts, winzes, tunnels drifts, crosscuts, raises, working places whether abandoned or in use beneath the earth’s surface for the purpose of searching for and extracting mineral deposits. (Sec. 1, Rule II-A, Rules Prescribing the Retirement Age for Underground Mine Employees, Department Order No. 9, Series of 1998, 4 May 1998)",1
+1216,Have you rendered at least 5 years of service? ,MCQ 49,"The minimum length of service shall include authorized absences and vacations, holidays, and mandatory fulfillment of a military or civic duty. (Sec. 2.3, Rule II-A, Rules Prescribing the Retirement Age for Underground Mine Employees, Department Order No. 9, Series of 1998, 4 May 1998)",1
+1217,Have you reached the minimum age of optional or compulsory retirement?,MCQ 50,"In the absence of a retirement plan or other applicable agreement providing for retirement benefits, an underground mining employee has the option of retiring upon reaching 50 years of age or more. (Sec. 2.1, Rule II-A, Rules Prescribing the Retirement Age for Underground Mine Employees, Department Order No. 9, Series of 1998, 4 May 1998) Where there is no such plan or agreement, an underground mining employee is required to retire upon reaching 60 years of age. (Sec. 2.2, Rule II-A, Rules Prescribing the Retirement Age for Underground Mine Employees, Department Order No. 9, Series of 1998, 4 May 1998)",1
+1218,Have you rendered at least 5 years of service?,MCQ 51,"The minimum length of service shall include authorized absences and vacations, holidays, and mandatory fulfillment of a military or civic duty. (Sec. 4.4, Rule II, Implementing Rules of the Retirement Pay Law)",1
+1219,Have you reached the minimum age of optional or compulsory retirement?,MCQ 52,"In the absence of a retirement plan or agreement providing for retirement benefits, an employee may retire upon reaching the optional retirement age of 60 years or more. Where there is no such plan or agreement, an employee shall be retired upon reaching 65 years of age. (Art. 302, Labor Code)",1
+1220,Are you employed in an establishment with less than 10 employees?,MCQ 53,,1
+1221,Are you already enjoying the benefit of service incentive leave?,MCQ 54,"Every employee covered by the Labor Code who has rendered at least one (1) year of service is entitled to a yearly service incentive leave of five (5) days with pay. (Section 2, Rule V, Book III, Rules to Implement the Labor Code)",1
+1222,Are you already enjoying at least 5 days of vacation leave with pay?,MCQ 55,,1
+1223,Have you already rendered at least 1 year of service?,MCQ 56,"The term '"at least one-year service'" shall mean service for not less than 12 months, whether continuous or broken reckoned from the date the employee started working, including authorized absences and paid regular holidays – unless the working days in the establishment as a matter of practice or policy, or that provided in the employment contract is less than 12 months, in which case said period shall be considered as one year. (Sec. 3, Rule V, Book III, Implementing Rules of the Labor Code)",1
+1224,Has it been more than 4 years from the time you were terminated? ,TEQ 1,,1
+1225,"Before the 4 years lapsed, were you able to institute a claim with the Department of Labor and Employment (DOLE)?",TEQ 2,,1
+1226,How was your employment terminated?,TEQ 3,,1
+1227,Were you terminated under a program like the special voluntary resignation (SVR) program or the Special Separation Program (SSP)?,TEQ 4,"Under SVRs, SSPs, and similar schemes, employers offer resignation benefits to employees who voluntarily terminate the employment relationship. (Jiao v. NLRC, G.R. No. 18233, 18 April 2012)",1
+1557,Was the closure or cessation of business operations total or partial?,TEQ 84,,1
+1228,"Was the reason for your termination based on grounds such as or similar to the following:
+a)	Serious misconduct or willful disobedience of the lawful orders of your employer or his representative in connection with his work;
+b)	Gross and habitual neglect of duties;
+c)	Abandonment of work;
+d)	Fraud or willful breach of trust of the employer or his duly authorized representative;
+e)	Commission of a crime or offense against the person of his employer or any immediate member of his family or his duly authorized representatives;
+f)	You are a union officer who knowingly participated in an illegal strike;
+g)	You are an employee, union officer, or ordinary union member who knowingly participated in the commission of illegal acts during a strike;
+h)	You are a striker who violated an order, prohibition, or injunction issued by the Department of Labor and Employment (DOLE) Secretary or the National Labor Relations Commission (NLRC);
+i)	You violated a union security agreement in the Collective Bargaining Agreement (CBA);
+j)	Violation of company rules and regulations;
+k)	Theft of property owned by a co-employee;
+l)	Incompetence, inefficiency, or ineptitude;
+m)	Failure to comply with weight standards of the employer;
+n)	Attitude problem; or
+o)	You contracted a disease?",TEQ 5,,1
+1229,"Was the reason for your termination based on grounds such as or similar to the following:
+a)	Installation of labor-saving devices;
+b)	Redundancy;
+c)	Retrenchment; or
+d)	Closure or cessation of business operations. ",TEQ 6,"a)	Labor-saving devices are machineries or equipment that replaces the need for employing workers, and thereby reduces the number of workers in the workplace. (Sec. 4 (m), Rule I-A, Book VI, Implementing Rules of the Labor Code)
+b)	There is redundancy when the services of an employee are in excess of what is required by a business. It is not always triggered by a decline in business. (Atlantic Gulf and Pacific Company of Manila, Inc. [AG & P] v. NLRC, G.R. No. 127516, 28 May 1999)
+c)	Retrenchment is resorted to primarily avoid or minimize serious business losses. (Atlantic Gulf and Pacific Company of Manila, Inc. [AG & P] v. NLRC, G.R. No. 127516, 28 May 1999)",1
+1230,Were you given a written notice stating both (1) the reason behind the termination and (2) that you have a reasonable period of at least 5 calendar days from receipt of the notice to submit a written explanation?,TEQ 7,,1
+1231,Were you given an opportunity to be heard and to submit your written answer within at least 5 calendar days from the day you received the written notice?,TEQ 8,,1
+1232,"After submitting your written answer, were you given another written notice of the decision to terminate you after due consideration all of the circumstances?",TEQ 9,,1
+1233,What was the reason given to justify your termination? (select the most similar option),TEQ 10,,1
+1234,Was the misconduct serious?,TEQ 11,"Serious misconduct implies that it must be grave and aggravating, not merely trivial or unimportant. There must be a valid company rule or regulation violated. Note that a series of irregularities put together may constitute serious misconduct. The gravity of the misconduct is a matter of evidence and argumentation, which must be established by the employer and must be argued against by the employee. Examples of serious misconduct are fighting within company premises (Technol Eight Philippines Corporation v. NLRC, G.R. No. 187605, 13 April 2010); uttering obscene, insulting, or offensive words against a superior (Autobus Workers Union v. NLRC, G.R. No. 117453, 1 July 1998); fabrication of time records (Felix v. Enertech Systems Industries, Inc., G.R. No. 142007, 28 March 2001); and using the employer’s property, equipment, and personnel in the personal business of the employee. (Zenco Sales, Inc. v. NLRC, G.R. No. 111110, 2 August 1994)",1
+1235,Was the misconduct related to the performance of your work duties?,TEQ 12,,1
+1236,Did the misconduct show that you have become unfit to continue working for the employer?,TEQ 13,,1
+1237,Was the misconduct performed with wrongful intent?,TEQ 14,,1
+1238,"Did you intentionally refuse to comply with the rules, orders, or instructions of the employer?",TEQ 15,,1
+1239,"Do you think the rule, order, or instruction violated was based on law or reasonable?",TEQ 16,,1
+1240,"Was the rule, order, or instruction violated made known to you?",TEQ 17,"The rule may have been made known to employees verbally or in writing. It may have also been incorporated in the company handbook, employment contract, or other document which the employee is reasonably expected to have read.",1
+1241,"Was the rule, order, or instruction violated connected with work or your duties?",TEQ 18,,1
+1242,Do you think your negligence was gross?,TEQ 19,"Gross negligence means the absence of that diligence that an ordinarily prudent man would use in his own affairs. (Chavez v. NLRC, G.R. No. 146530, 17 Jan 2005) Examples of gross negligence are repeated acts of absences without leave and tardiness, despite warnings. (Valiao vs. Court of Appeals, G.R. No. 146621, 30 July 2004)",1
+1243,Was your negligence work-related?,TEQ 20,,1
+1244,Did you fail to report for work?,TEQ 21,,1
+1245,Was your absence or failure to report to work caused by a justifiable reason?,TEQ 22,,1
+1246,Did you perform an act which would show an intention of ending your employment with the employer?,TEQ 23,"Such acts may vary from case to case and would depend on the surrounding circumstances. In one case, the Supreme Court considered the employee’s communication with other employees that she was about to resign to look for a better paying job, her submission of her resignation letter, and her initiation of clearance processing as acts that show her intent to resign. (BMG Records (Phils.) v. Aparecio, G.R. No. 153290, 5 September 2007)",1
+1247,Were you dishonest or did you deceive the employer?,TEQ 24,"Examples of fraudulent or deceitful acts are falsification and failure to deposit collections; stealing company property (Zamboanga Water District v. Bartolome, G.R. No. L-66766, 20 December 1985); and using double or fictitious requisition slips in order to withdraw company materials (PLDT v. NLRC, G.R. No. L-63191, 30 April 1984).",1
+1248,Did you intend to personally gain from your act of dishonesty or deception?,TEQ 25,"The fact that the amount involved is small is inconsequential. (Etcuban, Jr. v. Sulpicio Lines, Inc., G.R. No. 145901, 15 December 2005)",1
+1249,Did you intend to damage the employer by committing the act of dishonesty or deception?,TEQ 26,"Actual damage or losses is not necessary. (Villanueva v. NLRC, G.R. No. 129413, 27 July 1998)",1
+1250,Was the act of dishonesty or deception work-related?,TEQ 27,,1
+1554,Does the employer have externally audited financial statements to prove or support the losses?,TEQ 81,,1
+1555,Did the business close down or were operations merely suspended?,TEQ 82,,1
+1556,Was the closure or cessation of business operations due to serious business losses or financial reverses?,TEQ 83,,1
+1401,Are you in a position of trust and confidence?,TEQ 28,"Positions entrusted with confidence on delicate matters, such as the custody, handling, or care and protection of the employer’s money, assets, or property. (Bluer than Blue Joint Ventures Company v. Esteban, G.R. No. 192582, 7 April 2014) Managerial, supervisory, and fiduciary rank-and-file employees (e.g. cashiers, auditors, property custodians, or those who regularly handle significant amounts of the employer’s money or property) hold positions of trust and confidence. (Wesleyan University-Philippines v. Reyes, G.R. No. 209321, 30 July 2014)",1
+1402,Did you commit an act that would justify the loss of the employer’s trust and confidence?,TEQ 29,"An example of an act that justifiably lost the employer’s trust and confidence is that of a payroll officer who assigned a higher salary rate to himself without authority. (Bravo v. Urios College, G.R. No. 198066, 7 June 2017) Another example is that of a treasurer who encashed crossed checks named under her office, allowed the encashment by the Treasury Department of checks issued to other personnel in violation of the imprest system of accounting, and disbursed checks without supporting check vouchers. (Weseleyan University Philippines v. Reyes, G.R. No. 208321, 30 July 2014)",1
+1403,Did you commit such an act intentionally?,TEQ 30,,1
+1404,Do you have a reasonable excuse for committing such an act?,TEQ 31,,1
+1405,Was the act work-related?,TEQ 32,,1
+1406,Did you commit a criminal act against the employer?,TEQ 33,"A final conviction of a criminal charge is not necessary for this to be a ground for dismissal. (Concepcion v. Minex Import-Export Corporation, G.R. No. 153569, 24 January 2012)",1
+1407,Did you commit a criminal act against the employer’s immediate family members?,TEQ 34,"Immediate family members are limited to the employer’s spouse, parent, child, sibling, ascendant, or descendant.",1
+1408,Did you commit a criminal act against the employer’s duly authorized representative?,TEQ 35,,1
+1409,Did you participate in an illegal strike?,TEQ 36,"Generally, an illegal strike is one that did not comply with the requirements for a valid strike. For a strike to be valid, there must have been a Notice of Strike, an observation of the Cooling-off Period, a Notice of Strike Vote, and an observance of the 7-day strike ban.Strkes may also be deemed as illegal if they are performed despite or in violation of an order to the contrary by the Secretary of Labor and Employment, the National Labor Relations Commission, or the Office of the President.",1
+1410,"When you participated, did you know that it was an illegal strike?",TEQ 37,,1
+1411,Are you a union officer?,TEQ 38,,1
+1412,"Did you knowingly participate in a strike conducted even after the President or the Secretary of Labor and Employment declared that they would assume jurisdiction? (Art. 279 (a), 2nd paragraph, Labor Code)",TEQ 39,,1
+1413,"Did you knowingly commit any act of violence, coercion, or intimidation during the strike or picket?",TEQ 40,,1
+1414,"Did you knowingly obstruct the entrance or exit of the employer’s premises during the strike or picket? (Art. 279 (e), Labor Code)",TEQ 41,,1
+1415,Did you knowingly obstruct public roads during the strike or picket?,TEQ 42,,1
+1416,Did the Secretary of Labor and Employment assume jurisdiction over the dispute or certify the same to the National Labor Relations Commission (NLRC) for compulsory arbitration?,TEQ 43,"The Secretary’s assumption may be manifested in an assumption order issued by him. Alternatively, the Secretary’s certification to the NLRC of a dispute may be manifested in a certification order. The Secretary may resort to either measures when, in his opinion, the labor dispute will likely cause a strike or lockout in an industry indispensable to the national interest. (Art. 278 (g), Labor Code)",1
+1417,"Did you violate any order, prohibition, or injunction issued by the Secretary of Labor and Employment after it assumed jurisdiction over the dispute?",TEQ 44,"Violations of the orders of the Secretary may depend on the language of the order itself. The most common violation by employees is their failure to return to work or to cease striking despite the assumption order of the Secretary. (Bagong Pagkakaisa ng Manggagawa ng Triumph International v. Secretary of Labor and Employment, G.R. No. 167401, 5 July 2010)",1
+1418,"Did you violate any order, prohibition, or injunction issued by the National Labor Relations Commission after the Secretary of Labor and Employment certified the dispute to it?",TEQ 45,,1
+1419,Is there an existing Collective Bargaining Agreement between the employer and the union serving as the collective bargaining agent?,TEQ 46,,1
+1420,Are you a member in good standing of the collective bargaining agent?,TEQ 47,,1
+1421,Are you a bona fide member of a religion which prohibits you from joining unions?,TEQ 48,,1
+1422,Were you already a member of another union at the time the Collective Bargaining Agreement was signed?,TEQ 49,,1
+1423,Were you denied admission into the collective bargaining agent?,TEQ 50,,1
+1424,"When you were denied admission, were you qualified to be a member of the collective bargaining agent?",TEQ 51,"A bargaining unit is as a group of employees sharing mutual interests within a given employer unit comprised of all or less than all of the entire body of employees in the employer unit or any specific occupational or geographical grouping within such employer unit. (Sec. 1 (q), Rule I, Book V, Omnibus Rules Implementing the Labor Code) Note that managerial and confidential employees cannot become members of labor unions. (San Miguel Corporation Supervisors and Exempt Union v. Laguesma, G.R. No. 110399, 15 August 1997) Note also that supervisory and rank-and-file employees cannot be members of the same unit, much less the same union. (Holy Child Catholic School v. Sto. Tomas, G.R. No. 179146, 23 July 2013)",1
+1425,Were you formerly a member of the collective bargaining agent?,TEQ 52,,1
+1426,Were you removed for committing an act of disloyalty against the collective bargaining agent?,TEQ 53,,1
+1427,Did the collective bargaining agent demand your dismissal from the employers?,TEQ 54,,1
+1551,Did the employer experience business losses or will he be facing imminent losses?,TEQ 78,"Retrenchment can be justified by prevention or minimization of losses brought about by actual losses, financial reverses, lack of work, reduction in the volume of business, reorganization in good faith, abolition of company divisions, conservatorship, fire, and streamlining. (Revidad v. NLRC, G.R. No. 111105, 27 June 1995) Retrenchment may be resorted to even before losses were sustained. (Asian Alcohol Corporation v. NLRC, G.R. No. 131108, 25 March 1999)",1
+1552,Are the business losses substantial?,TEQ 79,,1
+1428,Are you suffering from any disease?,TEQ 55,"Disability is not equivalent to disease. Disability is not a ground for termination. Discrimination on the basis of disability alone is prohibited under Republic Act No. 7277. Disability means (1) a physical or mental impairment that substantially limits one or more psychological, physiological or anatomical function of an individual or activities of such individual; (2) a record of such an impairment; or (3) being regarded as having such an impairment. (Sec. 4 (c), Republic Act No. 7277) Disease, on the other hand, pertains to any illness caused by employment subject to proof that the risk of contracting the same is increased by working conditions, or to illnesses definitely accepted as an occupational disease listed by the National Labor Relations Commission. (Art. 173 (l), Labor Code)",1
+1429,Is your continued employment prohibited by law because of such disease?,TEQ 56,,1
+1430,Is your continued employment prejudicial to your health?,TEQ 57,,1
+1431,Is your continued employment prejudicial to the health of your co-employees?,TEQ 58,,1
+1432,"Did a public health authority issue a medical certificate stating that 
+a)	the employee is suffering from a disease prejudicial to his or his co-employees’ health; and 
+b)	it cannot be cured within 6 months, even with proper medical treatment?",TEQ 59,"Public health authority refers to a government doctor who specializes in the disease being suffered by the employee. (Chan, Bar Reviewer on Labor Law, Chan Robles Publishing Company: 2017) A company physician is not such a competent public health authority referred to by law. (Cebu Royal Plant v. Deputy Minister of Labor, G.R. No. 58639, 12 August 1987) The burden of securing this certificate lies with the employer, not the employee. (Crayons Processing, Inc. v. Pula, G.R. No. 167727, 30 July 2007)",1
+1433,Were you given a written notice of termination by the employer?,TEQ 60,,1
+1434,Was the written notice given at least one month (30 days) before the date of termination?,TEQ 61,,1
+1435,Did the written notice specify the grounds for termination?,TEQ 62,,1
+1436,Did the written notice state that the employer would pay the separation pay required by the Labor Code?,TEQ 63,,1
+1437,Was a similar written notice given to the appropriate Regional Office of the Department of Labor and Employment?,TEQ 64,,1
+1438,Was the written notice given to the DOLE Regional Office at least one month prior to the date of termination?,TEQ 65,,1
+1439,Was the termination by your employer made in good faith or without any bad intentions?,TEQ 66,"Good faith may be determined by the absence of malice, abuse of discretion, or arbitrariness.",1
+1440,Was the termination your employer’s last resort to bring down labor costs?,TEQ 67,"To know if termination was used as the last resort, see if the employer exhausted all other possible cost-cutting measures. Less drastic means (e.g., reduction of both management and rank-and-file bonuses and salaries, going on reduced time, improving manufacturing efficiencies, trimming of marketing and advertising costs, etc.) must have first been tried and found wanting. (Andrada v. National Labor Relations Commission, G.R. No. 173231, 28 December 2007)",1
+1441,Did your employer provide terminated employees with the proper separation pay?,TEQ 68,"a)	For employees terminated due to the installation of labor-saving devices or redundancy, the separation pay must be at least 1 month pay or at least 1 month pay for every year of service – whichever is higher. A fraction of at least 6 months is considered as 1 whole year. (Art. 298, Labor Code)
+b)	For employees terminated due to retrenchment or closure NOT due to serious business losses or financial reverses, the separation pay must be at least 1 month pay or at least ½ month pay for every year of service – whichever is higher. A fraction of at least 6 months is considered as 1 whole year. (Art. 298, Labor Code)
+c)	For employees terminated due to serious business losses or financial reverses, no separation pay is required to be paid. (North Davao Mining Corporation v. NLRC, G.R. No. 112546, 13 March 1996)
+d)	If the Collective Bargaining Agreement or company policy provides for a higher separation pay, that must be followed over the above rules. (Chan, Bar Reviewer on Labor Law, Chan Robles Publishing Company: 2017)",1
+1442,Did the employer follow or use fair and reasonable criteria in determining what positions would be affected by the termination?,TEQ 69,"Some examples of fair and reasonable criteria are the positions’ nature of work, the employee’s status of employment (e.g. casual, temporary, or regular), experience, efficiency, seniority, dependability, flexibility, trainability, job performance, discipline, and attitude. (Lambert Pawnbrokers and Jewelry Corp. v. Binamira, G.R. No. 170464, 12 July 2010)",1
+1443,What was the reason given to justify your termination? (select the most similar option),TEQ 70,,1
+1444,"Was the purpose of installing labor-saving devices to save on cost, enhance efficiency, or for other justifiable economic reasons?",TEQ 71,"Under this ground for termination, proof of losses is not required. (Chan, Bar Reviewer on Labor Law, Chan Robles Publishing Company: 2017) An example of labor-saving devices is the introduction of high-speed machines through modernization programs. (Abapo v. CA, G.R. No. 142405, 30 September 2004)",1
+1445,"Was the installation of labor-saving devices exercised with malice, arbitrariness, or abuse of discretion on the part of the employer?",TEQ 72,"The installation of labor-saving devices is a management prerogative which courts are unlikely to interfere with, unless they are tainted with malice, arbitrariness, or abuse of discretion. This is especially true when the employer has no other option but to introduce the machinery, equipment, or device which would lead to the termination of affected employees. (Chan, Bar Reviewer on Labor Law, Chan Robles Publishing Company: 2017) On the other hand, bad faith may attach if the reason behind the installation of labor-saving devices was unlawful, such as the circumvention of the employees’ right to self-organization. (Art. 258, Labor Code)",1
+1446,Was the service provided by the employees affected by the redundancy in excess of what was reasonably demanded by the actual requirements of the business?,TEQ 73,"If the work responsibilities of employee A can be reasonably expected to be accomplished by him on his own, but the company also hired employee B to handle the same work responsibilities, then there may be a case of redundancy. The work meant for one employee was divided between two employees, thereby costing the employer twice as much as was necessary to operate in an efficient manner.",1
+1447,Was your position superfluous?,TEQ 74,"A position can be superfluous because of a number of factors, such as over-hiring, decreased volume of business, dropping of a particular product line or service, or phasing out of service previously undertaken. (Nippon Housing Phil., Inc. v. Leynes, G.R. No. 177816, 3 August 2011)",1
+1553,Was retrenchment likely to effectively prevent the expected losses?,TEQ 80,,1
+1558,Can the business losses be proved by audited financial statements?,TEQ 85,,1
+1559,Did the suspension last for more than 6 months?,TEQ 86,,1
+1560,Was the suspension due to a bona fide reason?,TEQ 87,"The suspension may be bona fide if it was due to serious business losses or other justifiable reasons. It is not bona fide if it was for the purpose of defeating the rights of the employees under the Code. (Sec. 12, Title I, Book VI, Omnibus Rules Implementing the Labor Code)",1
+1561,Did you tell the employer of your desire to resume work?,TEQ 88,,1
+1562,Did you indicate your desire to resume work within 1 month from the resumption of business operations?,TEQ 89,,1
+1563,Were you terminated as a probationary employee?,TEQ 90,"Probationary Employees are those who, for a given period of time (usually 6 months), are on observation, evaluation, and trial by an employer. During this period, the employer determines the probationary employee’s qualification for permanent employment based on reasonable standards made known to the latter at the start of his employment. (Dela Cruz v. NLRC, 2003; Sec 2 (b) and (c), Rules to Implement the Labor Code, as amended)",1
+1564,Is there a written employment contract that states that you are a probationary employee?,TEQ 91,,1
+1565,Is there a provision in the contract that states how long the probationary period is?,TEQ 92,,1
+1566,Were you terminated for failing to qualify as a regular employee?,TEQ 93,,1
+1567,"When you started working as a probationary employee, were you explained of the standards you needed to meet to become a regular employee?",TEQ 94,,1
+1568,Does your company have its own rules of procedure for the termination of probationary employment?,TEQ 95,,1
+1569,Were those company rules complied with in the case of your termination?,TEQ 96,,1
+1570,Were you given a written notice of termination?,TEQ 97,,1
+1571,Was the written notice of termination given to you before the expiry of the probationary period?,TEQ 98,,1
+1572,Were you still made to work after the probationary period expired?,TEQ 99,,1
+1573,Were you repeatedly rehired as a probationary employee by the same employer?,TEQ 100,,1
+1574,Were you terminated as a project employee?,TEQ 101,"Project employees are those hired for a specific project or undertaking. The completion or termination of the project has been determined at the time of their engagement. (Art. 295, Labor Code)",1
+1575,Is there a written employment contract stating that you are a project employee?,TEQ 102,,1
+1576,Were you assigned to carry out a specific project or undertaking?,TEQ 103,,1
+1577,Was the scope and duration of the project or undertaking specified at the time you were hired for that project?,TEQ 104,,1
+1578,"Were you terminated when the project, undertaking, or phase thereof assigned to you was completed?",TEQ 105,,1
+1579,Were you terminated as a seasonal employee?,TEQ 106,"A seasonal employee is one whose work or service to be performed is seasonal in nature and the employment is for the duration of the season. (Art. 295, Labor Code)",1
+1580,Is there a written employment contract stating that you are a seasonal employee?,TEQ 107,,1
+1581,Is the work that you perform seasonal in nature?,TEQ 108,,1
+1582,Is the duration of your employment limited to only a season?,TEQ 109,,1
+1583,Is your work necessary or desirable in the employer’s usual business or trade?,TEQ 110,,1
+1584,Have you been hired as a seasonal employee for more than one season by the same employer?,TEQ 111,,1
+1585,Were you terminated as a casual employee?,TEQ 112,"Casual employees are engaged to perform a job, work, or service which is merely incidental to the business of the employer. If you are not a regular, project, or seasonal employee, you may be a casual employee. (Art. 295, Labor Code)",1
+1586,Is there a written employment contract which states that you are a casual employee?,TEQ 113,,1
+1587,"Is your job, work, or service merely incidental to the business of the employer?",TEQ 114,,1
+1588,Have you worked for at least one year?,TEQ 115,"The one-year period may be continuous or broken. (Art. 295, Labor Code)",1
+1589,Have you been repeatedly rehired as a casual employee by the same employer?,TEQ 116,,1
+1590,Were you terminated as a fixed-term employee?,TEQ 117,"A fixed-term employee is one whose employment period is fixed as voluntarily agreed upon by both parties. (Brent School, Inc. v. Zamora, G.R. No. L-48494, 5 February 1990) Overseas Filipino Workers (OFWs) are examples of fixed-term employees and can never acquire regular employment. (Brent School, Inc. v. Zamora, G.R. No. L-48494, 5 February 1990)",1
+1591,Is there a written employment contract which states that you are a fixed-term employee or provides for a fixed term for your employment?,TEQ 119,,1
+1592,"When arriving at an agreement as to the fixed term, did you and the employer deal with each other in equal terms?",TEQ 120,"If the employer exercised moral dominance over the employee, then they would not have been dealing in equal terms. (Brent School, Inc. v. Zamora, G.R. No. L-48494, 5 February 1990)",1
+1593,Did you knowingly and voluntarily agree on this fixed period?,TEQ 121,"There should not have been any force, duress, or improper pressure placed on the employee. No circumstance should have vitiated his consent. (Brent School, Inc. v. Zamora, G.R. No. L-48494, 5 February 1990)",1
+1594,Was the termination due to the expiration of the fixed period?,TEQ 122,,1
+1595,Were you allowed to work beyond the fixed term?,TEQ 123,,1
+1596,Did you resign voluntarily?,TEQ 124,,1
+1597,Did you give the employer a written notice of termination or resignation letter?,TEQ 125,"The resignation letter must be in writing – not merely verbal. (Art. 300, Labor Code)",1
+1598,Did you give the written notice to the employer at least 1 month before your intended date of resignation?,TEQ 126,"If a resignation letter provided that the resignation would be “effective immediately,” it would not comply with this requirement. (Chan, Bar Reviewer on Labor Law, Chan Robles Publishing Company: 2017)",1
+1599,Did you withdraw your resignation?,TEQ 127,,1
+1600,Did you withdraw before the employer gave you his written acceptance of the resignation?,TEQ 128,"The employer must not merely take note of the resignation, he must formally and expressly accept it. (Mora v. Avesco Marketing Corporation, G.R. No. 177414, 14 November 2008) This requirement of the employer’s acceptance has been recognized as a mandatory requirement for resignation. (Shie Jie Corp. v. National Federation of Labor, G.R. No. 153148, 15 July 2005)",1
+1701,Did he still accept your withdrawal?,TEQ 129,,1
+1702,Did the employer accept of your resignation?,TEQ 130,"The employer must not merely take note of the resignation, he must formally and expressly accept it. (Mora v. Avesco Marketing Corporation, G.R. No. 177414, 14 November 2008) This requirement of an acceptance by the employer has been recognized as a mandatory requirement for resignation. (Shie Jie Corp. v. National Federation of Labor, G.R. No. 153148, 15 July 2005)",1
+1703,How did the employer force you to resign?,TEQ 131,,1
+1704,Did you intend to resign before such a demand was made?,TEQ 132,,1
+1705,Did you perform an act that would show your intention to resign?,TEQ 133,"Such acts may vary from case to case and would depend on the surrounding circumstances. In one case, the Supreme Court considered the employee’s communication with other employees that she was about to resign to look for a better paying job, her submission of her resignation letter, and her initiation of clearance processing as acts that show her intent to resign. (BMG Records (Phils.) v. Aparecio, G.R. No. 153290, 5 September 2007)",1
+1706,"Did you resign because the employer threatened to dismiss you for causes such as or similar to the following:
+a)	 Serious misconduct or willful disobedience by the employee of the lawful orders of his employer or representative in connection with his work;
+b)	Gross and habitual neglect by the employee of his duties;
+c)	Abandonment of work;
+d)	Fraud or willful breach by the employee of the trust reposed in him by his employer or duly authorized representative;
+e)	Commission of a crime or offense by the employee against the person of his employer or any immediate member of his family or his duly authorized representatives;
+f)	You are a union officer who knowingly participated in an illegal strike;
+g)	You are an employee, union officer, or ordinary union member who knowingly participated in the commission of illegal acts during a strike;
+h)	You are a striker who violated an order, prohibition, or injunction issued by the Department of Labor and Employment (DOLE) Secretary or the National Labor Relations Commission (NLRC);
+i)	You violated a union security agreement in the Collective Bargaining Agreement (CBA);
+j)	Violation of company rules and regulations;
+k)	Theft of property owned by a co-employee;
+l)	Incompetence, inefficiency, or ineptitude;
+m)	Failure to comply with weight standards of the employer; or
+n)	Attitude problem?",TEQ 134,,1
+1707,Did you tender your resignation because the employer assured you that you would be re-hired again upon re-application?,TEQ 135,,1
+1708,Did you resign because the employer or his representative performed an act which caused serious insult against your honor or person?,TEQ 136,,1
+1709,Did you resign because the employer or his representative treated you inhumanely?,TEQ 137,,1
+1710,Did you resign because the employer or his representative committed a crime or offense against you or your immediate family members?,TEQ 138,"Immediate family members are limited to the employee’s spouse, parent, child, sibling, ascendant, or descendant.",1
+1711,Did you resign because you were demoted in rank?,TEQ 139,,1
+1712,Did you resign because your roles were diminished or downgraded?,TEQ 140,,1
+1713,Did you resign because your salary was decreased?,TEQ 141,,1
+1714,Did you resign because your salary was withheld?,TEQ 142,,1
+1715,Did you resign because the employer discriminated against you?,TEQ 143,,1
+1716,Did you resign because of continuous pressure by the employer for you to resign?,TEQ 144,,1
+1717,Did you resign because you were replaced by another while on leave?,TEQ 145,,1
+1718,Did you resign because you were transferred to another position or workplace?,TEQ 146,,1
+1719,Was the transfer done to comply with an order from the government?,TEQ 147,,1
+1720,"Was the transfer unreasonable, inconvenient, or prejudicial to you?",TEQ 148,"The Supreme Court has held that a transfer of working students when classes already started was grossly inconvenient as it disrupted their studies and there was no genuine business urgency for the said transfer. The Court also frowned upon the surrounding circumstances of the transfer, as such was made at the height of the union’s concerted activities. (Yuco Chemical Industries, Inc. v. Ministry of Labor and Employment, G.R. No. L-75656, 28 May 1990)",1
+1721,Did the transfer involve a demotion in rank?,TEQ 149,,1
+1722,"Did the transfer involve a decrease in salaries, benefits, or other privileges?",TEQ 150,,1
+1723,Did the transfer involve discrimination or disdain against the employee by the employee?,TEQ 151,,1
+1724,Did you resign because you were suspended?,TEQ 152,,1
+1725,Were you indefinitely suspended or preventively suspended?,TEQ 153,,1
+1726,Did the suspension last for more than 30 days?,TEQ 154,,1
+1727,Did the employer pay the salaries and benefits due you for the period of suspension that went beyond 30 days?,TEQ 155,,1
+1728,"Did you resign because you felt that continued employment became impossible, unreasonable, or unlikely?",TEQ 156,The surrounding circumstances for each case would have to be justified as being so unbearable as to give the employee no other choice but to resign.,1
+1729,Is the threatened suit based on a just or legal claim?,TEQ 157,"For instance, if the suit is one for estafa, the employer has every right to pursue legal action. Filing a case based on a legitimate ground or claim is a legal act and cannot vitiate consent. (Callanta v. NLRC, G.R. No. 105083, 20 August 1993)",1
+1730,Do you think your negligence was habitual?,TEQ 158,"Habitual negligence implies a repeated failure to perform one’s duties for a period of time, depending on the circumstances. (Premiere Development Bank v. Mantal, G.R. No. 167716, 23 March 2006)",1
+1731,Did your negligence cause substantial loss or damage to the employer?,TEQ 159,,1
+1732,What is the main purpose of the labor case you want to file?,WTFQ 1,,1
+1733,Are you a corporate officer?,WTFQ 2,"Corporate officers are those elected or appointed by directors or stockholders and are those expressly referred to by the corporation code or by the corporation’s by-laws. All other positions are employees. (Matling Industrial and Commercial Corporation v. Coros, G.R. No. 157802, 13 October 2010)",1
+1734,Can your employer be sued?,WTFQ 3,"An entity which cannot be sued or which enjoys immunity from suit also extends its immunity to its officers with respect to the latter’s official acts. (Department of Foreign Affairs v. NLRC, G.R. No. 113191, 18 September 1996) Such entities include the Asian Development Bank (ADB), the United Nations and its specialized agencies, foreign states and its agents engaged in the discharge of government functions, and other entities accorded such immunity through treaties. Note that foreign entities engaging in commercial and non-governmental functions may not enjoy immunity from suit. (United States v. Hon. Rodrigo, G.R. No. 79470, 26 February 1990)",1
+1735,Is there an existing Collective Bargaining Agreement (CBA) between the employer and employees like you?,WTFQ 4,,1
+1736,Is there a grievance mechanism in an existing Collective Bargaining Agreement which covers disputes over termination cases?,WTFQ 5,,1
+1737,Are you already in the process of going through the grievance mechanism to settle this issue?,WTFQ 6,,1
+1738,Have you actually been terminated?,WTFQ 7,"It can be said that no actual termination has taken place when the employee has not yet been dismissed or when the dispute is still in the interpretation, implementation, or enforcement stage. (Atlas Farms, Inc. v. NLRC, G.R. No. 142244, 18 November 2002)",1
+1739,Are you asking for reinstatement?,WTFQ 8,,1
+1740,"Does your claim involve an amount above P5,000.00?",WTFQ 9,"The Labor Arbiter has jurisdiction over money claims – except those for Employees Compensation, Social Security, Medicare, and maternity benefits. All other claims arising from employer-employee relations, including those of persons in domestic or household service, involving an amount exceeding P5,000.00, regardless of whether it is accompanied with a claim for reinstatement, fall within the jurisdiction of the Labor Arbiter. (Art. 224 (a) (6), Labor Code)",1

@@ -11,12 +11,9 @@ import ph.mahvine.karappatan.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -27,14 +24,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 
 
 import static ph.mahvine.karappatan.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -55,9 +50,6 @@ public class ModuleResourceIntTest {
 
     @Autowired
     private ModuleRepository moduleRepository;
-
-    @Mock
-    private ModuleRepository moduleRepositoryMock;
 
     @Autowired
     private ModuleMapper moduleMapper;
@@ -185,39 +177,6 @@ public class ModuleResourceIntTest {
             .andExpect(jsonPath("$.[*].details").value(hasItem(DEFAULT_DETAILS.toString())));
     }
     
-    @SuppressWarnings({"unchecked"})
-    public void getAllModulesWithEagerRelationshipsIsEnabled() throws Exception {
-        ModuleResource moduleResource = new ModuleResource(moduleRepositoryMock, moduleMapper);
-        when(moduleRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        MockMvc restModuleMockMvc = MockMvcBuilders.standaloneSetup(moduleResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-
-        restModuleMockMvc.perform(get("/api/modules?eagerload=true"))
-        .andExpect(status().isOk());
-
-        verify(moduleRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({"unchecked"})
-    public void getAllModulesWithEagerRelationshipsIsNotEnabled() throws Exception {
-        ModuleResource moduleResource = new ModuleResource(moduleRepositoryMock, moduleMapper);
-            when(moduleRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-            MockMvc restModuleMockMvc = MockMvcBuilders.standaloneSetup(moduleResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-
-        restModuleMockMvc.perform(get("/api/modules?eagerload=true"))
-        .andExpect(status().isOk());
-
-            verify(moduleRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
     @Test
     @Transactional
     public void getModule() throws Exception {

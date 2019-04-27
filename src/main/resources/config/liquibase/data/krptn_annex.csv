@@ -1,0 +1,54 @@
+id,content,identifier,module_id
+1751,"GENERAL WAGE & BENEFITS CALCULATOR
+
+۞	This calculator considers basic pay, premium pay, overtime pay, holiday pay, and night differentials and presumes that you are entitled to the same. 
+۞	The rates and equations for premium pay, overtime pay, holiday pay, and night differentials used in this calculator are those provided by the Labor Code. This may differ with rates governing your employment, as may be stipulated under collective bargaining agreements, your employment contract, or company policy. If the latter instruments provide for greater benefits, those shall be followed; otherwise, the provisions of the Labor Code govern.
+۞	Note that this calculator does not take into consideration valid deductions or charges to your income, such as taxes, SSS, Pag-Ibig, and PhilHealth contributions, and similar fees.
+۞	Note that your particular employment situation may not be applicable to this calculator. 
+	o	For a deeper analysis of your employment situation, please go through the labor questions starting from Question 1. 
+	o	If your primary concern is the proper calculation of your wages or salaries, please proceed to MC Question 1.
+
+WEEK 1 
+
+[TABLE 1]
+
+Add more weeks? <if yes, repeat the table>
+
+[TABLE 2]",1,1
+1752,"GENERAL 13TH MONTH PAY CALCULATOR
+
+۞	The “basic salary” of an employee for the purpose of computing the 13th month pay shall include all remunerations or earning paid by this employer for services rendered but does not include allowances and monetary benefits which are not considered or integrated as part of the regular or basic salary, such as the cash equivalent of unused vacation and sick leave credits, overtime, premium, night differential and holiday pay, and cost-of-living allowances. (Revised Guidelines on the Implementation of the 13th Month Pay Law, 16 November 1987)
+۞	However, these salary-related benefits should be included as part of the basic salary in the computation of the 13th month pay if by individual or collective agreement, company practice or policy, the same are treated as part of the basic salary of the employees. (Revised Guidelines on the Implementation of the 13th Month Pay Law, 16 November 1987)
+۞	Note that this calculator does not take into consideration valid deductions or charges to your 13th month pay, such as income taxes in certain situations under the National Internal Revenue Code, as amended by the T.
+۞	Note that your particular employment situation may not be applicable to this calculator. 
+	o	For a deeper analysis of your employment situation, please go through the labor questions starting from Question 1. 
+	o	If your primary concern is the proper calculation of your wages or salaries, please proceed to MC Question 1.
+	o	If your primary concern is your entitlement to 13th month pay or other benefits under the Labor Code, please proceed to MC Question 1.
+
+[TABLE]",2,1
+1753,"GENERAL SEPARATION PAY CALCULATOR
+
+۞	Note that if a Collective Bargaining Agreement, company policy, or contractual provision provides for greater benefits, it shall be followed. Conversely, if these instruments provide for less than that required by law, the calculation provided by the Labor Code shall apply.
+۞	Note that your particular employment situation may not be applicable to this calculator. 
+	o	For a deeper analysis of your employment situation, please go through the labor questions starting from Question 1. 
+	o	If your primary concern is the proper calculation of your wages or salaries, please proceed to MC Question 1.
+
+[TABLE]",3,1
+1754,"GENERAL RETIREMENT PAY CALCULATOR
+
+۞	Note that if a Collective Bargaining Agreement, company policy, or contractual provision provides for greater benefits, it shall be followed. Conversely, if these instruments provide for less than that required by law, the calculation provided by the Labor Code shall apply.
+۞	Note that this calculation presumes that you are entitled to 13th month pay and service incentive leaves
+۞	Note that your particular employment situation may not be applicable to this calculator. 
+	o	For a deeper analysis of your employment situation, please go through the labor questions starting from Question 1. 
+	o	If your primary concern is the proper calculation of your wages or salaries, please proceed to MC Question 1.
+
+[TABLE]",4,1
+1755,"SERVICE INCENTIVE LEAVE CALCULATOR
+
+۞	Note that this calculation presumes that you are entitled to service incentive leaves.
+۞	Note that your particular employment situation may not be applicable to this calculator. 
+	o	For a deeper analysis of your employment situation, please go through the labor questions starting from Question 1. 
+	o	If your primary concern is the proper calculation of your wages or salaries, please proceed to MC Question 1.
+	o	If your primary concern is your entitlement to service incentive leaves or other benefits under the Labor Code, please proceed to MC Question 1.
+
+[TABLE]",5,1

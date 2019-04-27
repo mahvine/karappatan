@@ -1,12 +1,9 @@
 package ph.mahvine.karappatan.service.dto;
 import javax.validation.constraints.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the Module entity.
@@ -20,12 +17,10 @@ public class ModuleDTO implements Serializable {
 
     private String details;
 
-    @JsonIgnoreProperties("module")
     private Set<QuestionDTO> questions = new HashSet<>();
-
-    private Set<AnnexDTO> annexes = new HashSet<>();
-
     private Set<RecommendationDTO> recommendations = new HashSet<>();
+
+	private Set<AnnexDTO> annexes = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -52,28 +47,28 @@ public class ModuleDTO implements Serializable {
     }
 
     public Set<QuestionDTO> getQuestions() {
-        return questions;
-    }
+		return questions;
+	}
 
-    public void setQuestions(Set<QuestionDTO> questions) {
-        this.questions = questions;
-    }
+	public void setQuestions(Set<QuestionDTO> questions) {
+		this.questions = questions;
+	}
 
-    public Set<AnnexDTO> getAnnexes() {
-        return annexes;
-    }
+	public Set<RecommendationDTO> getRecommendations() {
+		return recommendations;
+	}
 
-    public void setAnnexes(Set<AnnexDTO> annexes) {
-        this.annexes = annexes;
-    }
+	public void setRecommendations(Set<RecommendationDTO> recommendations) {
+		this.recommendations = recommendations;
+	}
 
-    public Set<RecommendationDTO> getRecommendations() {
-        return recommendations;
-    }
+	public Set<AnnexDTO> getAnnexes() {
+		return annexes;
+	}
 
-    public void setRecommendations(Set<RecommendationDTO> recommendations) {
-        this.recommendations = recommendations;
-    }
+	public void setAnnexes(Set<AnnexDTO> annexes) {
+		this.annexes = annexes;
+	}
 
     @Override
     public boolean equals(Object o) {

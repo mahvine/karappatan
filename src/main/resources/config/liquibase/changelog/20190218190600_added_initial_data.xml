@@ -17,12 +17,58 @@
         
         <!-- Module -->
         <loadData encoding="UTF-8"
-                  file="config/liquibase/dev/modules.csv"
+                  file="config/liquibase/data/modules.csv"
                   separator=";"
                   tableName="krptn_module">
         </loadData>
         
-    </changeSet>
+        <!-- Question -->
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/data/krptn_question.csv"
+                  separator=","
+                  tableName="krptn_question">
+        </loadData>
         
+        <!-- Answer -->
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/data/krptn_answer.csv"
+                  separator=","
+                  tableName="krptn_answer">
+        </loadData>
+        
+        <!-- Answer Next Questions -->
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/data/krptn_annex_next_questions.csv"
+                  separator=","
+                  tableName="krptn_annex_next_questions">
+        </loadData>
+        
+        <!-- Annex 5 -->
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/data/krptn_annex.csv"
+                  separator=","
+                  tableName="krptn_annex">
+        </loadData>
+        
+    </changeSet>
+
+
+    <changeSet id="20190428033400-3" author="joshvindomingo">
+        
+        <!-- Recommendation -->
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/data/krptn_recommendation.csv"
+                  separator=","
+                  tableName="krptn_recommendation">
+        </loadData>
+        
+        <!-- Recommendation Next Question -->
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/data/krptn_recommendation_next_questions.csv"
+                  separator=","
+                  tableName="krptn_recommendation_next_questions">
+        </loadData>
+     </changeSet>
+                
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

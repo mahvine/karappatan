@@ -5,17 +5,14 @@
         {
             "relationshipName": "questions",
             "otherEntityName": "question",
-            "relationshipType": "many-to-many",
-            "otherEntityField": "question",
-            "ownerSide": true,
+            "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "module",
             "otherEntityRelationshipNameUndefined": false
         },
         {
             "relationshipName": "annexes",
             "otherEntityName": "annex",
-            "relationshipType": "many-to-many",
-            "otherEntityField": "content",
+            "relationshipType": "one-to-many",
             "ownerSide": true,
             "otherEntityRelationshipName": "module",
             "otherEntityRelationshipNameUndefined": false
@@ -23,8 +20,7 @@
         {
             "relationshipName": "recommendations",
             "otherEntityName": "recommendation",
-            "relationshipType": "many-to-many",
-            "otherEntityField": "content",
+            "relationshipType": "one-to-many",
             "ownerSide": true,
             "otherEntityRelationshipName": "module",
             "otherEntityRelationshipNameUndefined": false

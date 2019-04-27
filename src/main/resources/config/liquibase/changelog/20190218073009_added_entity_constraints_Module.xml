@@ -8,38 +8,5 @@
     -->
     <changeSet id="20190218073009-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="module_id"
-                                 baseTableName="krptn_module_questions"
-                                 constraintName="fk_krptn_module_questions_krptn_module_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="krptn_module"/>
-        <addForeignKeyConstraint baseColumnNames="questions_id"
-                                 baseTableName="krptn_module_questions"
-                                 constraintName="fk_krptn_module_questions_questions_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="krptn_question"/>
-        
-        <addForeignKeyConstraint baseColumnNames="module_id"
-                                 baseTableName="krptn_module_annexes"
-                                 constraintName="fk_krptn_module_annexes_krptn_module_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="krptn_module"/>
-        <addForeignKeyConstraint baseColumnNames="annexes_id"
-                                 baseTableName="krptn_module_annexes"
-                                 constraintName="fk_krptn_module_annexes_annexes_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="krptn_annex"/>
-        
-        <addForeignKeyConstraint baseColumnNames="module_id"
-                                 baseTableName="krptn_module_recommendations"
-                                 constraintName="fk_krptn_module_recommendations_krptn_module_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="krptn_module"/>
-        <addForeignKeyConstraint baseColumnNames="recommendations_id"
-                                 baseTableName="krptn_module_recommendations"
-                                 constraintName="fk_krptn_module_recommendations_recommendations_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="krptn_recommendation"/>
-        
     </changeSet>
 </databaseChangeLog>

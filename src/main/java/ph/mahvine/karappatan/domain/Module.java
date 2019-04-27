@@ -1,11 +1,10 @@
 package ph.mahvine.karappatan.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -14,6 +13,8 @@ import java.util.Objects;
 
 /**
  * A Module.
+ * 
+ * Custom code in DTO and Mapper
  */
 @Entity
 @Table(name = "krptn_module")
@@ -33,27 +34,12 @@ public class Module implements Serializable {
     @Column(name = "details")
     private String details;
 
-    @ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name = "krptn_module_questions",
-               joinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "questions_id", referencedColumnName = "id"))
-    @JsonIgnoreProperties("module")
+    @OneToMany(mappedBy = "module", fetch=FetchType.EAGER)
     private Set<Question> questions = new HashSet<>();
-
-    @ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name = "krptn_module_annexes",
-               joinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "annexes_id", referencedColumnName = "id"))
-    @JsonIgnoreProperties("module")
+    @OneToMany(mappedBy = "module", fetch=FetchType.EAGER)
     private Set<Annex> annexes = new HashSet<>();
-
-    @ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name = "krptn_module_recommendations",
-               joinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "recommendations_id", referencedColumnName = "id"))
-    @JsonIgnoreProperties("module")
+    @OneToMany(mappedBy = "module", fetch=FetchType.EAGER)
     private Set<Recommendation> recommendations = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -100,11 +86,13 @@ public class Module implements Serializable {
 
     public Module addQuestions(Question question) {
         this.questions.add(question);
+        question.setModule(this);
         return this;
     }
 
     public Module removeQuestions(Question question) {
         this.questions.remove(question);
+        question.setModule(null);
         return this;
     }
 
@@ -123,11 +111,13 @@ public class Module implements Serializable {
 
     public Module addAnnexes(Annex annex) {
         this.annexes.add(annex);
+        annex.setModule(this);
         return this;
     }
 
     public Module removeAnnexes(Annex annex) {
         this.annexes.remove(annex);
+        annex.setModule(null);
         return this;
     }
 
@@ -146,11 +136,13 @@ public class Module implements Serializable {
 
     public Module addRecommendations(Recommendation recommendation) {
         this.recommendations.add(recommendation);
+        recommendation.setModule(this);
         return this;
     }
 
     public Module removeRecommendations(Recommendation recommendation) {
         this.recommendations.remove(recommendation);
+        recommendation.setModule(null);
         return this;
     }
 

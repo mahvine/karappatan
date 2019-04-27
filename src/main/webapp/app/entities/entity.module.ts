@@ -191,6 +191,14 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'annex',
                 loadChildren: './annex/annex.module#KarappatanAnnexModule'
+            },
+            {
+                path: 'module',
+                loadChildren: './module/module.module#KarappatanModuleModule'
+            },
+            {
+                path: 'module',
+                loadChildren: './module/module.module#KarappatanModuleModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

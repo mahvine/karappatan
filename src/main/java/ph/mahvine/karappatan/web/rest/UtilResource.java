@@ -59,8 +59,10 @@ public class UtilResource {
 	
 	Module module;
 	
-	@PostMapping("/uploadExcelFile")
-	public void uploadExcelSheet() throws IOException {
+	private static final String FILENAME = "Karappatan.xlsx";
+	
+	@GetMapping("/provisionData")
+	public void provisionData() throws IOException {
 		if(!running) {
 			module = moduleRepository.getOne(1L);
 			try {
@@ -78,19 +80,13 @@ public class UtilResource {
 			logger.error("Upload excel file currently running");
 		}
 	}
-	
-	@GetMapping
-	public void test() throws IOException {
-//		logger.info(recommendationRepository.findAll()+" test");
-		uploadExcelSheet();
-	}
-	
+		
 	private void loadQuestions(boolean loadReferences) {
 		
 		logger.info("Question Present:"+questionRepository.findOneByIdentifier("Q1").isPresent());
 		
 	    try {
-	    	FileInputStream fileInputStream = new FileInputStream(new File(getClass().getResource("/Karappatan.xlsx").getFile()));
+	    	FileInputStream fileInputStream = new FileInputStream(new File(FILENAME));
             Workbook workbook = new XSSFWorkbook(fileInputStream);
             Sheet datatypeSheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = datatypeSheet.iterator();
@@ -194,7 +190,7 @@ public class UtilResource {
 	    logger.info("start recommendations");
 	    try { 
 	    	// Recommendation
-	    	FileInputStream fileInputStream = new FileInputStream(new File(getClass().getResource("/Karappatan.xlsx").getFile()));
+	    	FileInputStream fileInputStream = new FileInputStream(new File(FILENAME));
             Workbook workbook = new XSSFWorkbook(fileInputStream);
             Sheet sheet = workbook.getSheetAt(1);
             int rowNum = 2;
@@ -263,7 +259,7 @@ public class UtilResource {
 	private void loadAnnexes(boolean loadReferences) {
 	    try { 
 	    	// Annex
-	    	FileInputStream fileInputStream = new FileInputStream(new File(getClass().getResource("/Karappatan.xlsx").getFile()));
+	    	FileInputStream fileInputStream = new FileInputStream(new File(FILENAME));
             Workbook workbook = new XSSFWorkbook(fileInputStream);
             Sheet sheet = workbook.getSheetAt(2);
             int rowNum = 2;

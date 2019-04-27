@@ -91,19 +91,13 @@ public class ModuleResource {
      * GET  /modules : get all the modules.
      *
      * @param pageable the pagination information
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of modules in body
      */
     @GetMapping("/modules")
-    public ResponseEntity<List<ModuleDTO>> getAllModules(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public ResponseEntity<List<ModuleDTO>> getAllModules(Pageable pageable) {
         log.debug("REST request to get a page of Modules");
-        Page<ModuleDTO> page;
-        if (eagerload) {
-            page = moduleRepository.findAllWithEagerRelationships(pageable).map(moduleMapper::toDto);
-        } else {
-            page = moduleRepository.findAll(pageable).map(moduleMapper::toDto);
-        }
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/modules?eagerload=%b", eagerload));
+        Page<ModuleDTO> page = moduleRepository.findAll(pageable).map(moduleMapper::toDto);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/modules");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -116,7 +110,7 @@ public class ModuleResource {
     @GetMapping("/modules/{id}")
     public ResponseEntity<ModuleDTO> getModule(@PathVariable Long id) {
         log.debug("REST request to get Module : {}", id);
-        Optional<ModuleDTO> moduleDTO = moduleRepository.findOneWithEagerRelationships(id)
+        Optional<ModuleDTO> moduleDTO = moduleRepository.findById(id)
             .map(moduleMapper::toDto);
         return ResponseUtil.wrapOrNotFound(moduleDTO);
     }

@@ -1,0 +1,562 @@
+id,answer,instructions,annex_id,recommendation_id,next_question_id,question_id
+1001,"Yes, I am employed by the government or a government owned or controlled corporation with an original charter.","Your rights are covered by the Civil Service Law, rules, and regulations, not by the Labor Code. (Art. 291, Labor Code)",NULL,NULL,NULL,1001
+1005,Labor union / organization,NULL,NULL,NULL,NULL,1002
+1006,"Yes, I am a domestic worker.",NULL,NULL,NULL,NULL,1003
+1014,"No, I am not a child under such an arrangement.",NULL,NULL,NULL,NULL,1006
+1019,"Yes, I am a managerial employee.",NULL,NULL,NULL,NULL,1008
+1021,"Yes, I am a supervisory employee.","You do not seem to be a rank-and-file employee under the definition of the law. (Art. 219 (m), Labor Code)",NULL,NULL,NULL,1009
+1032,Regularization,NULL,NULL,NULL,NULL,1014
+1033,Illegal recruitment,NULL,NULL,NULL,NULL,1014
+1034,Sexual harassment,NULL,NULL,NULL,NULL,1014
+1035,Oveseas employment issues,NULL,NULL,NULL,NULL,1014
+1036,Non-compliance with other contractual stipulations,NULL,NULL,NULL,NULL,1014
+1038,"No, it does not.",NULL,NULL,NULL,NULL,1015
+1040,"No, it does not.",NULL,NULL,NULL,NULL,1016
+1041,"Yes, it does.",NULL,NULL,NULL,NULL,1017
+1042,"No, it does not.",NULL,NULL,NULL,NULL,1017
+1049,"Yes, I am a government employee.","Government employees are covered by the salary standardization law and the Civil Service Law, rather than the Labor Code. Such employees are not entitled to holiday pay, premium pay, overtime pay, or night shift differentials under the Labor Code.(Art. 82, Labor Code)They are also not entitled to retirement pay if they are covered by the Civil Service Law and its regulations; however, if they do not have original charters and are organized under the Corporation Code, they are entitled. (Chan, Bar Reviewer on Labor Law, Chan Robles Publishing Company: 2017) Generally, government employees are not entitled to 13th Month Pay, with the exception of those employed under Government Owned and Controlled Corporations which operate essentially as private subsidiaries of the Government. (Revised Guidelines on the Implementation of the 13th Month Pay Law, 16 November 1987)They are not entitled to Service Incentive Leave. (Sec. 1, Rule V, Book III, Rules Implementing the Labor Code)",NULL,NULL,NULL,1021
+1051,"Yes, I am a managerial employee.","Such employees are not entitled to holiday pay, premium pay, overtime pay, or night shift differentials under the Labor Code.(Art. 82, Labor Code)",NULL,NULL,NULL,1022
+1053,"Yes, I am a member of the managerial staff.","Such employees are not entitled to holiday pay, premium pay, overtime pay, or night shift differentials under the Labor Code. (Art. 82, Labor Code)They are not entitled to 13th Month Pay. (Revised Guidelines on the Implementation of the 13th Month Pay Law, 16 November 1987) They are entitled to Retirement Pay. (Art. 302, Labor Code)",NULL,NULL,NULL,1023
+1066,"Yes, I devote more than 20% of my hours worked in a workweek to activities unrelated to management work.","You seem to be a member of the managerial staff. Such employees are not entitled to holiday pay, premium pay, overtime pay, or night shift differentials under the Labor Code. (Art. 82, Labor Code)They are not entitled to 13th Month Pay. (Revised Guidelines on the Implementation of the 13th Month Pay Law, 16 November 1987) They are entitled to Retirement Pay. (Art. 302, Labor Code)",NULL,NULL,NULL,1029
+1003,Co-worker,NULL,NULL,1601,NULL,1002
+1004,Employer / Superior / Management,NULL,NULL,NULL,1003,1002
+1007,"No, I am not a domestic helper.",NULL,NULL,NULL,1007,1003
+1008,I don’t know.,NULL,NULL,NULL,1004,1003
+1009,"Yes, I engage in such work.",NULL,NULL,NULL,1005,1004
+1011,I engage in it only from time to time.,You do not seem to be a domestic worker under the definition of the law.,NULL,NULL,1007,1005
+1012,It is my primary occupation.,NULL,NULL,NULL,1006,1005
+1013,"Yes, I am a child under such an arrangement.",You do not seem to be a domestic worker under the definition of the law.,NULL,NULL,1007,1006
+1015,"Yes, I am a rank and file employee.",NULL,NULL,NULL,1010,1007
+1016,"No, I am not a rank-and-file employee.",NULL,NULL,NULL,1008,1007
+1017,I don’t know.,NULL,NULL,NULL,1008,1007
+1018,"No, I am not a managerial employee.",NULL,NULL,NULL,1009,1008
+1022,I was directly hired by the employer.,NULL,NULL,NULL,1011,1010
+1023,I was hired through a contractor or agency.,NULL,NULL,NULL,1015,1010
+1024,"Yes, he has the right to exercise ALL of those powers.",There seems to be an employer-employee relationship under the 4-fold test.,NULL,NULL,1014,1011
+1025,"No, he cannot exercise one, some, or all of those powers.",It is debatable whether or not an employer-employee relationship exists under the 4-fold test.,NULL,NULL,1012,1011
+1026,"Yes, he has that power.",NULL,NULL,NULL,1013,1012
+1027,"No, he does not have that power.",NULL,NULL,1604,NULL,1012
+1028,"Yes, I am dependent on him.",There seems to be an employer-employee relationship under the Two-Tier Test.,NULL,NULL,1014,1013
+1029,"No, I am not dependent on him.",NULL,NULL,1605,NULL,1013
+1030,Termination of employment,NULL,NULL,NULL,1224,1014
+1031,Non-payment or underpayment of benefits or wages,NULL,NULL,NULL,1018,1014
+1037,"Yes, it does.",NULL,NULL,NULL,1016,1015
+1039,"Yes, it does.",NULL,NULL,NULL,1017,1016
+1043,"Yes, my money claims are related to illegal dismissal.",NULL,NULL,NULL,1224,1018
+1044,"No, my money claims are not related to illegal dismissal.",NULL,NULL,NULL,1019,1018
+1045,"Yes, more than 3 years have elapsed.",NULL,NULL,NULL,1020,1019
+1046,"No, 3 years have not yet elapsed.",NULL,NULL,NULL,1021,1019
+1047,"Yes, I was able to institute a claim before 3 years had passed.",NULL,NULL,NULL,1021,1020
+1050,"No, I am not a government employee.",NULL,NULL,NULL,1022,1021
+1052,"No, I am not a managerial employee.",NULL,NULL,NULL,1023,1022
+1054,"No, I am not a member of the managerial staff.",NULL,NULL,NULL,1030,1023
+1055,I don’t know.,NULL,NULL,NULL,1024,1023
+1056,"Yes, I do.",NULL,NULL,NULL,1025,1024
+1057,"No, I do not.",NULL,NULL,NULL,1030,1024
+1058,"Yes, I do.",NULL,NULL,NULL,1026,1025
+1059,"No, I do not.",NULL,NULL,NULL,1030,1025
+1060,"Yes, I do.",NULL,NULL,NULL,1029,1026
+1061,"No, I do not.",NULL,NULL,NULL,1027,1026
+1062,"Yes, it does.",NULL,NULL,NULL,1029,1027
+1063,"No, it does not.",NULL,NULL,NULL,1028,1027
+1064,"Yes, I do.",NULL,NULL,NULL,1029,1028
+1065,"No, I do not.",NULL,NULL,NULL,1030,1028
+1068,"Yes, I am a field personnel.",NULL,NULL,NULL,NULL,1030
+1070,"Yes, I am a member of the employer’s family who is dependent on him for support.","Such employees are not entitled to holiday pay, premium pay, overtime pay, or night shift differentials under the Labor Code. (Art. 82, Labor Code) Rank-and-file employees who are also members of the employer’s family and dependent on him for support are entitled to 13th Month Pay. (Revised Guidelines on the Implementation of the 13th Month Pay Law, 16 November 1987) They are entitled to Retirement Pay. (Art. 302, Labor Code)",NULL,NULL,NULL,1031
+1073,"Yes, I am in the personal service of the employer.","Such employees are not entitled to holiday pay, premium pay, overtime pay, or night shift differentials under the Labor Code. (Art. 82, Labor Code)",NULL,NULL,NULL,1032
+1075,"Yes, I am paid based on results.","Such employees are not entitled to holiday pay, premium pay, overtime pay, or night shift differentials under the Labor Code. (Art. 82, Labor Code) But workers paid on a piece-rate basis are entitled to 13th month pay. (Revised Guidelines on the Implementation of the 13th Month Pay Law, 16 November 1987) They are not entitled to 13th Month Pay. (Revised Guidelines on the Implementation of the 13th Month Pay Law, 16 November 1987) They are entitled to Retirement Pay. (Art. 302, Labor Code) They are not entitled to Service Incentive Leave. (Sec. 1, Rule V, Book III, Rules Implementing the Labor Code)",NULL,NULL,NULL,1033
+1077,"Yes, I am a domestic worker.","Such employees are not entitled to holiday pay, premium pay, overtime pay, or night shift differentials under the Labor Code. (Art. 82, Labor Code) They are entitled to 13th month pay. (Sec. 25, R.A. No. 10361) They are entitled to Retirement Pay. (Labor Advisory on Retirement Pay Law, 24 October 1996) They are entitled to Service Incentive Leave. (Sec. 29, R.A. No. 10361)",NULL,NULL,NULL,1034
+1084,Underpayment or non-payment of Hazards and Disabilities Benefits.,NULL,NULL,NULL,NULL,1035
+1087,I was not paid in cash or legal tender.,NULL,NULL,NULL,NULL,1036
+1088,I was not paid on time or at all.,NULL,NULL,NULL,NULL,1036
+1089,My salary or wage was not paid directly to me.,NULL,NULL,NULL,NULL,1036
+1090,The employer is interfering with how I use my salary or wage.,NULL,NULL,NULL,NULL,1036
+1091,There are deductions to my salary or wage.,NULL,NULL,NULL,NULL,1036
+1071,"No, I am not a member of the employer’s family.",NULL,NULL,NULL,1032,1031
+1074,"No, I am not in the personal service of the employer.",NULL,NULL,NULL,1033,1032
+1076,"No, I am not paid based on results.",NULL,NULL,NULL,1034,1033
+1078,"No, I am not a domestic worker.",NULL,NULL,NULL,1035,1034
+1080,Underpayment or non-payment of 13th month pay.,NULL,NULL,NULL,1203,1035
+1081,Underpayment or non-payment of separation pay.,NULL,NULL,NULL,1207,1035
+1082,Underpayment or non-payment of retirement pay.,NULL,NULL,NULL,1212,1035
+1083,Entitlement or recognition of service incentive leaves.,"Service incentive leaves are yearly leaves of five days with pay. (Art. 95, Labor Code)",NULL,NULL,1220,1035
+1085,I may be receiving less than the minimum wage.,NULL,NULL,NULL,1037,1036
+1086,I may have been underpaid.,"Included in this section are the computation for basic wages, premium pay, overtime pay, night differentials, and holiday pay.",NULL,NULL,1038,1036
+1092,National Capital Region (Metro Manila),NULL,NULL,1703,NULL,1037
+1093,Cordillera Administrative Region,NULL,NULL,1704,NULL,1037
+1094,Region I (Ilocos),NULL,NULL,1705,NULL,1037
+1095,Region II (Cagayan Valley),NULL,NULL,1706,NULL,1037
+1096,Region III (Central Luzon),NULL,NULL,1707,NULL,1037
+1097,Region IV – A (Southern Tagalog Mainland – CALABARZON),NULL,NULL,1708,NULL,1037
+1098,Region IV – B (MIMAROPA),NULL,NULL,1709,NULL,1037
+1099,Region V (Bicol),NULL,NULL,1710,NULL,1037
+1100,Region VI (Western Visayas),NULL,NULL,1711,NULL,1037
+1101,Region VII (Central Visayas),NULL,NULL,1712,NULL,1037
+1102,Region VIII (Eastern Visayas),NULL,NULL,1713,NULL,1037
+1103,Region IX (Zamboanga Peninsula),NULL,NULL,1714,NULL,1037
+1104,Region X (Northern Mindanao),NULL,NULL,1715,NULL,1037
+1105,Region XI (Davao),NULL,NULL,1716,NULL,1037
+1106,Region XII (SOCCSKSARGEN),NULL,NULL,1717,NULL,1037
+1107,Region XIII (CARAGA),NULL,NULL,1718,NULL,1037
+1108,Bangsamoro Autonomous Region (formerly Autonomous Region of Muslim Mindanao),NULL,NULL,1719,NULL,1037
+1109,"Yes, I am a health personnel.",NULL,NULL,NULL,1039,1038
+1110,"No, I am not a health personnel.",NULL,NULL,NULL,1041,1038
+1111,"Yes, I am a health personnel in such a city or municipality.",NULL,NULL,1720,NULL,1039
+1112,"No, I am not working in such a city.",NULL,NULL,NULL,1040,1039
+1114,"No, I am not employed in such a hospital.",NULL,NULL,NULL,1041,1040
+1115,"Yes, I am working under a CWW system.",NULL,NULL,1721,NULL,1041
+1116,"No, I am not working under a CWW system.",NULL,NULL,NULL,1046,1041
+1117,I don’t know.,NULL,NULL,NULL,1042,1041
+1118,"Yes, a majority of the employees voluntarily agreed to the CWW system.",NULL,NULL,NULL,1043,1042
+1120,"Yes, I work in such a company.",NULL,NULL,NULL,1044,1043
+1121,"No, I do not work in such a company.",NULL,NULL,NULL,1045,1043
+1122,"Yes, there is such a certification.",NULL,NULL,NULL,1045,1044
+1123,"No, there is no such certification.",The CWW does not seem to be valid.,NULL,NULL,1046,1044
+1124,"Yes, the employer notified the DOLE Regional Office.",NULL,NULL,1721,NULL,1045
+1125,"No, the employer did not notify the DOLE Regional Office.",NULL,NULL,NULL,1046,1045
+1126,"Yes, I work in such an establishment.",You do not seem to be entitled to Holiday Pay.,NULL,1722,NULL,1046
+1127,"No, I do not work in such an establishment.",NULL,NULL,NULL,1047,1046
+1128,"Yes, I am a seasonal worker.",NULL,NULL,NULL,1048,1047
+1129,"No, I am not a seasonal worker.",NULL,NULL,NULL,1050,1047
+1130,"Yes, I am.",NULL,NULL,NULL,1049,1048
+1131,"No, I am not.",NULL,NULL,1723,NULL,1048
+1132,"Yes, I did.",NULL,NULL,1723,NULL,1049
+1133,"No, I did not.",NULL,NULL,1722,NULL,1049
+1134,"Yes, I am.",NULL,NULL,NULL,1201,1050
+1135,"No, I am not.",NULL,NULL,NULL,1202,1050
+1136,"Yes, I am.",NULL,NULL,1724,NULL,1201
+1137,"No, I am not. ",NULL,NULL,1725,NULL,1201
+1139,"No, I do not.",NULL,NULL,1723,NULL,1202
+1166,"No, I do not work in such an establishment.",NULL,NULL,NULL,NULL,1213
+1185,"Yes, I have already rendered at least 1 year of service.",NULL,NULL,NULL,NULL,1223
+1141,"No, my work with the employer has not yet reached 1 month for the calendar year.",NULL,NULL,1726,NULL,1203
+1142,"Yes, the employer has been paying 13th month pay or its equivalent since November 16, 1987 or earlier.",NULL,NULL,NULL,1205,1204
+1143,"No, the employer has not been paying 13th month pay from a time before November 16, 1987.",NULL,NULL,NULL,1206,1204
+1144,"Yes, he has.",NULL,NULL,1727,NULL,1205
+1145,"No, the payments amount to less than 1/12 of the basic salary for the calendar year.",NULL,NULL,1728,NULL,1205
+1146,"Yes, I am separated from service.",NULL,NULL,1729,NULL,1206
+1147,"No, I am not separated from service.",NULL,NULL,1730,NULL,1206
+1148,"Yes, I was terminated due to at least one of those causes.",NULL,NULL,1731,NULL,1207
+1149,"No, I was not terminated because of those causes.",NULL,NULL,NULL,1208,1207
+1151,"Yes, I was terminated because of at least one of those causes.",NULL,NULL,1732,NULL,1208
+1152,"No, I was not terminated because of those causes.",NULL,NULL,NULL,1209,1208
+1153,I’m not sure if I was validly terminated under one of those causes.,NULL,NULL,NULL,1229,1208
+1154,"Yes, I was terminated because the company closed due to serious business losses.",NULL,NULL,1733,NULL,1209
+1155,"No, I was not terminated because of this.",NULL,NULL,NULL,1210,1209
+1156,I’m not sure if I was validly terminated because of this reason.,NULL,NULL,NULL,1229,1209
+1157,"Yes, I was terminated because of a disease I am suffering from.",NULL,NULL,1734,NULL,1210
+1158,"No, I was not terminated because of this.",NULL,NULL,NULL,1211,1210
+1159,I’m not sure if I was validly terminated because of this reason.,NULL,NULL,NULL,1228,1210
+1160,"Yes, I was.",NULL,NULL,1735,NULL,1211
+1161,"No, I was not.",NULL,NULL,1736,NULL,1211
+1162,I’m not sure if I was illegally dismissed.,NULL,NULL,NULL,1596,1211
+1164,"No, I do not work in such an establishment.",NULL,NULL,NULL,1213,1212
+1165,"Yes, I work in such an establishment.",NULL,NULL,1737,NULL,1213
+1167,"Yes, I work in such an establishment.",NULL,NULL,1737,NULL,1214
+1168,"No, I do not work in such an establishment.",NULL,NULL,NULL,1215,1214
+1169,"Yes, I am an underground mining employee.",NULL,NULL,NULL,1216,1215
+1170,"No, I am not an underground mining employee.",NULL,NULL,NULL,1218,1215
+1172,"No, I have not rendered service for at least 5 years.",NULL,NULL,1738,NULL,1216
+1173,"Yes, I have reached such age.",NULL,NULL,1739,NULL,1217
+1174,"No, I have not yet reached such age.",NULL,NULL,1738,NULL,1217
+1175,"Yes, I have rendered service for at least 5 years.",NULL,NULL,NULL,1219,1218
+1176,"No, I have not rendered service for at least 5 years.",NULL,NULL,1740,NULL,1218
+1177,"Yes, I have reached such age.",NULL,NULL,1741,NULL,1219
+1178,"No, I have not reached such age.",NULL,NULL,1740,NULL,1219
+1179,"Yes, I am employed in such an establishment.",NULL,NULL,1742,NULL,1220
+1181,"Yes, I am.",NULL,NULL,1742,NULL,1221
+1182,"No, I am not.",NULL,NULL,NULL,1222,1221
+1183,"Yes, I am. ",NULL,NULL,1742,NULL,1222
+1184,"No, I am not.",NULL,NULL,NULL,1223,1222
+1186,"No, I have not yet rendered 1 year of service.",NULL,NULL,1743,NULL,1223
+1187,"Yes, more than 4 years have elapsed.",NULL,NULL,NULL,1225,1224
+1188,"No, 4 years have not yet elapsed.",NULL,NULL,NULL,1226,1224
+1190,"No, I was not able to institute a claim before 4 years had passed.",NULL,NULL,1603,NULL,1225
+1191,I was dismissed by my employer.,NULL,NULL,NULL,1227,1226
+1192,I resigned.,NULL,NULL,NULL,1596,1226
+1193,"Yes, I was terminated under such a program.",NULL,NULL,1606,NULL,1227
+1194,"No, I was not terminated under such a program.",NULL,NULL,NULL,1228,1227
+1195,"Yes, I was terminated based on one of those grounds.",NULL,NULL,NULL,1230,1228
+1196,"No, I was not terminated based on any of those grounds.",NULL,NULL,NULL,1229,1228
+1197,"Yes, I was terminated based on one of those grounds.",NULL,NULL,NULL,1433,1229
+1198,"No, I was not terminated based on any of those grounds.",NULL,NULL,NULL,1563,1229
+1199,"Yes, I was given such a notice.",NULL,NULL,NULL,1231,1230
+1201,"Yes, I was.",NULL,NULL,NULL,1232,1231
+1202,"No, I was not.",NULL,NULL,1607,NULL,1231
+1203,"Yes, I was.",NULL,NULL,NULL,1233,1232
+1204,"No, I was not.",NULL,NULL,1607,NULL,1232
+1205,Serious misconduct in connection with work. ,NULL,NULL,NULL,1234,1233
+1207,Gross and habitual neglect of duties.,NULL,NULL,NULL,1242,1233
+1208,Abandonment of work.,NULL,NULL,NULL,1244,1233
+1209,Fraud in relation to work.,NULL,NULL,NULL,1247,1233
+1210,Willful breach of the employer or his duly authorized representative’s trust.,NULL,NULL,NULL,1401,1233
+1211,Commission of a crime or offense against the person of the employer or any immediate member of his family or his duly authorized representatives.,NULL,NULL,NULL,1406,1233
+1212,Participation in the commission of illegal acts during a strike.,NULL,NULL,NULL,1412,1233
+1214,Violation of a union security agreement in the Collective Bargaining Agreement (CBA).,NULL,NULL,NULL,1419,1233
+1215,Violation of company rules and regulations.,NULL,NULL,NULL,1238,1233
+1216,Theft of property owned by a co-employee.,"This is a ground analogous to serious misconduct. (John Hancock Life Insurance Corporation v. Davis, G.R. No. 169549, 3 September 2008)",NULL,NULL,1234,1233
+1217,"Gross incompetence, inefficiency, or ineptitude.","This is a ground analogous to gross neglect of duties. (Lim v. NLRC, G.R. No. 118434, 26 July 1996)",NULL,NULL,1242,1233
+1337,"Yes, fair and reasonable criteria was used.",NULL,NULL,NULL,1443,1442
+1338,"No, fair and equitable criteria was not used.",NULL,NULL,1634,NULL,1442
+1416,"Yes, I was terminated as a seasonal employee.",NULL,NULL,NULL,1584,1579
+1219,Attitude problem.,"Attitude problem has been applied as a basis for dismissal on the ground of loss of trust and confidence. (Reyes-Rayel v. Philippine Luen Thai Holdings Corp., G.R. No. 174893, 11 July 2012)",NULL,NULL,1401,1233
+1220,I contracted a disease.,NULL,NULL,NULL,1428,1233
+1221,"Yes, it was.",NULL,NULL,NULL,1235,1234
+1222,"No, it was not.",NULL,NULL,1608,NULL,1234
+1223,"Yes, it was.",NULL,NULL,NULL,1236,1235
+1224,"No, it was not.",NULL,NULL,1608,NULL,1235
+1225,"Yes, it did.",NULL,NULL,NULL,1237,1236
+1226,"No, it did not.",NULL,NULL,1608,NULL,1236
+1227,"Yes, it was.",NULL,NULL,1609,NULL,1237
+1228,"No, it was not.",NULL,NULL,1608,NULL,1237
+1229,"Yes, I did.",NULL,NULL,NULL,1239,1238
+1230,"No, I did not.",NULL,NULL,1610,NULL,1238
+1231,"Yes, it was.",NULL,NULL,NULL,1240,1239
+1232,"No, it was not.",NULL,NULL,1610,NULL,1239
+1233,"Yes, it was.",NULL,NULL,NULL,1241,1240
+1234,"No, it was not.",NULL,NULL,1610,NULL,1240
+1235,"Yes, it was.",NULL,NULL,1611,NULL,1241
+1236,"No, it was not.",NULL,NULL,1610,NULL,1241
+1237,"Yes, it was.",NULL,NULL,NULL,1730,1242
+1238,"No, it was not.",NULL,NULL,1612,NULL,1242
+1239,"Yes, it was.",NULL,NULL,1613,NULL,1243
+1240,"No, it was not.",NULL,NULL,1612,NULL,1243
+1241,"Yes, I did.",NULL,NULL,NULL,1245,1244
+1242,"No, I did not.",NULL,NULL,1614,NULL,1244
+1243,"Yes, it was.",NULL,NULL,NULL,1246,1245
+1244,"No, it was not.",NULL,NULL,1614,NULL,1245
+1245,"Yes, I did.",NULL,NULL,1615,NULL,1246
+1246,"No, I did not.",NULL,NULL,1614,NULL,1246
+1247,"Yes, I was dishonest or deceptive.",NULL,NULL,NULL,1248,1247
+1248,"No, I was not.",NULL,NULL,1616,NULL,1247
+1249,"Yes, I did.",NULL,NULL,NULL,1250,1248
+1250,"No, I did not.",NULL,NULL,NULL,1249,1248
+1251,"Yes, I did.",NULL,NULL,NULL,1250,1249
+1252,"No, I did not.",NULL,NULL,1616,NULL,1249
+1253,"Yes, it was.",NULL,NULL,1617,NULL,1250
+1254,"No, it was not.",NULL,NULL,1616,NULL,1250
+1255,"Yes, I am.",NULL,NULL,NULL,1402,1401
+1257,"Yes, I did.",NULL,NULL,NULL,1403,1402
+1258,"No, I did not.",NULL,NULL,1618,NULL,1402
+1259,"Yes, I did.",NULL,NULL,NULL,1404,1403
+1260,"No, I did not.",NULL,NULL,1618,NULL,1403
+1261,"Yes, I do.",NULL,NULL,1618,NULL,1404
+1263,"Yes, it was.",NULL,NULL,1619,NULL,1405
+1264,"No, it was not. ",NULL,NULL,1618,NULL,1405
+1265,"Yes, I did.",NULL,NULL,1621,NULL,1406
+1266,"No, I did not.",NULL,NULL,NULL,1407,1406
+1267,"Yes, I did.",NULL,NULL,1621,NULL,1407
+1269,"Yes, I did.",NULL,NULL,1621,NULL,1408
+1270,"No, I did not.",NULL,NULL,1620,NULL,1408
+1271,"Yes, I did.",NULL,NULL,NULL,1410,1409
+1272,"No, I did not.",NULL,NULL,1623,NULL,1409
+1274,"No, I did not.",NULL,NULL,1623,NULL,1410
+1275,"Yes, I am.",NULL,NULL,1622,NULL,1411
+1276,"No, I am not.",NULL,NULL,1624,NULL,1411
+1277,"Yes, I did.",NULL,NULL,1625,NULL,1412
+1278,"No, I did not.",NULL,NULL,NULL,1413,1412
+1280,"No, I did not.",NULL,NULL,NULL,1414,1413
+1281,"Yes, I did.",NULL,NULL,1625,NULL,1414
+1282,"No, I did not.",NULL,NULL,NULL,1415,1414
+1283,"Yes, I did.",NULL,NULL,1625,NULL,1415
+1284,"No, I did not.",NULL,NULL,1626,NULL,1415
+1286,The Secretary certified it to the National Labor Relations Commission.,NULL,NULL,NULL,1418,1416
+1287,"Yes, I did.",NULL,NULL,1628,NULL,1417
+1288,"No, I did not.",NULL,NULL,1627,NULL,1417
+1289,"Yes, I did.",NULL,NULL,1628,NULL,1418
+1290,"No, I did not.",NULL,NULL,1627,NULL,1418
+1291,"Yes, there is.",NULL,NULL,NULL,1420,1419
+1293,"Yes, I am.",NULL,NULL,1629,NULL,1420
+1294,"No, I am not.",NULL,NULL,NULL,1421,1420
+1295,"Yes, I am.",NULL,NULL,1629,NULL,1421
+1296,"No, I am not.",NULL,NULL,NULL,1422,1421
+1297,"Yes, I was.",NULL,NULL,1629,NULL,1422
+1298,"No, I was not.",NULL,NULL,NULL,1423,1422
+1300,"No, I was not.",NULL,NULL,NULL,1425,1423
+1301,"Yes, I was.",NULL,NULL,1629,NULL,1424
+1302,"No, I was not.",NULL,NULL,NULL,1425,1424
+1303,"Yes, I was.",NULL,NULL,NULL,1426,1425
+1304,"No, I was not.",NULL,NULL,NULL,1427,1425
+1306,"No, I was not.",NULL,NULL,1629,NULL,1426
+1308,"No, the employer was the one that initiated my dismissal.",NULL,NULL,1629,NULL,1427
+1309,"Yes, I am.",NULL,NULL,NULL,1429,1428
+1310,"No, I am not.",NULL,NULL,1631,NULL,1428
+1311,"Yes, it is.",NULL,NULL,NULL,1432,1429
+1312,"No, it is not.",NULL,NULL,NULL,1430,1429
+1313,"Yes, it is.",NULL,NULL,NULL,1432,1430
+1314,"No, it is not.",NULL,NULL,NULL,1431,1430
+1315,"Yes, it is.",NULL,NULL,NULL,1432,1431
+1316,"No, it is not.",NULL,NULL,NULL,1432,1431
+1317,"Yes, such a certificate was issued.",NULL,NULL,1632,NULL,1432
+1318,"No, such a certificate was not issued.",NULL,NULL,1631,NULL,1432
+1319,"Yes, I was. ",NULL,NULL,NULL,1434,1433
+1320,"No, I was not.",NULL,NULL,1633,NULL,1433
+1321,"Yes, it was.",NULL,NULL,NULL,1435,1434
+1323,"Yes, it did.",NULL,NULL,NULL,1436,1435
+1324,"No, it did not.",NULL,NULL,1633,NULL,1435
+1325,"Yes, it did.",NULL,NULL,NULL,1437,1436
+1326,"No, it did not.",NULL,NULL,1633,NULL,1436
+1327,"Yes, it was.",NULL,NULL,NULL,1438,1437
+1329,"Yes, it was.",NULL,NULL,NULL,1439,1438
+1330,"No, it was not. ",NULL,NULL,1633,NULL,1438
+1331,"Yes, it was.",NULL,NULL,NULL,1440,1439
+1332,"No, it was not.",NULL,NULL,1634,NULL,1439
+1333,"Yes, it was.",NULL,NULL,NULL,1441,1440
+1335,"Yes, the proper separation pay was given.",NULL,NULL,NULL,1442,1441
+1336,"No, the proper separation pay was not given.",NULL,NULL,1634,NULL,1441
+1340,Redundancy.,"There is redundancy when the services of an employee are in excess of what is required by a business. It is not always triggered by a decline in business. (Atlantic Gulf and Pacific Company of Manila, Inc. [AG & P] v. NLRC, G.R. No. 127516, 28 May 1999)",NULL,NULL,1446,1443
+1341,Retrenchment.,"Retrenchment is resorted to primarily avoid or minimize serious business losses. (Atlantic Gulf and Pacific Company of Manila, Inc. [AG & P] v. NLRC, G.R. No. 127516, 28 May 1999)",NULL,NULL,1551,1443
+1342,Closure or cessation of business operations.,NULL,NULL,NULL,1555,1443
+1343,"Yes, the purpose was for a justifiable economic reason.",NULL,NULL,NULL,1445,1444
+1344,"No, the purpose was not for a justifiable economic reason.",NULL,NULL,1635,NULL,1444
+1345,"Yes, it was exercised with malice, arbitrariness, or abuse of discretion.",NULL,NULL,1635,NULL,1445
+1346,"No, it was exercised in good faith.",NULL,NULL,1636,NULL,1445
+1347,"Yes, it was.",NULL,NULL,1637,NULL,1446
+1348,"No, it was not.",NULL,NULL,NULL,1447,1446
+1349,"Yes, it was superfluous.",NULL,NULL,1637,NULL,1447
+1350,"No, it was not superfluous.",NULL,NULL,NULL,1448,1447
+1351,"Yes, it is duplicated.",NULL,NULL,1637,NULL,1448
+1352,"No, it is not duplicated.",NULL,NULL,NULL,1449,1448
+1353,"Yes, it was a cost-cutting measure.",NULL,NULL,1637,NULL,1449
+1354,"No, it was not a cost-cutting measure.",NULL,NULL,NULL,1450,1449
+1355,"Yes, it streamlined operations.",NULL,NULL,1637,NULL,1450
+1356,"No, it did not streamline operations.",NULL,NULL,1638,NULL,1450
+1357,"Yes, he experienced business losses or will be facing losses.",NULL,NULL,NULL,1552,1551
+1358,"No, he has not experienced business losses and does not face imminent losses.",NULL,NULL,1639,NULL,1551
+1359,"Yes, the losses are substantial.",NULL,NULL,NULL,1553,1552
+1360,"No, the losses are not substantial.",NULL,NULL,1639,NULL,1552
+1361,"Yes, it will likely prevent the losses.",NULL,NULL,NULL,1554,1553
+1362,"No, it will not likely prevent the losses.",NULL,NULL,1639,NULL,1553
+1364,"No, they cannot be proved by externally audited financial statements.",NULL,NULL,1639,NULL,1554
+1365,The business closed down.,NULL,NULL,NULL,1556,1555
+1366,The business operations were suspended.,NULL,NULL,NULL,1559,1555
+1367,"Yes, it was due to serious business losses or financial reverses.",NULL,NULL,NULL,1557,1556
+1368,"No, it was not due to serious business losses or financial reverses.",NULL,NULL,1641,NULL,1556
+1369,It was total.,NULL,NULL,NULL,1558,1557
+1370,It was partial.,"This seems to be a case of retrenchment, rather than closure.",NULL,NULL,1551,1557
+1371,"Yes, it can.",NULL,NULL,1642,NULL,1558
+1372,"No, it cannot.",NULL,NULL,1641,NULL,1558
+1373,"Yes, the suspension exceeded more than 6 months.",NULL,NULL,NULL,1556,1559
+1374,"No, the suspension did not exceed 6 months.",NULL,NULL,NULL,1560,1559
+1375,"Yes, the suspension was bona fide.",NULL,NULL,NULL,1561,1560
+1377,"Yes, I did.",NULL,NULL,NULL,1562,1561
+1378,"No, I did not.",NULL,NULL,1644,NULL,1561
+1379,"Yes, I did.",NULL,NULL,1643,NULL,1562
+1380,"No, I did not.",NULL,NULL,1644,NULL,1562
+1381,"Yes, I was terminated as a probationary employee.",NULL,NULL,NULL,1564,1563
+1383,"Yes, there is a written employment contract that states that I am a probationary employee.",NULL,NULL,NULL,1565,1564
+1384,"No, there is no written employment contract that states that I am a probationary employee.",NULL,NULL,1645,NULL,1564
+1385,"Yes, there is a provision on the probationary period.",NULL,NULL,NULL,1566,1565
+1386,"No, there is no stipulation on the probationary period.",NULL,NULL,1646,NULL,1565
+1387,"Yes, I was terminated on the ground that I failed to qualify as a regular employee.",NULL,NULL,NULL,1567,1566
+1389,"Yes, the standards were explained to me at the start of my employment.",NULL,NULL,NULL,1568,1567
+1390,"No, the standards were not explained to me at the start of my employment.",NULL,NULL,1648,NULL,1567
+1391,"Yes, it does.",NULL,NULL,NULL,1569,1568
+1392,"No, it does not.",NULL,NULL,NULL,1570,1568
+1393,"Yes, they were complied with.",NULL,NULL,NULL,1570,1569
+1394,"No, they were not complied with.",NULL,NULL,1649,NULL,1569
+1395,"Yes, I was given a written notice of termination.",NULL,NULL,NULL,1571,1570
+1396,"No, I was not given a written notice of termination.",NULL,NULL,1654,NULL,1570
+1397,"Yes, it was given to me before the probationary period expired.",NULL,NULL,NULL,1572,1571
+1398,"No, it was given to me after the probationary period expired.",NULL,NULL,1650,NULL,1571
+1399,"Yes, I was still made to work after the expiry of the probationary period.",NULL,NULL,1651,NULL,1572
+1400,"No, I did not work after the expiry of the probationary period.",NULL,NULL,NULL,1573,1572
+1402,"No, I have not been repeatedly hired as a probationary employee by the same employer.",NULL,NULL,1653,NULL,1573
+1403,"Yes, I was terminated as a project employee.",NULL,NULL,NULL,1578,1574
+1404,"No, I was not terminated as a project employee.",NULL,NULL,NULL,1579,1574
+1405,I don’t know.,NULL,NULL,NULL,1575,1574
+1406,"Yes, there is such a written employment contract.",NULL,NULL,NULL,1576,1575
+1407,"No, there is no  written employment contract.",You do not seem to be a project employee.,NULL,1655,NULL,1575
+1409,"Yes, I was.",NULL,NULL,NULL,1577,1576
+1410,"No, I was not. ",You do not seem to be a project employee.,NULL,NULL,1579,1576
+1411,"Yes, the project or undertaking’s scope and duration was specified at the time I was hired.",You seem to be a project employee.,NULL,NULL,1578,1577
+1412,"No, the project or undertaking’s scope and duration was not specified at the time I was hired.",You do not seem to be a project employee.,NULL,NULL,1579,1577
+1413,"Yes, I was terminated when it was completed.",NULL,NULL,1656,NULL,1578
+1414,"No, I was not terminated even after it was completed.",NULL,NULL,1657,NULL,1578
+1415,"No, I was terminated before it was completed.",NULL,NULL,1658,NULL,1578
+1418,I don’t know.,NULL,NULL,NULL,1580,1579
+1419,"Yes, there is such a written employment contract.",NULL,NULL,NULL,1581,1580
+1421,"There is a written employment contract, but it does not state that I am a seasonal employee.",You do not seem to be a seasonal employee. ,NULL,NULL,1585,1580
+1422,"Yes, it is.",NULL,NULL,NULL,1582,1581
+1423,"No, it is not.",You do not seem to be a seasonal employee.,NULL,NULL,1585,1581
+1424,"Yes, it is.",NULL,NULL,NULL,1583,1582
+1425,"No, it is not.",You do not seem to be a seasonal employee.,NULL,NULL,1585,1582
+1426,"Yes, it is.",You seem to be a seasonal employee.,NULL,NULL,1584,1583
+1427,"No, it is not.",You do not seem to be a seasonal employee.,NULL,NULL,1585,1583
+1428,"Yes, I have been hired as a seasonal employee for more than one season by the same employer.",NULL,NULL,1660,NULL,1584
+1429,"No, I have not been hired for more than one season.",NULL,NULL,1661,NULL,1584
+1430,"Yes, I was terminated as a casual employee.",NULL,NULL,NULL,1588,1585
+1431,"No, I was not terminated as a casual employee.",NULL,NULL,NULL,1590,1585
+1432,I don’t know.,NULL,NULL,NULL,1586,1585
+1434,"No, there is no written employment contract.",You do not seem to be a casual employee.,NULL,1662,NULL,1586
+1436,"Yes, it is merely incidental to the employer’s business.",You seem to be a casual employee.,NULL,NULL,1588,1587
+1437,"No, it is necessary or desirable to the employer’s usual trade or business.",You do not seem to be a casual employee.,NULL,NULL,1590,1587
+1438,"Yes, I have worked for at least a year or more.",NULL,NULL,1663,NULL,1588
+1439,"No, I have worked for less than a year.",NULL,NULL,NULL,1589,1588
+1440,"Yes, I have been repeatedly rehired as a casual employee by the same employer.",NULL,NULL,1664,NULL,1589
+1441,"No, I have not been repeatedly rehired.",NULL,NULL,1665,NULL,1589
+1442,"Yes, I was terminated as a fixed-term employee.",NULL,NULL,NULL,1593,1590
+1443,"No, I was not terminated as a fixed-term employee.",NULL,NULL,1666,NULL,1590
+1444,I don’t know.,NULL,NULL,NULL,1591,1590
+1445,"Yes, there is such a written contract.",NULL,NULL,NULL,1592,1591
+1446,"No, there is no written employment contract.",NULL,NULL,1667,NULL,1591
+1447,"There is a written employment contract, but it does not state the specific fixed period of employment.",NULL,NULL,1666,NULL,1591
+1448,"Yes, we dealt with each other in equal terms.",You seem to be a fixed-term employee.,NULL,NULL,1594,1592
+1449,"No, we did not deal with each other in equal terms.",NULL,NULL,NULL,1593,1592
+1450,"Yes, I voluntarily agreed on this fixed period.",You seem to be a fixed-term employee.,NULL,NULL,1594,1593
+1451,"No, I did not voluntarily agree on this fixed period.",NULL,NULL,1668,NULL,1593
+1452,"Yes, the termination was due to the expiration of the fixed period.",NULL,NULL,NULL,1595,1594
+1453,"No, the termination happened before the lapse of the period.",NULL,NULL,1671,NULL,1594
+1454,"Yes, I was allowed to work beyond the fixed term.",NULL,NULL,1670,NULL,1595
+1455,"No, I was not allowed to work beyond the fixed term.",NULL,NULL,1669,NULL,1595
+1456,"Yes, I voluntarily resigned.",NULL,NULL,NULL,1597,1596
+1458,"No, I resigned due to other acts or conduct of the employer.",NULL,NULL,NULL,1707,1596
+1460,"Yes, I gave the employer a written notice. ",NULL,NULL,NULL,1598,1597
+1461,"No, I did not give the employer a written notice.",NULL,NULL,1672,NULL,1597
+1462,"Yes, I gave the notice at least 1 month in advance.",NULL,NULL,NULL,1599,1598
+1463,"No, I gave it less than 1 one month before my intended date of resignation.",NULL,NULL,1673,NULL,1598
+1464,"No, the employer asked to shorten the date of resignation to less than 1 month.",NULL,NULL,1674,NULL,1598
+1465,The employer wanted to extend the period beyond 30 days.,NULL,NULL,1675,NULL,1598
+1466,"Yes, I withdrew my resignation.",NULL,NULL,NULL,1600,1599
+1467,"No, I did not withdraw my resignation.",NULL,NULL,NULL,1702,1599
+1468,"Yes, I withdrew my resignation before he accepted it.",NULL,NULL,1676,NULL,1600
+1469,"No, I withdrew my resignation after he accepted it.",NULL,NULL,NULL,1701,1600
+1470,"Yes, he still accepted my withdrawal.",NULL,NULL,1677,NULL,1701
+1471,"No, he did not accept my withdrawal.",NULL,NULL,1678,NULL,1701
+1472,"Yes, the employer accepted my resignation.",NULL,NULL,1679,NULL,1702
+1473,"No, the employer did not accept my resignation.",NULL,NULL,1680,NULL,1702
+1474,The employer demanded that I submit my resignation letter.,NULL,NULL,NULL,1704,1703
+1475,The employer threatened to dismiss me if I did not resign.,NULL,NULL,NULL,1706,1703
+1476,The employer threatened to file charges against me if I did not resign.,NULL,NULL,NULL,1729,1703
+1477,"Yes, I had the intention to resign.",NULL,NULL,NULL,1705,1704
+1478,"No, I had no intention to resign.",NULL,NULL,1683,NULL,1704
+1479,"Yes, I performed an act that would show an intent to resign.",NULL,NULL,1682,NULL,1705
+1480,"No, I did not perform any act that would show an intent to resign.",NULL,NULL,1683,NULL,1705
+1481,"Yes, I resigned because the employer threatened to dismiss me for causes such as or similar to the above.",NULL,NULL,1684,NULL,1706
+1482,"No, I resigned because the employer threatened to dismiss me for other causes or reasons.",NULL,NULL,1685,NULL,1706
+1483,"Yes, I resigned because the employer assured me that I would be re-hired again.",NULL,NULL,1681,NULL,1707
+1484,"No, I did not resign because of such an assurance made by the employer.",NULL,NULL,NULL,1708,1707
+1485,"Yes, I resigned because the employer performed such an act.",NULL,NULL,1686,NULL,1708
+1486,"No, the employer did not perform such an act.",NULL,NULL,NULL,1709,1708
+1487,"Yes, I resigned because the employer treated me inhumanely.",NULL,NULL,1686,NULL,1709
+1488,"No, the employer did not treat me inhumanely.",NULL,NULL,NULL,1710,1709
+1489,"Yes, I resigned because the employer committed a crime or offense against me or my immediate family members.",NULL,NULL,1686,NULL,1710
+1490,"No, the employer did not commit a crime or offense against me or my immediate family members.",NULL,NULL,NULL,1711,1710
+1535,Damages.,NULL,NULL,NULL,NULL,1732
+1536,Legality of Strikes and Lockouts.,NULL,NULL,NULL,NULL,1732
+1537,Wage increases and wage distortion.,NULL,NULL,NULL,NULL,1732
+1538,Enforcement or annulment of compromise agreements.,NULL,NULL,NULL,NULL,1732
+1539,Execution and enforcement of decisions by voluntary arbitrators.,NULL,NULL,NULL,NULL,1732
+1540,Issues in relation to Overseas Filipino Workers.,NULL,NULL,NULL,NULL,1732
+1541,Issues in relation to domestic workers or kasambahay.,NULL,NULL,NULL,NULL,1732
+1542,Issues in relation to alien parties.,NULL,NULL,NULL,NULL,1732
+1543,Issues in relation to priests and ministers.,NULL,NULL,NULL,NULL,1732
+1544,Criminal and civil suits arising from violations of the penal provisions of the Labor Code.,NULL,NULL,NULL,NULL,1732
+1545,Constitutionality of labor contracts and agreements.,NULL,NULL,NULL,NULL,1732
+1002,"No, I am not employed by the government or a government owned or controlled corporation.",NULL,NULL,NULL,1002,1001
+1010,"No, I do not engage in such work.",You do not seem to be a domestic worker.,NULL,NULL,1007,1004
+1020,"No, I am not a supervisory employee.","You seem to fall under the law’s definition of rank-and-file employee. (Art. 219 (m), Labor Code)",NULL,NULL,1010,1009
+1048,"No, I was not able to institute a claim before 3 years had passed.",NULL,NULL,1702,NULL,1020
+1067,"No, I do not devote more than 20% of my hours worked in a workweek to activities unrelated to management work.",NULL,NULL,NULL,1030,1029
+1069,"No, I am not a field personnel.",NULL,NULL,NULL,1031,1030
+1072,"No, I am a member of the employer’s family who is not dependent on him for support.",NULL,NULL,NULL,1032,1031
+1079,Underpayment or non-payment of wages.,"Included in this section are concerns about minimum wage, basic wages, premium pay, overtime pay, night differentials, and holiday pay.",NULL,NULL,1036,1035
+1113,"Yes, I am a health personnel employed in such a hospital.",NULL,NULL,1720,NULL,1040
+1492,"No, I did not resign because of that.",NULL,NULL,NULL,1712,1711
+1493,"Yes, I resigned because my roles were diminished or downgraded.",NULL,NULL,1687,NULL,1712
+1494,"No, I did not resign because of that.",NULL,NULL,NULL,1713,1712
+1495,"Yes, I resigned because my salary was decreased.",NULL,NULL,1687,NULL,1713
+1496,"No, I did not resign because my salary was decreased.",NULL,NULL,NULL,1714,1713
+1497,"Yes, I resigned because my salary was withheld.",NULL,NULL,1687,NULL,1714
+1498,"No, I did not resign because of that.",NULL,NULL,NULL,1715,1714
+1500,"No, I did not resign because the employer discriminated against me.",NULL,NULL,NULL,1716,1715
+1501,"Yes, I resigned because the employer constantly pressured me to resign.",NULL,NULL,1687,NULL,1716
+1502,"No, I did not resign because of that.",NULL,NULL,NULL,1717,1716
+1503,"Yes, I resigned because I was replaced by another while I was on leave.",NULL,NULL,1687,NULL,1717
+1504,"No, I did not resign because of that.",NULL,NULL,NULL,1718,1717
+1505,"Yes, I resigned because of such transfer.",NULL,NULL,NULL,1719,1718
+1506,"No, I did not resign because of that.",NULL,NULL,NULL,1724,1718
+1508,"No, it was not done to comply with an order from the government.",NULL,NULL,NULL,1720,1719
+1509,"Yes, it was.",NULL,NULL,1690,NULL,1720
+1510,"No, it was not.",NULL,NULL,NULL,1721,1720
+1511,"Yes, the transfer involved a demotion in rank.",NULL,NULL,1690,NULL,1721
+1512,"No, it did not.",NULL,NULL,NULL,1722,1721
+1513,"Yes, it involved a decrease in salaries, benefits, or other privileges.",NULL,NULL,1690,NULL,1722
+1514,"No, it did not.",NULL,NULL,NULL,1723,1722
+1515,"Yes, the transfer involved discrimination or disdain by the employer.",NULL,NULL,1690,NULL,1723
+1516,"No, it did not.",The transfer seems to be valid.,NULL,1689,NULL,1723
+1517,"Yes, I resigned because I was suspended.",NULL,NULL,NULL,1725,1724
+1519,I was indefinitely suspended.,NULL,NULL,1691,NULL,1725
+1520,I was preventively suspended.,NULL,NULL,NULL,1726,1725
+1521,"Yes, the suspension lasted for more than 30 days. ",NULL,NULL,NULL,1716,1726
+1522,"No, the suspension did not last for more than 30 days.",NULL,NULL,1692,NULL,1726
+1523,"Yes, the employer paid the salaries and benefits due me.",NULL,NULL,1692,NULL,1727
+1524,"No, the employer did not pay the salaries and benefits due me.",NULL,NULL,1693,NULL,1727
+1527,"Yes, it is just or legal.",NULL,NULL,1694,NULL,1729
+1528,"No, it is not just or legal.",NULL,NULL,NULL,1704,1729
+1529,"Yes, it was habitual.",NULL,NULL,NULL,1243,1730
+1530,"No, it was not habitual.",NULL,NULL,NULL,1731,1730
+1531,"Yes, it caused substantial loss or damage.",NULL,NULL,NULL,1243,1731
+1532,"No, it did not cause substantial loss or damage.",NULL,NULL,1612,NULL,1731
+1533,Illegal termination. ,This includes claims for reinstatement or separation pay.,NULL,NULL,1733,1732
+1534,Money claims.,This includes claims for payment of wages and benefits.,NULL,NULL,1738,1732
+1546,"Yes, I am a corporate officer.",NULL,NULL,1695,NULL,1733
+1547,"No, I am not a corporate officer.",NULL,NULL,NULL,1734,1733
+1548,"Yes, my employer can be sued.",NULL,NULL,NULL,1735,1734
+1549,"No, my employer cannot be sued.",NULL,NULL,1696,NULL,1734
+1550,"Yes, there is.",NULL,NULL,NULL,1736,1735
+1551,"No, there is no CBA.",NULL,NULL,1697,NULL,1735
+1552,"Yes, there is.",NULL,NULL,NULL,1737,1736
+1553,"No, there is no grievance mechanism.",NULL,NULL,1697,NULL,1736
+1554,"Yes, I already in the process of going through the grievance mechanism for this issue.",NULL,NULL,NULL,1738,1737
+1555,"No, I did not use the grievance mechanism for this issue.",NULL,NULL,1697,NULL,1737
+1556,"Yes, I have been terminated.",NULL,NULL,1698,NULL,1738
+1557,"No, I have not yet been terminated.",NULL,NULL,1699,NULL,1738
+1558,"Yes, I am asking for reinstatement.",NULL,NULL,1700,NULL,1739
+1559,"No, I am not asking for reinstatement.",NULL,NULL,NULL,1740,1739
+1560,"Yes, the claim involves an amount above P5,000.00.",NULL,NULL,1700,NULL,1740
+1561,"No, the claim involves an amount of P5,000.00 or less.",NULL,NULL,1701,NULL,1740
+1119,"No, a majority of the employees did not agree to the CWW system.",The CWW does not seem to be valid.,NULL,NULL,1046,1042
+1138,"Yes, I do. ",NULL,NULL,1722,NULL,1202
+1140,"Yes, I have been working for the employer for at least 1 month during the calendar year.",NULL,NULL,NULL,1204,1203
+1150,I’m not sure if I was validly terminated under one of those causes.,NULL,NULL,NULL,1229,1207
+1163,"Yes, I work in such an establishment.",NULL,NULL,1737,NULL,1212
+1171,"Yes, I have rendered service for at least 5 years.",NULL,NULL,NULL,1217,1216
+1180,"No, I am not employed in such an establishment.",NULL,NULL,NULL,1221,1220
+1189,"Yes, I was able to institute a claim before 4 years had passed.",NULL,NULL,NULL,1226,1225
+1200,"No, I was not given such a notice.",NULL,NULL,1607,NULL,1230
+1206,Willful disobedience of the lawful orders of the employer or his representative in connection with his work.,NULL,NULL,NULL,1238,1233
+1213,"I was a striker who violated an order, prohibition, or injunction issued by the Department of Labor and Employment (DOLE) Secretary or the National Labor Relations Commission (NLRC).",NULL,NULL,NULL,1416,1233
+1218,Failure to comply with weight standards of the employer.,"In the context of flight attendants, obesity in violation of the continuing qualification of weight standards has been held as a voluntary act – being entirely attributable to the employee – which is analogous to the ground of gross neglect of duties. (Yrasuegi v. Philippine Airlines, Inc., G.R. No. 168081, 17 October 2008)",NULL,NULL,1242,1233
+1256,"No, I am not.",NULL,NULL,1618,NULL,1401
+1262,"No, I do not.",NULL,NULL,NULL,1405,1404
+1268,"No, I did not.",NULL,NULL,NULL,1408,1407
+1273,"Yes, I did.",NULL,NULL,NULL,1411,1410
+1279,"Yes, I did.",NULL,NULL,1625,NULL,1413
+1285,The Secretary assumed jurisdiction.,NULL,NULL,NULL,1417,1416
+1292,"No, there is no such agreement.",NULL,NULL,1629,NULL,1419
+1299,"Yes, I was.",NULL,NULL,NULL,1424,1423
+1305,"Yes, I was.",NULL,NULL,NULL,1427,1426
+1307,"Yes, I the sole and exclusive bargaining agent was the one that demanded my dismissal.",NULL,NULL,1630,NULL,1427
+1322,"No, it was not.",NULL,NULL,1633,NULL,1434
+1328,"No, it was not.",NULL,NULL,1633,NULL,1437
+1334,"No, it was not.",NULL,NULL,1634,NULL,1440
+1339,Installation of labor-saving devices.,"Labor-saving devices are machineries or equipment that replaces the need for employing workers, and thereby reduces the number of workers in the workplace. (Sec. 4 (m), Rule I-A, Book VI, Implementing Rules of the Labor Code)",NULL,NULL,1444,1443
+1363,"Yes, they can be proved by externally audited financial statements.",NULL,NULL,1640,NULL,1554
+1376,"No, the suspension was not bona fide.",NULL,NULL,1643,NULL,1560
+1382,"No, I was not terminated as a probationary employee.",NULL,NULL,NULL,1574,1563
+1388,"No, I was not terminated on the ground that I failed to qualify as a regular employee.",NULL,NULL,1647,NULL,1566
+1401,"Yes, I have been repeatedly hired as a probationary employer by the same employer.",NULL,NULL,1652,NULL,1573
+1408,"There is a written employment contract, but it does not state that I am a project employee.",You do not seem to be a project employee.,NULL,NULL,1579,1575
+1417,"No, I was not terminated as a seasonal employee.",NULL,NULL,NULL,1585,1579
+1420,"No, there is no written employment contract.",You do not seem to be a seasonal employee.,NULL,1659,NULL,1580
+1433,"Yes, there is such a written employment contract.",NULL,NULL,NULL,1587,1586
+1435,"There is a written employment contract, but it does not state that I am a casual employee.",You do not seem to be a casual employee.,NULL,NULL,1590,1586
+1457,"No, I was forced by the employer to resign.",NULL,NULL,NULL,1703,1596
+1459,"I availed of the employer’s special voluntary resignation (SVR) program, Special Separation Program (SSP), or other similar programs.","Under SVRs, SSPs, and similar schemes, employers offer resignation benefits to employees who voluntarily terminate the employment relationship. (Jiao v. NLRC, G.R. No. 18233, 18 April 2012)",NULL,1606,NULL,1596
+1491,"Yes, I resigned because I was demoted.",NULL,NULL,1687,NULL,1711
+1499,"Yes, I resigned because the employer discriminated against me.",NULL,NULL,1687,NULL,1715
+1507,"Yes, it was done to comply with an order from the government.",NULL,NULL,1688,NULL,1719
+1518,"No, I did not resign because I was suspended.",NULL,NULL,NULL,1728,1724
+1525,"Yes, I resigned because continued employment became impossible, unreasonable, or unlikely.",NULL,NULL,1687,NULL,1728
+1526,"No, I did not resign because of that.","The resignation will not likely be categorized as constructive dismissal if it is not caused by such or similar circumstances. Rather, it would probably be categorized as being voluntary resignation.",NULL,NULL,1597,1728
