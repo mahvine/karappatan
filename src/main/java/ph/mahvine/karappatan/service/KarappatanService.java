@@ -1,10 +1,14 @@
 package ph.mahvine.karappatan.service;
 
+import java.time.Instant;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ph.mahvine.karappatan.domain.CaseSummary;
+import ph.mahvine.karappatan.domain.User;
 import ph.mahvine.karappatan.repository.CaseSummaryRepository;
 import ph.mahvine.karappatan.service.dto.CaseSummaryDTO;
 import ph.mahvine.karappatan.service.mapper.CaseSummaryMapper;
@@ -24,12 +28,25 @@ public class KarappatanService {
         this.caseSummaryMapper = caseSummaryMapper;
     }
     
-    public void createCaseSummary(CaseSummaryDTO caseSummaryDTO) {
-    	
+    public CaseSummaryDTO createCaseSummary(CaseSummaryDTO caseSummaryDTO, User user) {
+    	CaseSummary caseSummary = caseSummaryMapper.toEntity(caseSummaryDTO);
+    	caseSummary.user(user);
+    	caseSummary.dateCreated(Instant.now());
+    	caseSummary = caseSummaryRepository.save(caseSummary);
+    	log.info("Case summary:{} created by user:{}",caseSummary.getId(), user.getLogin());
+    	return caseSummaryMapper.toDto(caseSummary);
     }
     
-    public void acceptCaseSummary() {
-    	
+    public CaseSummaryDTO acceptCaseSummary(Long caseSummaryId, User user) {
+    	CaseSummary caseSummary = caseSummaryRepository.getOne(caseSummaryId);
+    	if(caseSummary.getAcceptedBy()!=null) {
+    		throw new RuntimeException("Already accepted");
+    	}
+    	caseSummary.setAcceptedBy(user);
+    	caseSummary = caseSummaryRepository.save(caseSummary);
+    	log.info("Case summary:{} accepted by user:{}",caseSummary.getId(), user.getLogin());
+
+    	return caseSummaryMapper.toDto(caseSummary);
     }
 
 }

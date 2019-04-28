@@ -32,6 +32,7 @@ public abstract class CaseSummaryMapper implements EntityMapper<CaseSummaryDTO, 
     @Mapping(source = "module.title", target = "moduleTitle")
     @Mapping(source = "user", target = "user")
     @Mapping(source = "answers", target = "answerIds")
+    @Mapping(source = "acceptedBy.login", target = "acceptedByLogin")
     public abstract CaseSummaryDTO toDto(CaseSummary caseSummary);
 
     @Mapping(source = "userId", target = "user")

@@ -9,10 +9,25 @@
                 <dd>
                     <span>{{caseSummary.dateCreated}}</span>
                 </dd>
-                <dt><span>User</span></dt>
-                <dd>
-                    {{caseSummary.userLogin}}
-                </dd>
+                <div *ngIf="caseSummary.acceptedByLogin == currentAccount.login">
+                    <dt><span>User</span></dt>
+                    <dd>
+                        {{caseSummary.user.firstName}} {{caseSummary.user.lastName}} 
+                    </dd>
+                    <dd>
+                        <fa-icon [icon]="'home'"></fa-icon>&nbsp;{{caseSummary.user.address}}
+                    </dd>
+                    <dd>
+                        <fa-icon [icon]="'bell'"></fa-icon>&nbsp;{{caseSummary.user.contactNumber}}
+                    </dd>
+                </div>
+                
+                <div *ngIf="caseSummary.acceptedByLogin != currentAccount.login">
+                        <dt><span>Accepted by</span></dt>
+                        <dd>
+                            {{currentAccount.login}} - {{currentAccount.firstName}} {{currentAccount.lastName}}
+                        </dd>
+                </div>
                 <dt><span>Module: </span> <span *ngIf="module">{{module.title}}</span></dt>
                 <dd>
                     <div *ngIf="module">
@@ -35,7 +50,13 @@
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
             </button>
 
-            <button type="button"
+            <button type="button" *ngIf="caseSummary.acceptedByLogin==undefined"
+                    (click)="accept()"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Accept</span>
+            </button>
+
+            <button *jhiHasAnyAuthority="['ROLE_ADMIN']" type="button"
                     [routerLink]="['/case-summary', caseSummary.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>

@@ -39,10 +39,14 @@ public class CaseSummary implements Serializable {
                joinColumns = @JoinColumn(name = "case_summary_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "answers_id", referencedColumnName = "id"))
     private Set<Answer> answers = new HashSet<>();
-
+    
     @ManyToOne
     @JsonIgnoreProperties("caseSummaries")
     private Module module;
+
+
+    @ManyToOne(optional = true)
+    private User acceptedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -143,4 +147,12 @@ public class CaseSummary implements Serializable {
             ", dateCreated='" + getDateCreated() + "'" +
             "}";
     }
+
+	public User getAcceptedBy() {
+		return acceptedBy;
+	}
+
+	public void setAcceptedBy(User acceptedBy) {
+		this.acceptedBy = acceptedBy;
+	}
 }
