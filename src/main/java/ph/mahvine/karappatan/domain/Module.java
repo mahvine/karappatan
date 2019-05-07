@@ -7,7 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Objects;
 
@@ -35,11 +37,11 @@ public class Module implements Serializable {
     private String details;
 
     @OneToMany(mappedBy = "module", fetch=FetchType.EAGER)
-    private Set<Question> questions = new HashSet<>();
+    private List<Question> questions = new ArrayList<>();
     @OneToMany(mappedBy = "module", fetch=FetchType.EAGER)
-    private Set<Annex> annexes = new HashSet<>();
+    private List<Annex> annexes = new ArrayList<>();
     @OneToMany(mappedBy = "module", fetch=FetchType.EAGER)
-    private Set<Recommendation> recommendations = new HashSet<>();
+    private List<Recommendation> recommendations = new ArrayList<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -75,11 +77,11 @@ public class Module implements Serializable {
         this.details = details;
     }
 
-    public Set<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
-    public Module questions(Set<Question> questions) {
+    public Module questions(List<Question> questions) {
         this.questions = questions;
         return this;
     }
@@ -96,15 +98,15 @@ public class Module implements Serializable {
         return this;
     }
 
-    public void setQuestions(Set<Question> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 
-    public Set<Annex> getAnnexes() {
+    public List<Annex> getAnnexes() {
         return annexes;
     }
 
-    public Module annexes(Set<Annex> annexes) {
+    public Module annexes(List<Annex> annexes) {
         this.annexes = annexes;
         return this;
     }
@@ -121,15 +123,15 @@ public class Module implements Serializable {
         return this;
     }
 
-    public void setAnnexes(Set<Annex> annexes) {
+    public void setAnnexes(List<Annex> annexes) {
         this.annexes = annexes;
     }
 
-    public Set<Recommendation> getRecommendations() {
+    public List<Recommendation> getRecommendations() {
         return recommendations;
     }
 
-    public Module recommendations(Set<Recommendation> recommendations) {
+    public Module recommendations(List<Recommendation> recommendations) {
         this.recommendations = recommendations;
         return this;
     }
@@ -146,7 +148,7 @@ public class Module implements Serializable {
         return this;
     }
 
-    public void setRecommendations(Set<Recommendation> recommendations) {
+    public void setRecommendations(List<Recommendation> recommendations) {
         this.recommendations = recommendations;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
