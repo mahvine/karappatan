@@ -37,6 +37,7 @@ public class Module implements Serializable {
     private String details;
 
     @OneToMany(mappedBy = "module", fetch=FetchType.EAGER)
+    @OrderBy("id ASC")
     private List<Question> questions = new ArrayList<>();
     @OneToMany(mappedBy = "module", fetch=FetchType.EAGER)
     private List<Annex> annexes = new ArrayList<>();
