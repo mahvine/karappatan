@@ -22,7 +22,7 @@
                     </dd>
                 </div>
                 
-                <div *ngIf="caseSummary.acceptedByLogin != currentAccount.login">
+                <div *ngIf="caseSummary.acceptedByLogin != null && caseSummary.acceptedByLogin != currentAccount.login && configuration.caseSummaryAcceptanceEnabled">
                         <dt><span>Accepted by</span></dt>
                         <dd>
                             {{currentAccount.login}} - {{currentAccount.firstName}} {{currentAccount.lastName}}
