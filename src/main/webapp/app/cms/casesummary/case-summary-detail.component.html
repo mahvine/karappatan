@@ -9,7 +9,7 @@
                 <dd>
                     <span>{{caseSummary.dateCreated}}</span>
                 </dd>
-                <div *ngIf="caseSummary.acceptedByLogin == currentAccount.login">
+                <div *ngIf="caseSummary.acceptedByLogin == currentAccount.login ||  !configuration.caseSummaryAcceptanceEnabled">
                     <dt><span>User</span></dt>
                     <dd>
                         {{caseSummary.user.firstName}} {{caseSummary.user.lastName}} 
@@ -34,9 +34,9 @@
                         <p>{{module.details}}</p>
                         <dt>Questions:</dt>
                         <ol>
-                            <li *ngFor="let question of module.questions"> {{question.question}}
+                            <li *ngFor="let question of module.questions"> <div [innerHtml]="question.question"></div>
                                 <ul *ngFor="let answer of question.answers">
-                                    <li *ngIf="caseSummary.answerIds.indexOf(answer.id) > -1">{{answer.answer}} <br> {{answer.instructions}}</li>
+                                    <li *ngIf="caseSummary.answerIds.indexOf(answer.id) > -1"><div [innerHTML]="answer.answer"></div> <br> <div [innerHTML]="answer.instructions"></div></li>
                                 </ul>
                             </li>
                         </ol>
@@ -50,7 +50,7 @@
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
             </button>
 
-            <button type="button" *ngIf="caseSummary.acceptedByLogin==undefined"
+            <button type="button" *ngIf="caseSummary.acceptedByLogin==undefined && configuration.caseSummaryAcceptanceEnabled"
                     (click)="accept()"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Accept</span>

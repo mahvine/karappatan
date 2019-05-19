@@ -17,6 +17,7 @@ import ph.mahvine.karappatan.domain.User;
 import ph.mahvine.karappatan.service.KarappatanService;
 import ph.mahvine.karappatan.service.UserService;
 import ph.mahvine.karappatan.service.dto.CaseSummaryDTO;
+import ph.mahvine.karappatan.service.dto.CreateCaseSummaryDTO;
 import ph.mahvine.karappatan.web.rest.errors.BadRequestAlertException;
 import ph.mahvine.karappatan.web.rest.util.HeaderUtil;
 
@@ -49,11 +50,8 @@ public class KarappatanResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/caseSummaries")
-    public ResponseEntity<CaseSummaryDTO> createCaseSummary(@Valid @RequestBody CaseSummaryDTO caseSummaryDTO) throws URISyntaxException {
+    public ResponseEntity<CaseSummaryDTO> createCaseSummary(@Valid @RequestBody CreateCaseSummaryDTO caseSummaryDTO) throws URISyntaxException {
         log.debug("REST request to save CaseSummary : {}", caseSummaryDTO);
-        if (caseSummaryDTO.getId() != null) {
-            throw new BadRequestAlertException("A new caseSummary cannot already have an ID", ENTITY_NAME, "idexists");
-        }
         User user = userService.getUserWithAuthorities().get();
         CaseSummaryDTO result = karappatanService.createCaseSummary(caseSummaryDTO, user);
         return ResponseEntity.created(new URI("/api/caseSummaries/" + result.getId()))

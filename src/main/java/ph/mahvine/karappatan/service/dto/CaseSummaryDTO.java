@@ -1,13 +1,13 @@
 package ph.mahvine.karappatan.service.dto;
+import java.io.Serializable;
 import java.time.Instant;
-import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 import ph.mahvine.karappatan.domain.Answer;
-
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
 
 /**
  * A DTO for the CaseSummary entity.
@@ -24,7 +24,7 @@ public class CaseSummaryDTO implements Serializable {
     
     private UserDTO user;
     
-    private Set<Long> answerIds = new HashSet<>();
+    private List<Long> answerIds = new ArrayList<>();
 
     private Set<Answer> answers = new HashSet<>();
 
@@ -131,11 +131,11 @@ public class CaseSummaryDTO implements Serializable {
 		this.user = user;
 	}
 
-	public Set<Long> getAnswerIds() {
+	public List<Long> getAnswerIds() {
 		return answerIds;
 	}
 
-	public void setAnswerIds(Set<Long> answerIds) {
+	public void setAnswerIds(List<Long> answerIds) {
 		this.answerIds = answerIds;
 	}
 

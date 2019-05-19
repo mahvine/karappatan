@@ -7,10 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ph.mahvine.karappatan.domain.Answer;
 import ph.mahvine.karappatan.domain.CaseSummary;
 import ph.mahvine.karappatan.domain.User;
+import ph.mahvine.karappatan.repository.AnswerRepository;
 import ph.mahvine.karappatan.repository.CaseSummaryRepository;
 import ph.mahvine.karappatan.service.dto.CaseSummaryDTO;
+import ph.mahvine.karappatan.service.dto.CreateCaseSummaryDTO;
 import ph.mahvine.karappatan.service.mapper.CaseSummaryMapper;
 
 @Service
@@ -22,14 +25,21 @@ public class KarappatanService {
     private final CaseSummaryRepository caseSummaryRepository;
 
     private final CaseSummaryMapper caseSummaryMapper;
+    
+    private final AnswerRepository answerRepository;
 
-    public KarappatanService(CaseSummaryRepository caseSummaryRepository, CaseSummaryMapper caseSummaryMapper) {
+    public KarappatanService(CaseSummaryRepository caseSummaryRepository, CaseSummaryMapper caseSummaryMapper, AnswerRepository answerRepository) {
         this.caseSummaryRepository = caseSummaryRepository;
         this.caseSummaryMapper = caseSummaryMapper;
+        this.answerRepository = answerRepository;
     }
     
-    public CaseSummaryDTO createCaseSummary(CaseSummaryDTO caseSummaryDTO, User user) {
-    	CaseSummary caseSummary = caseSummaryMapper.toEntity(caseSummaryDTO);
+    public CaseSummaryDTO createCaseSummary(CreateCaseSummaryDTO caseSummaryDTO, User user) {
+    	CaseSummary caseSummary = caseSummaryMapper.toEntityFromDTO(caseSummaryDTO);
+    	if(caseSummary.getAnswers().size() > 0) {    		
+    		Answer answer = answerRepository.getOne(caseSummaryDTO.getAnswerIds().get(0));
+    		caseSummary.module(answer.getQuestion().getModule());
+    	}
     	caseSummary.user(user);
     	caseSummary.dateCreated(Instant.now());
     	caseSummary = caseSummaryRepository.save(caseSummary);

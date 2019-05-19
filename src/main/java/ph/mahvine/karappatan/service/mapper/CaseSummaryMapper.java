@@ -4,9 +4,12 @@ import ph.mahvine.karappatan.domain.*;
 import ph.mahvine.karappatan.repository.AnswerRepository;
 import ph.mahvine.karappatan.repository.ModuleRepository;
 import ph.mahvine.karappatan.service.dto.CaseSummaryDTO;
+import ph.mahvine.karappatan.service.dto.CreateCaseSummaryDTO;
 import ph.mahvine.karappatan.service.dto.UserDTO;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -40,6 +43,9 @@ public abstract class CaseSummaryMapper implements EntityMapper<CaseSummaryDTO, 
     @Mapping(source = "answerIds", target = "answers")
     public abstract CaseSummary toEntity(CaseSummaryDTO caseSummaryDTO);
 
+    @Mapping(source = "answerIds", target = "answers")
+    public abstract CaseSummary toEntityFromDTO(CreateCaseSummaryDTO caseSummaryDTO);
+
     public CaseSummary fromId(Long id) {
         if (id == null) {
             return null;
@@ -56,16 +62,16 @@ public abstract class CaseSummaryMapper implements EntityMapper<CaseSummaryDTO, 
     	return moduleRepository.getOne(id);
     }
 
-    public Set<Long> answersToIds(Set<Answer> answers) {
-    	return answers.stream().map(Answer::getId).collect(Collectors.toSet());
+    public List<Long> answersToIds(List<Answer> answers) {
+    	return answers.stream().map(Answer::getId).collect(Collectors.toList());
     }
     
 
-    public Set<Answer> answersFromIds(Set<Long> answerIds) {
+    public List<Answer> answersFromIds(List<Long> answerIds) {
     	if(answerIds == null) {
     		return null;
     	}
-    	return new HashSet<>(answerRepository.findAllById(answerIds));
+    	return answerRepository.findAllById(answerIds);
     }
     
     

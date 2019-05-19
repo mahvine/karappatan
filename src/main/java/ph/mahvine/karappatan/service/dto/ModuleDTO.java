@@ -1,7 +1,9 @@
 package ph.mahvine.karappatan.service.dto;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,7 +19,7 @@ public class ModuleDTO implements Serializable {
 
     private String details;
 
-    private Set<QuestionDTO> questions = new HashSet<>();
+    private List<QuestionDTO> questions = new ArrayList<>();
     private Set<RecommendationDTO> recommendations = new HashSet<>();
 
 	private Set<AnnexDTO> annexes = new HashSet<>();
@@ -48,11 +50,11 @@ public class ModuleDTO implements Serializable {
         this.details = details;
     }
 
-    public Set<QuestionDTO> getQuestions() {
+    public List<QuestionDTO> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(Set<QuestionDTO> questions) {
+	public void setQuestions(List<QuestionDTO> questions) {
 		this.questions = questions;
 	}
 

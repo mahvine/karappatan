@@ -1,16 +1,27 @@
 package ph.mahvine.karappatan.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * A CaseSummary.
@@ -38,7 +49,7 @@ public class CaseSummary implements Serializable {
     @JoinTable(name = "case_summary_answers",
                joinColumns = @JoinColumn(name = "case_summary_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "answers_id", referencedColumnName = "id"))
-    private Set<Answer> answers = new HashSet<>();
+    private List<Answer> answers = new ArrayList<>();
     
     @ManyToOne
     @JsonIgnoreProperties("caseSummaries")
@@ -83,11 +94,11 @@ public class CaseSummary implements Serializable {
         this.user = user;
     }
 
-    public Set<Answer> getAnswers() {
+    public List<Answer> getAnswers() {
         return answers;
     }
 
-    public CaseSummary answers(Set<Answer> answers) {
+    public CaseSummary answers(List<Answer> answers) {
         this.answers = answers;
         return this;
     }
@@ -102,7 +113,7 @@ public class CaseSummary implements Serializable {
         return this;
     }
 
-    public void setAnswers(Set<Answer> answers) {
+    public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
 
