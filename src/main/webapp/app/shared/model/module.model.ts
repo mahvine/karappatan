@@ -9,6 +9,7 @@ export interface IModule {
     questions?: IQuestion[];
     annexes?: IAnnex[];
     recommendations?: IRecommendation[];
+    firstQuestionId?: number;
 }
 
 export class Module implements IModule {
@@ -18,6 +19,7 @@ export class Module implements IModule {
         public details?: string,
         public questions?: IQuestion[],
         public annexes?: IAnnex[],
-        public recommendations?: IRecommendation[]
+        public recommendations?: IRecommendation[],
+        public firstQuestionId?: number
     ) {}
 }

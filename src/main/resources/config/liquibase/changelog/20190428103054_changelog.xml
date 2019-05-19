@@ -18,4 +18,17 @@
 	        <where>id = 1</where>
 	    </update>
 	</changeSet>
+	
+    <changeSet author="mahvine" id="1558184460365-3">
+	    <update tableName="krptn_module">
+	        <column name="title" value="Labor Cases" />
+	        <where>id = 1</where>
+	    </update>
+	</changeSet>
+    <changeSet author="mahvine" id="1558184460365-4">
+	    <update tableName="krptn_module">
+	        <column name="details" value="The Department of Labor and Employment (DOLE) is encouraging workers to report employers who do not comply with labor standards as it vows to enforce its new order against labor-only contracting and other illegal contracting practices." />
+	        <where>id = 1</where>
+	    </update>
+	</changeSet>
 </databaseChangeLog>

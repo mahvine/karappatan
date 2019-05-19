@@ -34,7 +34,7 @@
                         <p>{{module.details}}</p>
                         <dt>Questions:</dt>
                         <ol>
-                            <li *ngFor="let question of module.questions"> <div [innerHtml]="question.question"></div>
+                            <li *ngFor="let question of sortedQuestions"> <div [innerHtml]="question.question"></div>
                                 <ul *ngFor="let answer of question.answers">
                                     <li *ngIf="caseSummary.answerIds.indexOf(answer.id) > -1"><div [innerHTML]="answer.answer"></div> <br> <div [innerHTML]="answer.instructions"></div></li>
                                 </ul>
