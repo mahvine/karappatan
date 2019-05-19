@@ -21,6 +21,8 @@ public class ModuleDTO implements Serializable {
     private Set<RecommendationDTO> recommendations = new HashSet<>();
 
 	private Set<AnnexDTO> annexes = new HashSet<>();
+	
+	private Long firstQuestionId;
 
     public Long getId() {
         return id;
@@ -99,4 +101,12 @@ public class ModuleDTO implements Serializable {
             ", details='" + getDetails() + "'" +
             "}";
     }
+
+	public Long getFirstQuestionId() {
+		return firstQuestionId;
+	}
+
+	public void setFirstQuestionId(Long firstQuestionId) {
+		this.firstQuestionId = firstQuestionId;
+	}
 }

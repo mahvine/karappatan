@@ -13,6 +13,12 @@
                 <dd>
                     <span>{{module.details}}</span>
                 </dd>
+                <dt *ngIf="module.firstQuestionId"><span>First Question</span></dt>
+                <dd>
+                    <div *ngIf="module.firstQuestionId">
+                        <a [routerLink]="['/question', module.firstQuestionId, 'view']">{{module.firstQuestionId}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

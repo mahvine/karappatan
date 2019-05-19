@@ -1,17 +1,23 @@
 package ph.mahvine.karappatan.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * A Module.
@@ -35,9 +41,12 @@ public class Module implements Serializable {
 
     @Column(name = "details")
     private String details;
+    
+    @ManyToOne
+    private Question firstQuestion;
 
-    @OneToMany(mappedBy = "module", fetch=FetchType.EAGER)
     @OrderBy("id ASC")
+    @OneToMany(mappedBy = "module", fetch=FetchType.EAGER)
     private List<Question> questions = new ArrayList<>();
     @OneToMany(mappedBy = "module", fetch=FetchType.EAGER)
     private List<Annex> annexes = new ArrayList<>();
@@ -182,4 +191,12 @@ public class Module implements Serializable {
             ", details='" + getDetails() + "'" +
             "}";
     }
+
+	public Question getFirstQuestion() {
+		return firstQuestion;
+	}
+
+	public void setFirstQuestion(Question firstQuestion) {
+		this.firstQuestion = firstQuestion;
+	}
 }

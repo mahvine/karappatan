@@ -1,9 +1,10 @@
 package ph.mahvine.karappatan.service.mapper;
 
-import ph.mahvine.karappatan.domain.*;
-import ph.mahvine.karappatan.service.dto.ModuleDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-import org.mapstruct.*;
+import ph.mahvine.karappatan.domain.Module;
+import ph.mahvine.karappatan.service.dto.ModuleDTO;
 
 /**
  * Mapper for the entity Module and its DTO ModuleDTO.
@@ -12,6 +13,10 @@ import org.mapstruct.*;
 public interface ModuleMapper extends EntityMapper<ModuleDTO, Module> {
 
 
+    @Mapping(source = "firstQuestion.id", target = "firstQuestionId")
+    public abstract ModuleDTO toDto(Module module);
+    
+    @Mapping(source = "firstQuestionId", target = "firstQuestion")
     Module toEntity(ModuleDTO moduleDTO);
 
     default Module fromId(Long id) {
@@ -22,4 +27,5 @@ public interface ModuleMapper extends EntityMapper<ModuleDTO, Module> {
         module.setId(id);
         return module;
     }
+
 }

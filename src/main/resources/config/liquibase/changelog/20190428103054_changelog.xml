@@ -7,4 +7,15 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet author="mahvine (generated)" id="1558184460362-1">
+        <addColumn tableName="krptn_module">
+            <column name="first_question_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mahvine" id="1558184460364-2">
+	    <update tableName="krptn_module">
+	        <column name="first_question_id" value="1001" />
+	        <where>id = 1</where>
+	    </update>
+	</changeSet>
 </databaseChangeLog>
