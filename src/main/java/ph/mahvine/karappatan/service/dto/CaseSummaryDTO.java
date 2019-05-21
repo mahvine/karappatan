@@ -7,11 +7,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import ph.mahvine.karappatan.domain.Answer;
 
 /**
  * A DTO for the CaseSummary entity.
  */
+@JsonInclude(Include.NON_NULL)
 public class CaseSummaryDTO implements Serializable {
 
     private Long id;

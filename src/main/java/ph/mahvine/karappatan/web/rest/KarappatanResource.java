@@ -1,24 +1,29 @@
 package ph.mahvine.karappatan.web.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ph.mahvine.karappatan.domain.Answer;
 import ph.mahvine.karappatan.domain.User;
+import ph.mahvine.karappatan.repository.CaseSummaryRepository;
 import ph.mahvine.karappatan.service.KarappatanService;
 import ph.mahvine.karappatan.service.UserService;
 import ph.mahvine.karappatan.service.dto.CaseSummaryDTO;
 import ph.mahvine.karappatan.service.dto.CreateCaseSummaryDTO;
-import ph.mahvine.karappatan.web.rest.errors.BadRequestAlertException;
+import ph.mahvine.karappatan.service.mapper.CaseSummaryMapper;
 import ph.mahvine.karappatan.web.rest.util.HeaderUtil;
 
 /**
@@ -36,10 +41,16 @@ public class KarappatanResource {
     private final KarappatanService karappatanService;
     
     private final UserService userService;
+    
+    private final CaseSummaryRepository caseSummaryRepository;
+    
+    private final CaseSummaryMapper mapper;
 
-    public KarappatanResource(KarappatanService karappatanService, UserService userService) {
+    public KarappatanResource(KarappatanService karappatanService, UserService userService, CaseSummaryRepository caseSummaryRepository, CaseSummaryMapper mapper) {
         this.karappatanService = karappatanService;
         this.userService = userService;
+        this.caseSummaryRepository = caseSummaryRepository;
+        this.mapper = mapper;
     }
 
     /**
@@ -53,10 +64,24 @@ public class KarappatanResource {
     public ResponseEntity<CaseSummaryDTO> createCaseSummary(@Valid @RequestBody CreateCaseSummaryDTO caseSummaryDTO) throws URISyntaxException {
         log.debug("REST request to save CaseSummary : {}", caseSummaryDTO);
         User user = userService.getUserWithAuthorities().get();
+        if(user == null) {
+        	throw new RuntimeException("User not logged in");
+        }
         CaseSummaryDTO result = karappatanService.createCaseSummary(caseSummaryDTO, user);
         return ResponseEntity.created(new URI("/api/caseSummaries/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+    
+    @GetMapping("/caseSummaries")
+    public List<CaseSummaryDTO> getMyCaseSummaries() throws URISyntaxException {
+        return caseSummaryRepository.findByUserIsCurrentUser().stream().map( caseSummary -> {
+        	CaseSummaryDTO caseSummaryDTO = new CaseSummaryDTO();
+        	caseSummaryDTO.setId(caseSummary.getId());
+        	caseSummaryDTO.setAnswerIds(caseSummary.getAnswers().stream().map(Answer::getId).collect(Collectors.toList()));
+        	caseSummaryDTO.setDateCreated(caseSummary.getDateCreated());
+        	return caseSummaryDTO;
+        }).collect(Collectors.toList());
     }
     
 

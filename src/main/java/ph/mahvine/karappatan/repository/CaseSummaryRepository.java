@@ -17,7 +17,7 @@ import java.util.Optional;
 @Repository
 public interface CaseSummaryRepository extends JpaRepository<CaseSummary, Long> {
 
-    @Query("select case_summary from CaseSummary case_summary where case_summary.user.login = ?#{principal.username}")
+    @Query("select case_summary from CaseSummary case_summary left join fetch case_summary.answers where case_summary.user.login = ?#{principal.username} ")
     List<CaseSummary> findByUserIsCurrentUser();
 
     @Query(value = "select distinct case_summary from CaseSummary case_summary left join fetch case_summary.answers",
