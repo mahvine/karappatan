@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity CaseSummaryOffer.
+    -->
+    <changeSet id="20190706221429-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="case_summary_id"
+                                 baseTableName="case_summary_offer"
+                                 constraintName="fk_case_summary_offer_case_summary_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="case_summary"/>
+
+        <addForeignKeyConstraint baseColumnNames="lawyer_id"
+                                 baseTableName="case_summary_offer"
+                                 constraintName="fk_case_summary_offer_lawyer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+    </changeSet>
+</databaseChangeLog>

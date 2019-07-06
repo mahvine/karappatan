@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "caseSummary",
+            "otherEntityName": "caseSummary",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "lawyer",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "caseSummaryOffer"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "dateCreated",
+            "fieldType": "Instant",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "OfferStatus",
+            "fieldValues": "OPEN,DENIED,ACCEPTED"
+        }
+    ],
+    "changelogDate": "20190706221429",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "case_summary_offer",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

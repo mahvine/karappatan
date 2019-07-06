@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ph.mahvine.karappatan.domain.Answer;
+import ph.mahvine.karappatan.domain.CaseSummaryOffer;
 import ph.mahvine.karappatan.domain.User;
 import ph.mahvine.karappatan.repository.CaseSummaryRepository;
 import ph.mahvine.karappatan.service.KarappatanService;
 import ph.mahvine.karappatan.service.UserService;
 import ph.mahvine.karappatan.service.dto.CaseSummaryDTO;
 import ph.mahvine.karappatan.service.dto.CreateCaseSummaryDTO;
+import ph.mahvine.karappatan.service.dto.CreateOfferDTO;
 import ph.mahvine.karappatan.service.mapper.CaseSummaryMapper;
 import ph.mahvine.karappatan.web.rest.util.HeaderUtil;
 
@@ -99,6 +101,14 @@ public class KarappatanResource {
         User user = userService.getUserWithAuthorities().get();
         CaseSummaryDTO result = karappatanService.acceptCaseSummary(id, user);
         return result;
+    }
+    
+
+    @PostMapping("/caseSummaries/offers")
+    public CaseSummaryOffer createCaseSummaryOffer(@Valid @RequestBody CreateOfferDTO caseSummaryOfferDTO) throws URISyntaxException {
+        log.debug("REST request to offer CaseSummary : {}", caseSummaryOfferDTO);
+        User user = userService.getUserWithAuthorities().get();
+        return karappatanService.createOffer(caseSummaryOfferDTO.getCaseSummaryId(), user);
     }
     
 

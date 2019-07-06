@@ -25,6 +25,10 @@
                         <a [routerLink]="['/module', caseSummary.moduleId, 'view']">{{caseSummary.moduleTitle}}</a>
                     </div>
                 </dd>
+                <dt><span>Details</span></dt>
+                <dd>
+                    <span>{{caseSummary.details}}</span>
+                </dd>
             </dl>
 
             <button type="submit"

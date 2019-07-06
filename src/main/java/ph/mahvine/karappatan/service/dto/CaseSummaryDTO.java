@@ -37,6 +37,8 @@ public class CaseSummaryDTO implements Serializable {
     private String moduleTitle;
     
     private String acceptedByLogin;
+    
+    private String details;
 
     public Long getId() {
         return id;
@@ -149,5 +151,13 @@ public class CaseSummaryDTO implements Serializable {
 
 	public void setAcceptedByLogin(String acceptedByLogin) {
 		this.acceptedByLogin = acceptedByLogin;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
 	}
 }

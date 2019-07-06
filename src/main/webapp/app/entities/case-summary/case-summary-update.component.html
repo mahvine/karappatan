@@ -43,6 +43,11 @@
                         <option [ngValue]="moduleOption.id" *ngFor="let moduleOption of modules; trackBy: trackModuleById">{{moduleOption.title}}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_details">Details</label>
+                    <textarea class="form-control" name="details" id="field_details"
+                        [(ngModel)]="caseSummary.details" ></textarea>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

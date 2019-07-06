@@ -36,6 +36,14 @@
         {
             "fieldName": "dateCreated",
             "fieldType": "Instant"
+        },
+        {
+            "fieldName": "details",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20190222150334",

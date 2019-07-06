@@ -12,6 +12,7 @@ export interface ICaseSummary {
     answerIds?: number[];
     acceptedByLogin?: string;
     user?: any;
+    details?: string;
 }
 
 export class CaseSummary implements ICaseSummary {
@@ -25,6 +26,7 @@ export class CaseSummary implements ICaseSummary {
         public moduleId?: number,
         public answerIds?: number[],
         public acceptedByLogin?: string,
-        public user?: any
+        public user?: any,
+        public details?: string
     ) {}
 }

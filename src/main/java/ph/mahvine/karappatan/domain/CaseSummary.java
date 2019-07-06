@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -58,6 +59,9 @@ public class CaseSummary implements Serializable {
 
     @ManyToOne(optional = true)
     private User acceptedBy;
+    
+    @Column(name = "details")
+    private String details;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -165,5 +169,18 @@ public class CaseSummary implements Serializable {
 
 	public void setAcceptedBy(User acceptedBy) {
 		this.acceptedBy = acceptedBy;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
+	}
+	
+	public CaseSummary details(String details) {
+		this.details = details;
+		return this;
 	}
 }

@@ -9,6 +9,8 @@ import java.util.List;
 public class CreateCaseSummaryDTO implements Serializable {
 
     private List<Long> answerIds = new ArrayList<>();
+    
+    private String details;
 
 	public List<Long> getAnswerIds() {
 		return answerIds;
@@ -41,6 +43,14 @@ public class CreateCaseSummaryDTO implements Serializable {
 		} else if (!answerIds.equals(other.answerIds))
 			return false;
 		return true;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
 	}
     
     

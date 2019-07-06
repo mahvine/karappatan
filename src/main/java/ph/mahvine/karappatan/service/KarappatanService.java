@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ph.mahvine.karappatan.domain.Answer;
 import ph.mahvine.karappatan.domain.CaseSummary;
+import ph.mahvine.karappatan.domain.CaseSummaryOffer;
 import ph.mahvine.karappatan.domain.User;
 import ph.mahvine.karappatan.repository.AnswerRepository;
+import ph.mahvine.karappatan.repository.CaseSummaryOfferRepository;
 import ph.mahvine.karappatan.repository.CaseSummaryRepository;
 import ph.mahvine.karappatan.service.dto.CaseSummaryDTO;
 import ph.mahvine.karappatan.service.dto.CreateCaseSummaryDTO;
@@ -27,11 +29,14 @@ public class KarappatanService {
     private final CaseSummaryMapper caseSummaryMapper;
     
     private final AnswerRepository answerRepository;
+    
+    private final CaseSummaryOfferRepository caseSummaryOfferRepository;
 
-    public KarappatanService(CaseSummaryRepository caseSummaryRepository, CaseSummaryMapper caseSummaryMapper, AnswerRepository answerRepository) {
+    public KarappatanService(CaseSummaryRepository caseSummaryRepository, CaseSummaryMapper caseSummaryMapper, AnswerRepository answerRepository, CaseSummaryOfferRepository caseSummaryOfferRepository) {
         this.caseSummaryRepository = caseSummaryRepository;
         this.caseSummaryMapper = caseSummaryMapper;
         this.answerRepository = answerRepository;
+        this.caseSummaryOfferRepository = caseSummaryOfferRepository;
     }
     
     public CaseSummaryDTO createCaseSummary(CreateCaseSummaryDTO caseSummaryDTO, User user) {
@@ -57,6 +62,18 @@ public class KarappatanService {
     	log.info("Case summary:{} accepted by user:{}",caseSummary.getId(), user.getLogin());
 
     	return caseSummaryMapper.toDto(caseSummary);
+    }
+    
+
+    public CaseSummaryOffer createOffer(Long caseSummaryId, User user) {
+    	CaseSummary caseSummary = caseSummaryRepository.getOne(caseSummaryId);
+    	CaseSummaryOffer offer = new CaseSummaryOffer();
+    	offer.dateCreated(Instant.now());
+    	offer.lawyer(user);
+    	offer.caseSummary(caseSummary);
+    	log.info("Case summary:{} offered by user:{}",caseSummary.getId(), user.getLogin());
+    	caseSummaryOfferRepository.save(offer);
+    	return offer;
     }
 
 }
