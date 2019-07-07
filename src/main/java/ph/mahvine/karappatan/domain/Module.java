@@ -8,6 +8,8 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +20,8 @@ import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import ph.mahvine.karappatan.domain.enumeration.ModuleType;
 
 /**
  * A Module.
@@ -31,7 +35,7 @@ public class Module implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
@@ -44,6 +48,10 @@ public class Module implements Serializable {
     
     @ManyToOne
     private Question firstQuestion;
+    
+    @Column(name= "type")
+    @Enumerated(EnumType.STRING)
+    private ModuleType type;
 
     @OrderBy("id ASC")
     @OneToMany(mappedBy = "module", fetch=FetchType.EAGER)

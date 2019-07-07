@@ -56,23 +56,21 @@ public class UtilResource {
 	ModuleRepository moduleRepository;
 	
 	static boolean running = false;
-	
-	Module module;
-	
-	private static final String FILENAME = "Karappatan.xlsx";
-	
+
 	@GetMapping("/provisionData")
 	public void provisionData() throws IOException {
 		if(!running) {
-			module = moduleRepository.getOne(1L);
+			Module module = moduleRepository.getOne(1L);
+			String karappatanExcel = "Karappatan.xlsx";
+			
 			try {
 				running = true;
-				loadQuestions(false);
-				loadRecommendations(false);
-				loadAnnexes(false);
-				loadQuestions(true);
-				loadRecommendations(true);
-				loadAnnexes(true);
+				loadQuestions(false, karappatanExcel, module);
+				loadRecommendations(false, karappatanExcel, module);
+				loadAnnexes(false, karappatanExcel, module);
+				loadQuestions(true, karappatanExcel, module);
+				loadRecommendations(true, karappatanExcel, module);
+				loadAnnexes(true, karappatanExcel, module);
 			} finally {
 				running = false;
 			}
@@ -80,13 +78,38 @@ public class UtilResource {
 			logger.error("Upload excel file currently running");
 		}
 	}
+	
+
+	@GetMapping("/provisionIndigencyTest")
+	public void provisionDataIndigencyTest() throws IOException {
+		if(!running) {
+			Module module = moduleRepository.getOne(2L);
+			String excelFile = "Indigency-Test-v2.xlsx";
+			
+			try {
+				running = true;
+				loadQuestions(false, excelFile, module);
+				loadRecommendations(false, excelFile, module);
+				loadQuestions(true, excelFile, module);
+				loadRecommendations(true, excelFile, module);
+			} finally {
+				running = false;
+			}
+		} else {
+			logger.error("Upload excel file currently running");
+		}
+	}
+	
+	
+	
+	
 		
-	private void loadQuestions(boolean loadReferences) {
+	private void loadQuestions(boolean loadReferences,String filename, Module module) {
 		
 		logger.info("Question Present:"+questionRepository.findOneByIdentifier("Q1").isPresent());
 		
 	    try {
-	    	FileInputStream fileInputStream = new FileInputStream(new File(FILENAME));
+	    	FileInputStream fileInputStream = new FileInputStream(new File(filename));
             Workbook workbook = new XSSFWorkbook(fileInputStream);
             Sheet datatypeSheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = datatypeSheet.iterator();
@@ -185,12 +208,12 @@ public class UtilResource {
 	}
 	
 	
-	private void loadRecommendations(boolean loadReferences) {
+	private void loadRecommendations(boolean loadReferences, String filename, Module module) {
 
 	    logger.info("start recommendations");
 	    try { 
 	    	// Recommendation
-	    	FileInputStream fileInputStream = new FileInputStream(new File(FILENAME));
+	    	FileInputStream fileInputStream = new FileInputStream(new File(filename));
             Workbook workbook = new XSSFWorkbook(fileInputStream);
             Sheet sheet = workbook.getSheetAt(1);
             int rowNum = 2;
@@ -206,8 +229,12 @@ public class UtilResource {
                 	i++;
                 }
                 String content = currentRow.getCell(i)!= null && currentRow.getCell(i).getCellType() == CellType.STRING?currentRow.getCell(i).getStringCellValue(): currentRow.getCell(i).getCellType()==CellType.NUMERIC ? currentRow.getCell(i).getNumericCellValue()+"":null; i++;
-            	currentRow.getCell(i).setCellType(CellType.STRING);
-                String nextQuestionIDs = currentRow.getCell(i)!= null && currentRow.getCell(i).getCellType() == CellType.STRING?currentRow.getCell(i).getStringCellValue(): currentRow.getCell(i).getCellType()==CellType.NUMERIC ? currentRow.getCell(i).getNumericCellValue()+"":null; i++;
+                String nextQuestionIDs = null;
+                if(currentRow.getCell(i) != null) {                	
+                	currentRow.getCell(i).setCellType(CellType.STRING);
+                	nextQuestionIDs = currentRow.getCell(i)!= null && currentRow.getCell(i).getCellType() == CellType.STRING?currentRow.getCell(i).getStringCellValue(): currentRow.getCell(i).getCellType()==CellType.NUMERIC ? currentRow.getCell(i).getNumericCellValue()+"":null; i++;
+                }
+                
                 String nextRecommendationID = null;
                 if(currentRow.getCell(i)!= null) {
                 	currentRow.getCell(i).setCellType(CellType.STRING);
@@ -256,10 +283,10 @@ public class UtilResource {
 	}
 	
 	
-	private void loadAnnexes(boolean loadReferences) {
+	private void loadAnnexes(boolean loadReferences, String filename, Module module) {
 	    try { 
 	    	// Annex
-	    	FileInputStream fileInputStream = new FileInputStream(new File(FILENAME));
+	    	FileInputStream fileInputStream = new FileInputStream(new File(filename));
             Workbook workbook = new XSSFWorkbook(fileInputStream);
             Sheet sheet = workbook.getSheetAt(2);
             int rowNum = 2;

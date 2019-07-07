@@ -7,4 +7,18 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet author="mahvine"  id="1562447416227-2">
+        <addColumn tableName="krptn_module">
+            <column name="type" type="varchar(30)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mahvine" id="1562486876698-1">
+        <loadUpdateData primaryKey="id" encoding="UTF-8"
+                  file="config/liquibase/data/2019.07.07/modules.csv"
+                  separator=";"
+                  tableName="krptn_module">
+    	</loadUpdateData>
+    </changeSet>
 </databaseChangeLog>
