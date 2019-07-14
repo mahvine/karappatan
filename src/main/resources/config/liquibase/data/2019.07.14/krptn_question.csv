@@ -1,0 +1,9 @@
+id,question,identifier,info,module_id
+951,Is the applicant or party  a natural or juridical person? ,M2_1,NULL,2
+1742,Where does the applicant reside? ,M2_2,NULL,2
+1743,"Does the applicant’s net income exceed 14,000 a month? ",M2_3,"Net income is the income of the applicant less statutory deductions such as withholding deductions, GSIS, SSS, Pag-Ibig, Philhealth, and other mandatory deductions. ",2
+1744,"Does the applicant’s net income exceed 13,000 a month? ",M2_4,"Net income is the income of the applicant less statutory deductions such as withholding deductions, GSIS, SSS, Pag-Ibig, Philhealth, and other mandatory deductions. ",2
+1745,"Does the applicant’s net income exceed 12,000 a month? ",M2_5,"Net income is the income of the applicant less statutory deductions such as withholding deductions, GSIS, SSS, Pag-Ibig, Philhealth, and other mandatory deductions. ",2
+1746,"Does the case involve any of the following: BP22, sum of money, forfeiture, annulment? ",M2_6,NULL,2
+1747,"Did the applicant already engage the services of another lawyer, firm, or institution? ",M2_7,NULL,2
+1748,"Upload any of the following documents: Latest income tax return or pay slip or other proof of income; Certificate of Indigency from the Department of Social Welfare and Development, its local district office, or the Municipal Social Welfare and Development Office having jurisdiction over the residence of the applicant or Certificate of Indigency from the Barangay Chairman having jurisdiction over the residence of the applicant. ",M2_8,NULL,2

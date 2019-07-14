@@ -1,0 +1,5 @@
+id,content,identifier,next_recommendation_id,module_id
+1792,The person is not qualified for legal assistance. ,R2_1,NULL,2
+1793,The applicant is not qualified for legal assistance pursuant to the PAO’s (Public Attorney’s Office) indigency test. ,R2_2,NULL,2
+1794,The applicant is not qualified for legal assistance as these claims are inconsistent with a claim of indifency. ,R2_3,NULL,2
+1795,The applicant is no longer qualified for legal assistance due to availability of another counsel.  ,R2_4,NULL,2

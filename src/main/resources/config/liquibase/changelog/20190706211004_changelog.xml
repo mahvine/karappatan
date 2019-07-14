@@ -21,4 +21,28 @@
                   tableName="krptn_module">
     	</loadUpdateData>
     </changeSet>
+    <changeSet id="20190714101400-1" author="joshvindomingo" >
+       <loadData encoding="UTF-8"
+                 file="config/liquibase/data/2019.07.14/krptn_question.csv"
+                 separator=","
+                 tableName="krptn_question">
+       </loadData>
+       <loadData encoding="UTF-8"
+                 file="config/liquibase/data/2019.07.14/krptn_answer.csv"
+                 separator="," 
+                 tableName="krptn_answer">
+       </loadData>
+       <loadData encoding="UTF-8"
+                 file="config/liquibase/data/2019.07.14/krptn_recommendation.csv"
+                 separator="," 
+                 tableName="krptn_recommendation">
+       </loadData>
+    </changeSet>
+    
+    <changeSet author="mahvine" id="20190714101400-2">
+	    <update tableName="krptn_module">
+	        <column name="first_question_id" value="951" />
+	        <where>id = 2</where>
+	    </update>
+	</changeSet>
 </databaseChangeLog>

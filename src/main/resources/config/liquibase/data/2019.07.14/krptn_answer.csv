@@ -1,0 +1,16 @@
+id,answer,instructions,annex_id,recommendation_id,next_question_id,question_id
+1692,The applicant is a juridical person.,NULL,NULL,1792,NULL,951
+1693,The applicant is a natural person.,NULL,NULL,NULL,1742,951
+1694,The applicant resides in Metro Manila.,NULL,NULL,NULL,1743,1742
+1695,The applicant resides in other cities ,NULL,NULL,NULL,1744,1742
+1696,The applicant resides in oher places. ,NULL,NULL,NULL,1745,1742
+1697,"Yes, the applicant''s income exceeds 14,000 a month. ",NULL,NULL,1793,NULL,1743
+1698,"No, the applicant''s income does not exceed 14,000 a month. ",NULL,NULL,NULL,1745,1743
+1699,"Yes, the applicant''s income exceeds 13,000 a month. ",NULL,NULL,1793,NULL,1744
+1700,"No, the applicant''s income does not exceed 13,000 a month. ",NULL,NULL,NULL,1745,1744
+1701,"Yes, the applicant''s income exceeds 12,000 a month. ",NULL,NULL,1793,NULL,1745
+1702,"No, the applicant''s income does not exceed 12,000 a month. ",NULL,NULL,NULL,1746,1745
+1703,Yes. ,NULL,NULL,1794,NULL,1746
+1704,No. ,NULL,NULL,NULL,1747,1746
+1705,Yes. ,NULL,NULL,1795,NULL,1747
+1706,No. ,NULL,NULL,NULL,1748,1747
