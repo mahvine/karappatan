@@ -9,7 +9,7 @@
                 <dd>
                     <span>{{caseSummary.dateCreated}}</span>
                 </dd>
-                <div *ngIf="caseSummary.acceptedByLogin == currentAccount.login ||  !configuration.caseSummaryAcceptanceEnabled">
+                <div *ngIf="caseSummary.acceptedByLogin == currentAccount.login">
                     <dt><span>User</span></dt>
                     <dd>
                         {{caseSummary.user.firstName}} {{caseSummary.user.lastName}} 
@@ -22,7 +22,7 @@
                     </dd>
                 </div>
                 
-                <div *ngIf="caseSummary.acceptedByLogin != null && caseSummary.acceptedByLogin != currentAccount.login && configuration.caseSummaryAcceptanceEnabled">
+                <div *ngIf="caseSummary.acceptedByLogin != null && caseSummary.acceptedByLogin != currentAccount.login">
                         <dt><span>Accepted by</span></dt>
                         <dd>
                             {{currentAccount.login}} - {{currentAccount.firstName}} {{currentAccount.lastName}}
@@ -56,7 +56,7 @@
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
             </button>
 
-            <button type="button" *ngIf="caseSummary.acceptedByLogin==undefined && configuration.caseSummaryAcceptanceEnabled"
+            <button type="button" *ngIf="caseSummary.acceptedByLogin==undefined && false"
                     (click)="accept()"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Accept</span>

@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import ph.mahvine.karappatan.domain.Answer;
 import ph.mahvine.karappatan.domain.CaseSummaryOffer;
 import ph.mahvine.karappatan.domain.User;
+import ph.mahvine.karappatan.repository.CaseSummaryOfferRepository;
 import ph.mahvine.karappatan.repository.CaseSummaryRepository;
 import ph.mahvine.karappatan.service.KarappatanService;
 import ph.mahvine.karappatan.service.UserService;
+import ph.mahvine.karappatan.service.dto.CaseOfferOperationDTO;
 import ph.mahvine.karappatan.service.dto.CaseSummaryDTO;
 import ph.mahvine.karappatan.service.dto.CreateCaseSummaryDTO;
 import ph.mahvine.karappatan.service.dto.CreateOfferDTO;
@@ -47,12 +49,15 @@ public class KarappatanResource {
     private final CaseSummaryRepository caseSummaryRepository;
     
     private final CaseSummaryMapper mapper;
+    
+    private final CaseSummaryOfferRepository caseSummaryOfferRepository;
 
-    public KarappatanResource(KarappatanService karappatanService, UserService userService, CaseSummaryRepository caseSummaryRepository, CaseSummaryMapper mapper) {
+    public KarappatanResource(KarappatanService karappatanService, UserService userService, CaseSummaryRepository caseSummaryRepository, CaseSummaryMapper mapper, CaseSummaryOfferRepository caseSummaryOfferRepository) {
         this.karappatanService = karappatanService;
         this.userService = userService;
         this.caseSummaryRepository = caseSummaryRepository;
         this.mapper = mapper;
+        this.caseSummaryOfferRepository = caseSummaryOfferRepository;
     }
 
     /**
@@ -109,6 +114,23 @@ public class KarappatanResource {
         log.debug("REST request to offer CaseSummary : {}", caseSummaryOfferDTO);
         User user = userService.getUserWithAuthorities().get();
         return karappatanService.createOffer(caseSummaryOfferDTO.getCaseSummaryId(), user);
+    }
+
+    @PostMapping("/caseSummaries/{id}/offers")
+    public List<CaseSummaryOffer> listCaseSummaryOffer(@PathVariable("id") Long caseSummaryId) throws URISyntaxException {
+    	return caseSummaryOfferRepository.findByCaseSummaryId(caseSummaryId);
+    }
+
+    @PostMapping("/caseSummaries/offers/accept")
+    public void acceptCaseSummaryOffer(@Valid @RequestBody CaseOfferOperationDTO caseSummaryOfferDTO) throws URISyntaxException {
+        User user = userService.getUserWithAuthorities().get();
+        karappatanService.acceptOffer(caseSummaryOfferDTO.caseSummaryOfferId, user);
+    }
+
+    @PostMapping("/caseSummaries/offers/decline")
+    public void declineCaseSummaryOffer(@Valid @RequestBody CaseOfferOperationDTO caseSummaryOfferDTO) throws URISyntaxException {
+        User user = userService.getUserWithAuthorities().get();
+        karappatanService.denyOffer(caseSummaryOfferDTO.caseSummaryOfferId, user);
     }
     
 

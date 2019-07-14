@@ -1,10 +1,12 @@
 package ph.mahvine.karappatan.repository;
 
-import ph.mahvine.karappatan.domain.CaseSummaryOffer;
-import org.springframework.data.jpa.repository.*;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import ph.mahvine.karappatan.domain.CaseSummaryOffer;
 
 /**
  * Spring Data  repository for the CaseSummaryOffer entity.
@@ -15,5 +17,8 @@ public interface CaseSummaryOfferRepository extends JpaRepository<CaseSummaryOff
 
     @Query("select case_summary_offer from CaseSummaryOffer case_summary_offer where case_summary_offer.lawyer.login = ?#{principal.username}")
     List<CaseSummaryOffer> findByLawyerIsCurrentUser();
+    
+
+    List<CaseSummaryOffer> findByCaseSummaryId(Long caseSummaryId);
 
 }

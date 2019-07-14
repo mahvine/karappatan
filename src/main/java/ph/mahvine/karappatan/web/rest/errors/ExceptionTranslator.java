@@ -56,7 +56,7 @@ public class ExceptionTranslator implements ProblemHandling {
         if (problem instanceof ConstraintViolationProblem) {
             builder
                 .with(VIOLATIONS_KEY, ((ConstraintViolationProblem) problem).getViolations())
-                .with(MESSAGE_KEY, ErrorConstants.ERR_VALIDATION);
+                .with(MESSAGE_KEY, ((ConstraintViolationProblem) problem).getMessage());
         } else {
             builder
                 .withCause(((DefaultProblem) problem).getCause())
@@ -64,7 +64,7 @@ public class ExceptionTranslator implements ProblemHandling {
                 .withInstance(problem.getInstance());
             problem.getParameters().forEach(builder::with);
             if (!problem.getParameters().containsKey(MESSAGE_KEY) && problem.getStatus() != null) {
-                builder.with(MESSAGE_KEY, "error.http." + problem.getStatus().getStatusCode());
+                builder.with(MESSAGE_KEY, problem.getDetail());
             }
         }
         return new ResponseEntity<>(builder.build(), entity.getHeaders(), entity.getStatusCode());

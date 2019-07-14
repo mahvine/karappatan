@@ -19,7 +19,6 @@ export class CaseSummaryDetailComponent implements OnInit {
     currentAccount: any;
     caseSummary: ICaseSummary;
     module: IModule;
-    configuration: any[] = [];
     configKeys: any[] = [];
     sortedQuestions: IQuestion[] = [];
 
@@ -27,25 +26,10 @@ export class CaseSummaryDetailComponent implements OnInit {
         protected activatedRoute: ActivatedRoute,
         private moduleService: ModuleService,
         private karappatanService: KarappatanService,
-        private accountService: AccountService,
-        private configurationService: JhiConfigurationService
+        private accountService: AccountService
     ) {}
 
     ngOnInit() {
-        this.configurationService.get().subscribe(configuration => {
-            this.configuration = configuration.filter(config => {
-                if (config.prefix === 'application') {
-                    return true;
-                }
-                return false;
-            })[0].properties; // caseSummaryAcceptanceEnabled
-
-            for (const config of configuration) {
-                if (config.properties !== undefined) {
-                    this.configKeys.push(Object.keys(config.properties));
-                }
-            }
-        });
         this.activatedRoute.data.subscribe(({ caseSummary }) => {
             this.caseSummary = caseSummary;
             if (this.caseSummary.moduleId !== undefined) {

@@ -1,6 +1,8 @@
 package ph.mahvine.karappatan.service;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,7 @@ import ph.mahvine.karappatan.domain.Answer;
 import ph.mahvine.karappatan.domain.CaseSummary;
 import ph.mahvine.karappatan.domain.CaseSummaryOffer;
 import ph.mahvine.karappatan.domain.User;
+import ph.mahvine.karappatan.domain.enumeration.OfferStatus;
 import ph.mahvine.karappatan.repository.AnswerRepository;
 import ph.mahvine.karappatan.repository.CaseSummaryOfferRepository;
 import ph.mahvine.karappatan.repository.CaseSummaryRepository;
@@ -74,6 +77,55 @@ public class KarappatanService {
     	log.info("Case summary:{} offered by user:{}",caseSummary.getId(), user.getLogin());
     	caseSummaryOfferRepository.save(offer);
     	return offer;
+    }
+    
+    
+    public void denyOffer(Long caseSummaryOfferId, User user) {
+    	Optional<CaseSummaryOffer> caseSummaryOfferOpt = caseSummaryOfferRepository.findById(caseSummaryOfferId);
+    	if(caseSummaryOfferOpt.isPresent()) {
+    		CaseSummaryOffer caseSummaryOffer = caseSummaryOfferOpt.get();
+    		CaseSummary caseSummary = caseSummaryOffer.getCaseSummary();
+    		if(caseSummaryOffer.getStatus() == OfferStatus.ACCEPTED || caseSummaryOffer.getStatus() == OfferStatus.DECLINED) {
+    			throw new RuntimeException("Cannot deny offer already in end state");
+    		} else {
+    			if(caseSummary.getUser().getId() == user.getId()) {    				
+    				caseSummaryOffer.setStatus(OfferStatus.DECLINED);
+    				caseSummaryOfferRepository.save(caseSummaryOffer);
+    			} else {
+    				throw new RuntimeException("Not allowed to do transaction");
+    			}
+    		}
+    	} else {
+    		throw new RuntimeException("Case summary offer not existing:"+caseSummaryOfferId);
+    	}
+    }
+    
+    public void acceptOffer(Long caseSummaryOfferId, User user) {
+    	Optional<CaseSummaryOffer> caseSummaryOfferOpt = caseSummaryOfferRepository.findById(caseSummaryOfferId);
+    	if(caseSummaryOfferOpt.isPresent()) {
+    		CaseSummaryOffer caseSummaryOffer = caseSummaryOfferOpt.get();
+    		CaseSummary caseSummary = caseSummaryOffer.getCaseSummary();
+    		if(caseSummaryOffer.getStatus() == OfferStatus.ACCEPTED || caseSummaryOffer.getStatus() == OfferStatus.DECLINED) {
+    			throw new RuntimeException("Cannot deny offer already in end state");
+    		} else {
+    			if(caseSummary.getUser().getId() == user.getId()) {  
+    				List<CaseSummaryOffer> otherCaseOffers = caseSummaryOfferRepository.findByCaseSummaryId(caseSummary.getId());
+    				otherCaseOffers.forEach(offer -> {
+    					if(offer.getId() == caseSummaryOfferId) {
+    						offer.setStatus(OfferStatus.ACCEPTED);
+    					} else {    						
+    						offer.setStatus(OfferStatus.DECLINED);
+    					}
+    				});
+    				caseSummaryOfferRepository.saveAll(otherCaseOffers);
+    				acceptCaseSummary(caseSummary.getId(), user);
+    			} else {
+    				throw new RuntimeException("Not allowed to do transaction");
+    			}
+    		}
+    	} else {
+    		throw new RuntimeException("Case summary offer not existing:"+caseSummaryOfferId);
+    	}
     }
 
 }
