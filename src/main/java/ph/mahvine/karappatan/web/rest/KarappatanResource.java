@@ -116,7 +116,7 @@ public class KarappatanResource {
         return karappatanService.createOffer(caseSummaryOfferDTO.getCaseSummaryId(), user);
     }
 
-    @PostMapping("/caseSummaries/{id}/offers")
+    @GetMapping("/caseSummaries/{id}/offers")
     public List<CaseSummaryOffer> listCaseSummaryOffer(@PathVariable("id") Long caseSummaryId) throws URISyntaxException {
     	return caseSummaryOfferRepository.findByCaseSummaryId(caseSummaryId);
     }
