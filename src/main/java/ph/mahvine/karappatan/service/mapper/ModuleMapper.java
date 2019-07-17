@@ -15,10 +15,12 @@ public interface ModuleMapper extends EntityMapper<ModuleDTO, Module> {
 
     @Mapping(source = "firstQuestion.id", target = "firstQuestionId")
     @Mapping(source = "visible", target = "visible")
+    @Mapping(source = "type", target = "type")
     public abstract ModuleDTO toDto(Module module);
     
     @Mapping(source = "firstQuestionId", target = "firstQuestion")
     @Mapping(source = "visible", target = "visible")
+    @Mapping(source = "type", target = "type")
     Module toEntity(ModuleDTO moduleDTO);
 
     default Module fromId(Long id) {

@@ -27,6 +27,8 @@ public class ModuleDTO implements Serializable {
 	private Long firstQuestionId;
 	
 	private boolean visible;
+	
+	private String type;
 
     public Long getId() {
         return id;
@@ -120,5 +122,13 @@ public class ModuleDTO implements Serializable {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }

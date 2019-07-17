@@ -218,4 +218,12 @@ public class Module implements Serializable {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
+
+	public ModuleType getType() {
+		return type;
+	}
+
+	public void setType(ModuleType type) {
+		this.type = type;
+	}
 }
