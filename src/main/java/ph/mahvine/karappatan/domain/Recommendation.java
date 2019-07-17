@@ -28,7 +28,7 @@ public class Recommendation implements Serializable {
     @Column(name = "content")
     private String content;
 
-    
+
     @Column(name = "identifier", unique = true)
     private String identifier;
 
@@ -45,6 +45,10 @@ public class Recommendation implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("recommendations")
     private Module module;
+    
+
+    @Column(name = "tag")
+    private String tag;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -129,6 +133,14 @@ public class Recommendation implements Serializable {
     public void setModule(Module module) {
         this.module = module;
     }
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

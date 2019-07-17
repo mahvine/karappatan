@@ -1,5 +1,9 @@
 package ph.mahvine.karappatan.service.dto;
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +13,7 @@ import javax.persistence.Lob;
 /**
  * A DTO for the Recommendation entity.
  */
+@JsonInclude(Include.NON_NULL)
 public class RecommendationDTO implements Serializable {
 
     private Long id;
@@ -28,6 +33,8 @@ public class RecommendationDTO implements Serializable {
     private Long moduleId;
 
     private String moduleTitle;
+    
+    private String tag;
 
     public Long getId() {
         return id;
@@ -126,4 +133,12 @@ public class RecommendationDTO implements Serializable {
             ", module='" + getModuleTitle() + "'" +
             "}";
     }
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 }

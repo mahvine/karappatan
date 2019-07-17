@@ -25,6 +25,8 @@ public class ModuleDTO implements Serializable {
 	private Set<AnnexDTO> annexes = new HashSet<>();
 	
 	private Long firstQuestionId;
+	
+	private boolean visible;
 
     public Long getId() {
         return id;
@@ -110,5 +112,13 @@ public class ModuleDTO implements Serializable {
 
 	public void setFirstQuestionId(Long firstQuestionId) {
 		this.firstQuestionId = firstQuestionId;
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 }

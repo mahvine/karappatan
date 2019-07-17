@@ -52,6 +52,9 @@ public class Module implements Serializable {
     @Column(name= "type")
     @Enumerated(EnumType.STRING)
     private ModuleType type;
+    
+    @Column(name="visible")
+    private boolean visible;
 
     @OrderBy("id ASC")
     @OneToMany(mappedBy = "module", fetch=FetchType.EAGER)
@@ -206,5 +209,13 @@ public class Module implements Serializable {
 
 	public void setFirstQuestion(Question firstQuestion) {
 		this.firstQuestion = firstQuestion;
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 }
