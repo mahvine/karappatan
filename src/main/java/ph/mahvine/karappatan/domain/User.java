@@ -100,11 +100,17 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(max = 254)
     @Column(length = 254, unique = true)
     private String address;
-    
+
     @Size(max = 254)
     @Column(name="fb_id", length = 254, unique = true)
     private String fbId;
 
+
+    @Size(max = 254)
+    @Column(name="google_id", length = 254, unique = true)
+    private String googleId;
+
+    
     public Long getId() {
         return id;
     }
@@ -266,5 +272,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", activationKey='" + activationKey + '\'' +
             "}";
     }
+
+	public String getGoogleId() {
+		return googleId;
+	}
+
+	public void setGoogleId(String googleId) {
+		this.googleId = googleId;
+	}
 
 }

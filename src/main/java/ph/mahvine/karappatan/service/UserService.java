@@ -8,6 +8,7 @@ import ph.mahvine.karappatan.repository.UserRepository;
 import ph.mahvine.karappatan.security.AuthoritiesConstants;
 import ph.mahvine.karappatan.security.SecurityUtils;
 import ph.mahvine.karappatan.service.dto.FacebookLoginDTO;
+import ph.mahvine.karappatan.service.dto.GoogleLoginDTO;
 import ph.mahvine.karappatan.service.dto.UserDTO;
 import ph.mahvine.karappatan.service.util.RandomUtil;
 import ph.mahvine.karappatan.web.rest.errors.*;
@@ -142,6 +143,7 @@ public class UserService {
         newUser.setLastName(fbLoginDTO.getLastName());
         newUser.setEmail(fbLoginDTO.getEmail().toLowerCase());
         String encryptedPassword = passwordEncoder.encode("dummy_baka");//TODO workaround
+        newUser.setFbId(fbLoginDTO.getFbId());
         newUser.setPassword(encryptedPassword);
         newUser.setLangKey("en");
         newUser.setActivated(true);
@@ -185,6 +187,75 @@ public class UserService {
         if (optUser.isPresent()) {
         	User existingUser = optUser.get();
             existingUser.setFbId(null);
+            userRepository.save(existingUser);
+            log.info("Unlinked for FB User: {}", existingUser);
+        } else {
+        	throw new EmailNotFoundException();
+        };
+    }
+    
+    
+
+    public User registerGoogleUser(GoogleLoginDTO googleLoginDTO) {
+        
+        User newUser = new User();
+        
+
+        userRepository.findOneByEmailIgnoreCase(googleLoginDTO.getEmail()).ifPresent(existingUser -> {
+            boolean removed = removeNonActivatedUser(existingUser);
+            if (!removed) {
+                throw new EmailAlreadyUsedException();
+            }
+        });
+        newUser.setLogin(googleLoginDTO.getEmail().toLowerCase());
+        newUser.setFirstName(googleLoginDTO.getFirstName());
+        newUser.setLastName(googleLoginDTO.getLastName());
+        newUser.setEmail(googleLoginDTO.getEmail().toLowerCase());
+        newUser.setGoogleId(googleLoginDTO.getGoogleId());
+        String encryptedPassword = passwordEncoder.encode("dummy_baka");//TODO workaround
+        newUser.setPassword(encryptedPassword);
+        newUser.setLangKey("en");
+        newUser.setActivated(true);
+        Set<Authority> authorities = new HashSet<>();
+        authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+        newUser.setAuthorities(authorities);
+        userRepository.save(newUser);
+        log.debug("Created Information for FB User: {}", newUser);
+        return newUser;
+    }
+    
+
+    
+    public void linkGoogleUser(String email, String googleId) {
+    	//Check if fbId is existing
+        userRepository.findOneByFbId(googleId).ifPresent(existingUser -> {
+            boolean removed = removeNonActivatedUser(existingUser);
+            if (!removed) {
+                throw new EmailAlreadyUsedException();
+            }
+        });
+        User existingUser = null;
+        
+    	//Check if email is in use by other user
+        Optional<User> optUser = userRepository.findOneByEmailIgnoreCase(email);
+        if (optUser.isPresent()) {
+        	existingUser = optUser.get();
+        	if(existingUser.getGoogleId() != null) {
+        		throw new EmailAlreadyUsedException();
+        	}
+        } else {
+        	throw new EmailNotFoundException();
+        };
+        existingUser.setGoogleId(googleId);
+        userRepository.save(existingUser);
+        log.info("Linked for FB User: {}", existingUser);
+    }
+    
+    public void unlinkGoogleUser(String email) {
+        Optional<User> optUser = userRepository.findOneByEmailIgnoreCase(email);
+        if (optUser.isPresent()) {
+        	User existingUser = optUser.get();
+            existingUser.setGoogleId(null);
             userRepository.save(existingUser);
             log.info("Unlinked for FB User: {}", existingUser);
         } else {

@@ -91,14 +91,4 @@ public class FacebookAccountResource {
         return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
     }
 
-
-    @GetMapping("/linkFb")
-    public ResponseEntity<String> linkFb() {
-        return new ResponseEntity<>("TODO secured", HttpStatus.OK);
-    }
-    
-    @GetMapping("/unlinkFb")
-    public ResponseEntity<String> unlinkFb() {
-        return new ResponseEntity<>("TODO secured", HttpStatus.OK);
-    }
 }

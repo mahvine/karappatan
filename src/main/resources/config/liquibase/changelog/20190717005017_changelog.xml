@@ -41,4 +41,10 @@
                  tableName="krptn_recommendation">
        </loadUpdateData>
     </changeSet>
+    
+    <changeSet author="mahvine (generated)" id="1563634938711-1">
+        <addColumn tableName="jhi_user">
+            <column name="google_id" type="varchar(254)"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
