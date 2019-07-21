@@ -10,6 +10,7 @@ import { AccountService } from 'app/core';
 import { ModuleService } from 'app/entities/module';
 import { KarappatanService } from './karappatan.service';
 import { IAnswer } from 'app/shared/model/answer.model';
+import { ICaseSummaryOffer, OfferStatus } from 'app/shared/model/case-summary-offer.model';
 
 @Component({
     selector: 'jhi-case-summary-detail',
@@ -21,6 +22,10 @@ export class CaseSummaryDetailComponent implements OnInit {
     module: IModule;
     configKeys: any[] = [];
     sortedQuestions: IQuestion[] = [];
+    recommendations: string[] = [];
+    offers: ICaseSummaryOffer[] = [];
+    isOffered = false;
+    hasBeenAccepted = false;
 
     constructor(
         protected activatedRoute: ActivatedRoute,
@@ -42,11 +47,29 @@ export class CaseSummaryDetailComponent implements OnInit {
         this.accountService.identity().then(account => {
             this.currentAccount = account;
             console.log(this.currentAccount);
+            this.listOffers();
         });
     }
 
     previousState() {
         window.history.back();
+    }
+
+    private listOffers() {
+        this.karappatanService.listOffers(this.caseSummary.id).subscribe(response => {
+            this.offers = response.body;
+            this.isOffered = false;
+            this.hasBeenAccepted = false;
+            this.offers.forEach(offer => {
+                if (offer.lawyer.login === this.currentAccount.login) {
+                    this.isOffered = true;
+                }
+
+                if (offer.status === OfferStatus.ACCEPTED) {
+                    this.hasBeenAccepted = true;
+                }
+            });
+        });
     }
 
     accept() {
@@ -81,6 +104,9 @@ export class CaseSummaryDetailComponent implements OnInit {
             const userAnswer: IAnswer = this.getUserAnswer(firstQuestion);
             // Get User's Answer
             if (userAnswer !== undefined) {
+                if (userAnswer.recommendationContent != null) {
+                    this.recommendations.push(userAnswer.recommendationContent);
+                }
                 // Get Next Question and add to sortedQuestions
                 const nextQuestion = this.module.questions.find(question => question.id === userAnswer.nextQuestionId);
                 if (nextQuestion !== undefined) {
@@ -93,6 +119,12 @@ export class CaseSummaryDetailComponent implements OnInit {
     private getUserAnswer(question: IQuestion): IAnswer {
         return question.answers.find(answer => {
             return this.caseSummary.answerIds.indexOf(answer.id) > -1;
+        });
+    }
+
+    private offer() {
+        this.karappatanService.offer(this.caseSummary.id).subscribe(response => {
+            this.listOffers();
         });
     }
 }

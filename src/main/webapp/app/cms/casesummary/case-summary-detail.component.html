@@ -32,14 +32,36 @@
                 <dd>
                     <div *ngIf="module">
                         <p>{{module.details}}</p>
+                        <ng-template [ngIf]="caseSummary.acceptedByLogin == null && caseSummary.acceptedByLogin !== currentAccount.login">
+                            <dt>Recommendations:</dt>
+                            <ul>
+                                <li *ngFor="let recommendation of recommendations"> 
+                                    <div [innerHtml]="recommendation"></div>
+                                </li>
+                            </ul>
+                        </ng-template>
+
+                        <!-- if accepted by User -->
+                        <ng-template [ngIf]="caseSummary.acceptedByLogin != null && caseSummary.acceptedByLogin === currentAccount.login">
                         <dt>Questions:</dt>
                         <ol>
-                            <li *ngFor="let question of sortedQuestions"> <div [innerHtml]="question.question"></div>
+                            <li *ngFor="let question of sortedQuestions"> 
+                                <div [innerHtml]="question.question"></div>
                                 <ul *ngFor="let answer of question.answers">
-                                    <li *ngIf="caseSummary.answerIds.indexOf(answer.id) > -1"><div [innerHTML]="answer.answer"></div> <br> <div [innerHTML]="answer.instructions"></div></li>
+                                    <li *ngIf="caseSummary.answerIds.indexOf(answer.id) > -1">
+                                        <div *ngIf="answer.answer" [innerHTML]="answer.answer"></div> 
+                                        <br> 
+                                        <div [innerHTML]="answer.instructions"></div>
+                                        <div *ngIf="answer.recommendationContent">
+                                            <b *ngIf="answer.recommendationContent">Recommendation:</b> 
+                                            <div *ngIf="answer.recommendationContent" [innerHTML]="answer.recommendationContent"></div> 
+                                        </div>
+                                    </li>
                                 </ul>
                             </li>
                         </ol>
+                        </ng-template>
+
                     </div>
                 </dd>
                 <div>
@@ -60,6 +82,12 @@
                     (click)="accept()"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Accept</span>
+            </button>
+
+            <button type="button" *ngIf="caseSummary.acceptedByLogin==undefined && !hasBeenAccepted"
+                    (click)="offer()"
+                    class="btn btn-primary" [disabled]="isOffered">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> {{isOffered?  'Already offered': 'Offer'}}</span>
             </button>
 
             <button *jhiHasAnyAuthority="['ROLE_ADMIN']" type="button"

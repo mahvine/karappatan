@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { ICaseSummary } from 'app/shared/model/case-summary.model';
+import { ICaseSummaryOffer } from 'app/shared/model/case-summary-offer.model';
 
 type EntityResponseType = HttpResponse<ICaseSummary>;
 type EntityArrayResponseType = HttpResponse<ICaseSummary[]>;
@@ -46,5 +47,18 @@ export class KarappatanService {
             });
         }
         return res;
+    }
+
+    offer(caseSummaryId: number): Observable<EntityResponseType> {
+        const url = this.resourceUrl + '/offers';
+        return this.http
+            .post<ICaseSummary>(url, { caseSummaryId: caseSummaryId }, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    listOffers(caseSummaryId: number): Observable<EntityArrayResponseType> {
+        return this.http
+            .get<ICaseSummaryOffer[]>(this.resourceUrl + '/' + caseSummaryId + '/offers', { observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 }

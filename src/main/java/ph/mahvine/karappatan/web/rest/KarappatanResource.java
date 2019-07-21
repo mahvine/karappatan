@@ -100,7 +100,7 @@ public class KarappatanResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new caseSummaryDTO, or with status 400 (Bad Request) if the caseSummary has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/caseSummaries/{id}/accept")
+//    @PostMapping("/caseSummaries/{id}/accept")
     public CaseSummaryDTO acceptCaseSummary(@PathVariable Long id) throws URISyntaxException {
         log.debug("REST request to accept CaseSummary : {}", id);
         User user = userService.getUserWithAuthorities().get();

@@ -10,7 +10,7 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dateCreated"><span>Date Created</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="userLogin"><span>User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th jhiSortBy="userLogin"><span>User</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th jhiSortBy="moduleTitle"><span>Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -19,9 +19,9 @@
             <tr *ngFor="let caseSummary of caseSummaries ;trackBy: trackId">
                 <td><a [routerLink]="['/case-summary', caseSummary.id, 'view' ]">{{caseSummary.id}}</a></td>
                 <td>{{caseSummary.dateCreated | date:'mediumDate'}}</td>
-                <td>
+                <!-- <td>
                     {{caseSummary.userLogin}}
-                </td>
+                </td> -->
                 <td>
                     <div *ngIf="caseSummary.moduleId">
                         <a [routerLink]="['../module', caseSummary.moduleId , 'view' ]" >{{caseSummary.moduleTitle}}</a>

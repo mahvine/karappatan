@@ -74,6 +74,7 @@ public class KarappatanService {
     	offer.dateCreated(Instant.now());
     	offer.lawyer(user);
     	offer.caseSummary(caseSummary);
+    	offer.status(OfferStatus.OPEN);
     	log.info("Case summary:{} offered by user:{}",caseSummary.getId(), user.getLogin());
     	caseSummaryOfferRepository.save(offer);
     	return offer;
@@ -113,12 +114,12 @@ public class KarappatanService {
     				otherCaseOffers.forEach(offer -> {
     					if(offer.getId() == caseSummaryOfferId) {
     						offer.setStatus(OfferStatus.ACCEPTED);
+    	    				acceptCaseSummary(caseSummary.getId(), offer.getLawyer());
     					} else {    						
     						offer.setStatus(OfferStatus.DECLINED);
     					}
     				});
     				caseSummaryOfferRepository.saveAll(otherCaseOffers);
-    				acceptCaseSummary(caseSummary.getId(), user);
     			} else {
     				throw new RuntimeException("Not allowed to do transaction");
     			}
