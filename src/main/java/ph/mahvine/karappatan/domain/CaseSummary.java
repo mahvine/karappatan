@@ -60,6 +60,7 @@ public class CaseSummary implements Serializable {
     @ManyToOne(optional = true)
     private User acceptedBy;
     
+    @Lob
     @Column(name = "details")
     private String details;
 

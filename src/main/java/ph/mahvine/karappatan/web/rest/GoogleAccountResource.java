@@ -15,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,7 @@ import ph.mahvine.karappatan.repository.UserRepository;
 import ph.mahvine.karappatan.security.jwt.JWTFilter;
 import ph.mahvine.karappatan.security.jwt.TokenProvider;
 import ph.mahvine.karappatan.service.UserService;
+import ph.mahvine.karappatan.service.dto.FacebookLoginDTO;
 import ph.mahvine.karappatan.service.dto.GoogleLoginDTO;
 import ph.mahvine.karappatan.web.rest.UserJWTController.JWTToken;
 
@@ -82,6 +84,24 @@ public class GoogleAccountResource {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
         return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+    }
+
+    /**
+     * POST  /account/google : link google id
+     */
+    @PostMapping("/account/google")
+    public void linkAccount(@Valid @RequestBody GoogleLoginDTO login) {
+    	User user = userService.getUserWithAuthorities().get();
+		userService.linkGoogleUser(user.getEmail(), login.getGoogleId());
+    }
+
+    /**
+     * DELETE  /account/google : unlink google id
+     */
+    @DeleteMapping("/account/google")
+    public void unlinkAccount() {
+    	User user = userService.getUserWithAuthorities().get();
+		userService.unlinkGoogleUser(user.getEmail());
     }
 
 }

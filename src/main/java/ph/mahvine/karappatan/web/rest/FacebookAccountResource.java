@@ -90,5 +90,23 @@ public class FacebookAccountResource {
         httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
         return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
     }
+    
+    /**
+     * POST  /account/facebook : link facebook id
+     */
+    @PostMapping("/account/facebook")
+    public void linkAccount(@Valid @RequestBody FacebookLoginDTO fbLogin) {
+    	User user = userService.getUserWithAuthorities().get();
+		userService.linkFbUser(user.getEmail(), fbLogin.getFbId());
+    }
+
+    /**
+     * DELETE  /account/facebook : unlink facebook id
+     */
+    @DeleteMapping("/account/facebook")
+    public void unlinkAccount() {
+    	User user = userService.getUserWithAuthorities().get();
+		userService.unlinkFbUser(user.getEmail());
+    }
 
 }

@@ -8,6 +8,9 @@ import ph.mahvine.karappatan.domain.User;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
@@ -16,6 +19,7 @@ import java.util.stream.Collectors;
 /**
  * A DTO representing a user, with his authorities.
  */
+@JsonInclude(Include.NON_NULL)
 public class UserDTO {
 
     private Long id;
@@ -58,6 +62,10 @@ public class UserDTO {
 
     @Size(max = 254)
     private String address;
+    
+    private String fbId;
+    
+    private String googleId;
 
     public UserDTO() {
         // Empty constructor needed for Jackson.
@@ -81,6 +89,8 @@ public class UserDTO {
             .collect(Collectors.toSet());
         this.contactNumber = user.getContactNumber();
         this.address = user.getAddress();
+        this.fbId = user.getFbId();
+        this.googleId = user.getGoogleId();
     }
 
     public Long getId() {
@@ -203,6 +213,23 @@ public class UserDTO {
 		this.address = address;
 	}
 
+	public String getGoogleId() {
+		return googleId;
+	}
+
+	public void setGoogleId(String googleId) {
+		this.googleId = googleId;
+	}
+
+	public String getFbId() {
+		return fbId;
+	}
+
+	public void setFbId(String fbId) {
+		this.fbId = fbId;
+	}
+    
+
 	@Override
 	public String toString() {
 		return "UserDTO [" + (id != null ? "id=" + id + ", " : "") + (login != null ? "login=" + login + ", " : "")
@@ -219,7 +246,6 @@ public class UserDTO {
 				+ (contactNumber != null ? "contactNumber=" + contactNumber + ", " : "")
 				+ (address != null ? "address=" + address : "") + "]";
 	}
-    
     
 
     
